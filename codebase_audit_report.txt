@@ -1,0 +1,610 @@
+================================================================================
+                     CODEBASE AUDIT REPORT: EduCampaign Website
+                           Technical Discovery Document
+                               Generated: January 2026
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+EduCampaign is a Next.js 16-based marketing website for an education consultancy
+firm based in Kathmandu, Nepal. The site serves as a lead generation platform
+targeting students seeking study abroad opportunities in Japan, Australia, UK,
+Canada, and New Zealand. The codebase follows a static/hybrid approach with
+minimal backend integration—all data is hardcoded in TypeScript files.
+
+================================================================================
+SECTION 1: TECH STACK & DEPENDENCIES
+================================================================================
+
+CORE FRAMEWORK:
+---------------
+• Next.js 16.0.7 (App Router architecture)
+• React 19.2.1 / React DOM 19.2.1
+• TypeScript 5.x (strict mode enabled)
+• Node.js 18+ (specified in CI/CD)
+
+STYLING & UI:
+-------------
+• Tailwind CSS v4 (latest, utility-first)
+• PostCSS with @tailwindcss/postcss plugin
+• tw-animate-css v1.3.8 (animation utilities)
+• class-variance-authority v0.7.1 (component variants)
+• clsx v2.1.1 + tailwind-merge v3.3.1 (conditional classes)
+
+UI COMPONENTS:
+--------------
+• shadcn/ui (configured via components.json, "new-york" style)
+• @radix-ui/react-slot v1.2.3 (slot composition)
+• lucide-react v0.544.0 (icon library)
+
+STATE MANAGEMENT:
+-----------------
+• Zustand v5.0.9 (minimal global state - navigation stack only)
+• React useState/useRef (local component state)
+
+CAROUSEL/INTERACTION:
+---------------------
+• embla-carousel-react v8.6.0
+• embla-carousel-autoplay v8.6.0
+
+FONTS:
+------
+• Google Fonts: Poppins (400-700 weights), Numans (400 weight)
+• Custom font variables: --font-poppins, --font-numans
+
+BUILD TOOLS:
+------------
+• Turbopack (via `next dev --turbopack`)
+• ESLint 9 with next/core-web-vitals, next/typescript configs
+
+DEPLOYMENT:
+-----------
+• GitHub Actions workflow targeting cPanel
+• Support for both static export and Node.js server modes
+• Custom server.js for production (http module, manual request handling)
+
+================================================================================
+SECTION 2: COMPONENT ARCHITECTURE
+================================================================================
+
+LAYOUT COMPONENTS (src/components/):
+------------------------------------
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Component          │ Role                                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Header.tsx         │ Fixed dual-bar navigation with dropdown menus,        │
+│                    │ mobile hamburger, scroll-hide behavior, contact bar    │
+│                    │ (395 lines - COMPLEX)                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Footer.tsx         │ Multi-column footer with nav links, social icons,     │
+│                    │ embedded Google Map, branch info (343 lines)           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ GlobalBackground   │ Fixed background with decorative gradient blobs       │
+│ .tsx               │ positioned at specific viewport offsets               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ScrollToTop.tsx    │ Floating button, appears after 300px scroll           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+HERO & BREADCRUMBS:
+-------------------
+• hero/HeroSection.tsx     - Reusable hero with dynamic padding based on title
+• breadcrumbs/breadcrumbs  - Auto-generated from pathname, route group filtering
+                             .tsx                                              
+
+UI PRIMITIVES (shadcn-based):
+-----------------------------
+• ui/button.tsx            - CVA-powered button with 6 variants, 4 sizes
+• ui/fonts/fonts.ts        - Google font configuration exports
+
+BLOG SYSTEM:
+------------
+• blog/BlogCard.tsx        - Card with image, category badge, author info
+• blog/CategoryFilter.tsx  - Horizontal filter tabs for blog categories
+
+GALLERY SYSTEM:
+---------------
+• gallery/FilterTabs.tsx   - Category filter (mirrors BlogCategoryFilter)
+• gallery/GalleryItemCard  - Hover-reveal card with overlay info
+• gallery/Lightbox.tsx     - Full-screen modal with keyboard nav (Esc/Arrow)
+
+================================================================================
+SECTION 3: PAGE SECTIONS (src/sections/)
+================================================================================
+
+HOMEPAGE SECTIONS (9 total):
+----------------------------
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Section            │ Purpose                                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Hero.tsx           │ Main CTA with hero image, "Latest Blogs" sidebar       │
+│ AboutSection.tsx   │ Rotating background images, company intro text         │
+│ WhyUs.tsx          │ 6 feature cards in 2-column grid                       │
+│ TopDestinations    │ Embla carousel showcasing 6 study destinations         │
+│ .tsx               │                                                        │
+│ ContactSection.tsx │ Lead capture form with country selector (no backend)   │
+│ StudentVoice.tsx   │ YouTube video embeds with custom thumbnails            │
+│ Testimonials.tsx   │ 4 student testimonials in staggered grid               │
+│ NoticeEvents.tsx   │ Event/Notice cards from static data                    │
+│ TrustedBy.tsx      │ Partner logos (Universities Australia, etc.)           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+SECTION 4: API & INTEGRATION MAP
+================================================================================
+
+EXTERNAL INTEGRATIONS (Current):
+--------------------------------
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Service            │ Usage                          │ Location              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Unsplash           │ Placeholder images             │ next.config.ts        │
+│ Google Maps        │ Embedded iframe in Footer      │ layout.tsx            │
+│ YouTube            │ Video embeds (StudentVoice)    │ StudentVoice.tsx      │
+│ Social Media       │ External links only            │ Header, Footer, About │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+INTERNAL DATA SOURCES (src/data/):
+----------------------------------
+• blogData.ts        - 9 blog posts, Author type, BlogCategory type
+• eventsData.ts      - 3 notices/events with dates, locations
+• galleryData.ts     - 12 gallery items with categories
+• sswData.ts         - SSW1 (15 items) & SSW2 (13 items) job categories
+• topDestinations.ts - 6 countries with descriptions
+
+API ENDPOINTS: NONE
+-------------------
+** CRITICAL: No backend integration exists. **
+- Contact form has no submit handler
+- Blog content is fully static (no CMS)
+- No analytics tracking code present
+- No authentication/user management
+
+================================================================================
+SECTION 5: "HOW IT WORKS" WORKFLOW
+================================================================================
+
+SITE INITIALIZATION FLOW:
+-------------------------
+1. Request hits Next.js App Router
+2. src/app/layout.tsx renders:
+   - Google Fonts loaded via next/font
+   - GlobalBackground (decorative blobs)
+   - Header (fixed, scroll-aware)
+   - {children} (page content)
+   - Footer (map embed, nav links)
+   - ScrollToTop (floating button)
+
+3. For homepage (src/app/page.tsx):
+   - 'use client' directive (client component)
+   - useRef for scroll targets (contactRef, noticeEventsRef)
+   - useScrollToOffset hook for smooth scroll with offset
+   - Renders 9 sections sequentially
+
+NAVIGATION DATA FLOW:
+---------------------
+1. User clicks nav link in Header
+2. Next.js App Router handles route
+3. Page component renders within layout
+4. Breadcrumbs auto-generate from pathname
+5. HeroSection displays page-specific hero
+
+ROUTING ARCHITECTURE:
+---------------------
+/                           → Homepage (9 sections)
+/(Navigation)/              → Route group (no URL segment)
+  ├─ about/                 → About Us (static content + team)
+  ├─ abroad/                → Placeholder page
+  ├─ blog/                  → Blog listing with category filter
+  │   └─ [slug]/            → Dynamic blog detail (static data lookup)
+  ├─ contact/               → "Coming Soon" placeholder
+  ├─ events/                → Events listing from eventsData.ts
+  ├─ gallery/               → Gallery with lightbox
+  ├─ services/              → Services with accordion sections
+  ├─ studyabroad/           → Country overview cards
+  │   ├─ australia/         → Australia details (518 lines)
+  │   │   └─ (subpages)/    → Nested route group
+  │   │       ├─ university/→ University program info
+  │   │       └─ vet/       → VET program info
+  │   └─ japan/             → Japan details (637 lines)
+  │       ├─ bekka/         → Bekka program
+  │       ├─ daigaku/       → Daigaku program
+  │       └─ ...            → Other sub-programs
+  ├─ testimonials/          → "Coming Soon" placeholder
+  └─ testpreparation/       → Test prep overview
+      └─ (subpages)/        → IELTS, PTE, Japanese, SSW
+
+SCROLL-TO-SECTION PATTERN:
+--------------------------
+Multiple pages use URL query params for deep linking:
+  /services?scrollTo=careerCounseling
+  /studyabroad/japan?scrollTo=scholarship
+
+Implementation:
+  const searchParams = useSearchParams();
+  const refMap = { "careerCounseling": counselingRef, ... };
+  useEffect(() => {
+    const scrollTo = searchParams.get("scrollTo");
+    if (scrollTo) scrollToOffset(refMap[scrollTo]?.current);
+  }, [searchParams]);
+
+================================================================================
+SECTION 6: STRENGTHS TO PRESERVE
+================================================================================
+
+1. CLEAN ARCHITECTURE
+   - Proper separation: components/, sections/, data/, utils/, types/
+   - Route groups for logical URL structure
+   - Consistent file naming conventions
+
+2. DESIGN SYSTEM FOUNDATION
+   - globals.css defines standard spacing utilities (px-standard)
+   - Typography scale with semantic classes (text-display, text-h1, etc.)
+   - Consistent color palette (#6B4FA1 purple primary, #3d1a4d dark accent)
+
+3. REUSABLE COMPONENTS
+   - HeroSection accepts imageSrc/title props
+   - BlogCard/GalleryItemCard are properly typed
+   - FilterTabs pattern works for both blog and gallery
+
+4. ACCESSIBILITY CONSIDERATIONS
+   - sr-only labels on form inputs
+   - aria-label attributes on buttons
+   - Keyboard navigation in Lightbox
+
+5. PERFORMANCE OPTIMIZATIONS
+   - next/image for automatic optimization
+   - priority attribute on above-fold images
+   - sizes prop for responsive images
+
+6. EMBLA CAROUSEL
+   - Clean integration with custom navigation
+   - Proper cleanup in useCallback
+
+7. TYPE SAFETY
+   - TypeScript interfaces for all data structures
+   - Strict mode enabled
+   - Props properly typed
+
+================================================================================
+SECTION 7: WEAKNESSES & TECHNICAL DEBT
+================================================================================
+
+CRITICAL ISSUES:
+----------------
+
+1. NO BACKEND INTEGRATION
+   - Contact form doesn't submit anywhere
+   - All content is hardcoded in TS files
+   - No CMS integration
+   - No email/notification system
+
+2. MASSIVE PAGE FILES
+   - services/page.tsx: 521 lines
+   - japan/page.tsx: 637 lines
+   - australia/page.tsx: 518 lines
+   - about/page.tsx: 312 lines
+   → Should be split into smaller components
+
+3. DUPLICATE CODE
+   - Social icons duplicated in Header, Footer, About (identical SVG code)
+   - FilterTabs and CategoryFilter are nearly identical components
+   - cn() utility exists in both lib/utils.ts AND utils/classnames.ts
+
+4. CLIENT-SIDE RENDERING OVERUSE
+   - Homepage is 'use client' despite mostly static content
+   - blog/page.tsx is client-side (category filter could use URL params)
+   - Metadata export commented out due to 'use client'
+
+MODERATE ISSUES:
+----------------
+
+5. HARDCODED CONTENT EVERYWHERE
+   - About page: company description inline
+   - WhyUs: services array inline
+   - Testimonials: testimonial data inline
+   - Should be in data/ files or CMS
+
+6. INCONSISTENT STYLING APPROACH
+   - Some components use Tailwind inline
+   - Some use CSS variables
+   - globals.css has both @layer base and @layer utilities
+   - Mix of hardcoded px values and Tailwind spacing
+
+7. PLACEHOLDER PAGES
+   - /contact → "Coming Soon..."
+   - /testimonials → "Coming Soon..."
+   - /abroad → "hello world"
+   - Multiple country pages not implemented
+
+8. UNUSED/ORPHANED CODE
+   - useNavStack store exists but never used in pages
+   - server.js has hardcoded production hostname
+   - Some commented-out code blocks remain
+
+9. MISSING SEO OPTIMIZATION
+   - No sitemap.xml generation
+   - No robots.txt configured
+   - Metadata on homepage commented out
+   - No structured data (JSON-LD)
+
+10. IMAGE MANAGEMENT
+    - Mix of Unsplash placeholders and local images
+    - No clear image optimization strategy
+    - Some images referenced may not exist
+
+MINOR ISSUES:
+-------------
+
+11. CONSOLE LOGS IN PRODUCTION
+    - FilterTabs.tsx has console.log debugging
+    - Should be removed or use proper logging
+
+12. INCONSISTENT NAMING
+    - Some files use PascalCase.tsx, some lowercase
+    - Event vs Events naming inconsistency
+    - studyabroad vs study-abroad
+
+13. INCOMPLETE TYPES
+    - css.d.ts only declares "*.css" module
+    - No global types file
+
+================================================================================
+SECTION 8: PHASE 2 IMPLEMENTATION PLAN
+================================================================================
+
+OBJECTIVE: Transition to a dynamic, data-driven model while maintaining
+simplicity and existing design patterns.
+
+--------------------------------------------------------------------------------
+PHASE 2A: IMMEDIATE FIXES (Week 1-2)
+--------------------------------------------------------------------------------
+
+1. EXTRACT INLINE DATA TO DATA FILES
+   ─────────────────────────────────
+   Move all hardcoded content from page files to src/data/:
+   
+   • Create: servicesData.ts (from services/page.tsx)
+   • Create: aboutData.ts (from about/page.tsx)
+   • Create: whyUsData.ts (from WhyUs.tsx)
+   • Create: testimonialsData.ts (from Testimonials.tsx)
+   • Create: socialLinks.ts (consolidate social icon data)
+   
+   Pattern:
+   ```typescript
+   // src/data/servicesData.ts
+   export interface ServiceDetail {
+     icon: string;
+     title: string;
+     paragraphs: string[];
+     image: string;
+   }
+   export const services: ServiceDetail[] = [...];
+   ```
+
+2. CONSOLIDATE DUPLICATE UTILITIES
+   ────────────────────────────────
+   • Delete: src/utils/classnames.ts
+   • Keep: src/lib/utils.ts (shadcn standard)
+   • Update imports across codebase
+
+3. FIX CLIENT/SERVER COMPONENT SPLIT
+   ──────────────────────────────────
+   • Create separate client components for interactive parts
+   • Keep page-level components as Server Components where possible
+   
+   Example:
+   ```
+   src/app/(Navigation)/blog/page.tsx       → Server Component
+   src/components/blog/BlogPageClient.tsx   → 'use client' filter logic
+   ```
+
+4. REMOVE DEBUG CODE
+   ──────────────────
+   • Remove console.logs from FilterTabs.tsx
+   • Remove commented-out code blocks
+   • Remove "random comment" markers
+
+--------------------------------------------------------------------------------
+PHASE 2B: BACKEND INTEGRATION (Week 3-4)
+--------------------------------------------------------------------------------
+
+5. IMPLEMENT CONTACT FORM SUBMISSION
+   ──────────────────────────────────
+   Option A: API Route + Email Service
+   ```
+   src/app/api/contact/route.ts
+   → POST handler
+   → Validate with Zod
+   → Send via Resend/SendGrid
+   ```
+   
+   Option B: Third-party Form Service
+   → Formspree, Formspark, or similar
+   → No backend code needed
+
+6. ADD ANALYTICS
+   ──────────────
+   • Integrate Vercel Analytics or Google Analytics 4
+   • Add in layout.tsx as Script component
+
+7. GENERATE SITEMAP & ROBOTS
+   ──────────────────────────
+   ```
+   src/app/sitemap.ts    → Generate from routes
+   src/app/robots.ts     → Allow all, reference sitemap
+   ```
+
+--------------------------------------------------------------------------------
+PHASE 2C: CMS INTEGRATION (Week 5-6)
+--------------------------------------------------------------------------------
+
+8. HEADLESS CMS SETUP (Recommended: Sanity or Contentful)
+   ────────────────────────────────────────────────────────
+   Content types to create:
+   • BlogPost (title, slug, content, author, category, image)
+   • Event (title, date, location, description, type)
+   • GalleryItem (image, category, caption)
+   • Testimonial (name, role, quote, avatar)
+   • Service (title, description, icon)
+   
+   Query pattern:
+   ```typescript
+   // src/lib/sanity.ts
+   export async function getBlogPosts() {
+     return client.fetch('*[_type == "blogPost"] | order(date desc)');
+   }
+   ```
+
+9. MIGRATE DATA FILES TO CMS
+   ─────────────────────────
+   • Export current data from TS files
+   • Import into CMS as initial content
+   • Update components to fetch from CMS
+   • Keep fallback data for offline dev
+
+--------------------------------------------------------------------------------
+PHASE 2D: COMPONENT REFACTORING (Week 7-8)
+--------------------------------------------------------------------------------
+
+10. BREAK DOWN LARGE PAGE FILES
+    ────────────────────────────
+    services/page.tsx (521 lines) → Split into:
+    • ServicesHero.tsx
+    • ServiceAccordion.tsx
+    • DocumentChecklist.tsx
+    • PreDepartureInfo.tsx
+    
+    japan/page.tsx (637 lines) → Split into:
+    • JapanHero.tsx
+    • WhyStudyJapan.tsx (icon boxes)
+    • LanguageSchools.tsx
+    • UniversitySection.tsx
+    • ScholarshipSection.tsx
+    • IntakeSection.tsx
+    • VisaProcess.tsx
+
+11. CREATE SHARED ICON COMPONENT
+    ────────────────────────────
+    ```typescript
+    // src/components/icons/SocialIcons.tsx
+    export const socialIcons = {
+      facebook: (props) => <svg {...props}>...</svg>,
+      instagram: (props) => <svg {...props}>...</svg>,
+      // ...
+    };
+    ```
+
+12. UNIFY FILTER COMPONENTS
+    ────────────────────────
+    Merge BlogCategoryFilter and GalleryFilterTabs into:
+    ```typescript
+    // src/components/ui/FilterTabs.tsx
+    interface FilterTabsProps<T extends string> {
+      categories: { id: number; label: string; value: T }[];
+      activeCategory: T;
+      onCategoryChange: (category: T) => void;
+    }
+    ```
+
+--------------------------------------------------------------------------------
+PHASE 2E: POLISH & COMPLETION (Week 9-10)
+--------------------------------------------------------------------------------
+
+13. IMPLEMENT PLACEHOLDER PAGES
+    ───────────────────────────
+    • /contact → Full contact page with form, map, hours
+    • /testimonials → All testimonials with video section
+    • Complete remaining country pages
+
+14. IMAGE AUDIT
+    ───────────────
+    • Replace all Unsplash placeholders with real images
+    • Optimize images (WebP format, proper dimensions)
+    • Implement blur placeholders
+
+15. PERFORMANCE OPTIMIZATION
+    ────────────────────────
+    • Lazy load below-fold sections
+    • Implement Intersection Observer for animations
+    • Review and optimize bundle size
+
+16. SEO COMPLETION
+    ───────────────
+    • Add JSON-LD structured data for Organization
+    • Add Open Graph meta tags
+    • Implement canonical URLs
+    • Add language alternates if multi-language planned
+
+--------------------------------------------------------------------------------
+CONSTRAINTS ACKNOWLEDGMENT
+--------------------------------------------------------------------------------
+
+This plan adheres to the following principles:
+
+✓ NO OVER-ENGINEERING: No Redux, no GraphQL, no microservices
+✓ SIMPLE DATA FLOW: CMS → Server Component → Client Component
+✓ READABLE CODE: Extract complexity, not abstract it
+✓ EXISTING PATTERNS: Maintain Tailwind, shadcn, existing folder structure
+✓ INCREMENTAL IMPROVEMENT: Each phase delivers usable features
+
+================================================================================
+APPENDIX A: FILE SIZE INVENTORY (Lines of Code)
+================================================================================
+
+TOP 10 LARGEST FILES:
+---------------------
+1. japan/page.tsx           637 lines
+2. services/page.tsx        521 lines
+3. australia/page.tsx       518 lines
+4. globals.css              430 lines
+5. Header.tsx               395 lines
+6. Footer.tsx               343 lines
+7. about/page.tsx           312 lines
+8. blog/[slug]/page.tsx     223 lines
+9. StudentVoice.tsx         214 lines
+10. blogData.ts             189 lines
+
+================================================================================
+APPENDIX B: ROUTE MAP
+================================================================================
+
+ACTIVE ROUTES:
+--------------
+/                              ✓ Complete
+/about                         ✓ Complete
+/blog                          ✓ Complete
+/blog/[slug]                   ✓ Complete
+/events                        ✓ Complete
+/gallery                       ✓ Complete
+/services                      ✓ Complete
+/studyabroad                   ✓ Complete
+/studyabroad/japan             ✓ Complete
+/studyabroad/japan/bekka       ✓ Needs audit
+/studyabroad/japan/daigaku     ✓ Needs audit
+/studyabroad/australia         ✓ Complete
+/studyabroad/australia/vet     ✓ Needs audit
+/studyabroad/australia/university ✓ Needs audit
+/testpreparation               ✓ Complete
+/testpreparation/ielts         ✓ Needs audit
+/testpreparation/pte           ✓ Needs audit
+/testpreparation/japaneselanguage ✓ Needs audit
+/testpreparation/sswpreparation ✓ Needs audit
+
+PLACEHOLDER ROUTES:
+-------------------
+/contact                       ✗ "Coming Soon"
+/testimonials                  ✗ "Coming Soon"
+/abroad                        ✗ "hello world"
+/studyabroad/uk                ✗ Not implemented
+/studyabroad/canada            ✗ Not implemented
+/studyabroad/germany           ✗ Not implemented
+/studyabroad/korea             ✗ Not implemented
+
+================================================================================
+END OF REPORT
+================================================================================
+
+Report generated by: Senior Full-Stack Architect Analysis
+Codebase: EduCampaign Website (educampaign.com.np)
+Framework: Next.js 16.0.7 / React 19.2.1
+Total Files Analyzed: 70+

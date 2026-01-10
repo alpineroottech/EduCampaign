@@ -1,0 +1,214 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+
+// type definition for video data
+type Video = {
+    id: string;
+    title: string;
+    thumbnail: string;
+    youtubeId: string;
+};
+
+// actual video data
+const VIDEOS: Video[] = [
+    {
+        id: 'uk-classroom',
+        title: 'Students sharing their study abroad experience',
+        thumbnail: '/images/countries/uk.jpg',
+        youtubeId: 'IjY34e7NfaU',
+    },
+    {
+        id: 'australia-testimonial',
+        title: 'Student testimonial about studying abroad',
+        thumbnail: '/images/countries/Australia.jpg',
+        youtubeId: 'IjY34e7NfaU',
+    },
+    {
+        id: 'japan-journey',
+        title: 'International student sharing their journey',
+        thumbnail: '/images/countries/japan.png',
+        youtubeId: 'IjY34e7NfaU',
+    },
+];
+
+// inline svg components for icons because it's bascially few bytes, no need to import entire lib
+const PlayIcon = () => (
+    <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="w-8 h-8 ml-1"
+        aria-hidden="true"
+    >
+        <path d="M8 5v14l11-7z" />
+    </svg>
+);
+
+const CloseIcon = () => (
+    <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        className="w-6 h-6"
+        aria-hidden="true"
+    >
+        <path d="M18 6L6 18M6 6l12 12" />
+    </svg>
+);
+
+// video holder / video card component
+type VideoCardProps = {
+    video: Video;
+    onPlay: (youtubeId: string) => void;
+    priority?: boolean;
+};
+
+const VideoCard = ({ video, onPlay, priority = false }: VideoCardProps) => {
+    return (
+        <article
+            className="relative group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full "
+            onClick={() => onPlay(video.youtubeId)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onPlay(video.youtubeId);
+                }
+            }}
+            aria-label={`Play video: ${video.title}`}
+        >
+            <div className="relative w-full h-full bg-gray-200">
+                <Image
+                    src={video.thumbnail}
+                    alt={video.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={priority}
+                />
+
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+                        <PlayIcon />
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    );
+};
+
+// model component to show video in overlay
+type VideoModalProps = {
+    youtubeId: string;
+    onClose: () => void;
+};
+
+const VideoModal = ({ youtubeId, onClose }: VideoModalProps) => {
+    useEffect(() => {
+        // Close on ESC key
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
+
+        document.addEventListener('keydown', handleEsc);
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.removeEventListener('keydown', handleEsc);
+            document.body.style.overflow = 'unset';
+        };
+    }, [onClose]);
+
+    return (
+        <div
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+            onClick={onClose}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Video player"
+        >
+            <div
+                className="relative w-full max-w-5xl aspect-video"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <button
+                    className="absolute -top-12 right-0 md:-right-12 md:top-0 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-colors"
+                    onClick={onClose}
+                    aria-label="Close video"
+                >
+                    <CloseIcon />
+                </button>
+
+                <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`}
+                    title="Student Voice Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full rounded-lg shadow-2xl"
+                />
+            </div>
+        </div>
+    );
+};
+
+
+const StudentVoice = () => {
+    const [activeYoutubeId, setActiveYoutubeId] = useState<string | null>(null);
+    const [featuredVideo, ...otherVideos] = VIDEOS;
+
+    return (
+        <section
+            className="relative py-6 md:py-10 "
+            id="student-voice"
+        >
+            <div className="px-standard text-center mb-8 md:mb-12 max-w-4xl mx-auto">
+                <h2 className=" mb-4">
+                    Our/ Student Voice
+                </h2>
+                <p className=" leading-relaxed">
+                    Here, we share the experiences and reflections of our students from across the globe.
+                    Their stories highlight learning, growth, and personal journeys, inspiring others to
+                    explore opportunities and pursue their dreams.
+                </p>
+            </div>
+
+            {/* alternatively we can make it same as width of form too , using max-w- */}
+            <div className="px-standard mx-auto ">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="h-[400px] md:h-[600px] md:row-span-2">
+                        <VideoCard
+                            video={featuredVideo}
+                            onPlay={setActiveYoutubeId}
+                            priority
+                        />
+                    </div>
+
+                    {otherVideos.map((video) => (
+                        <div key={video.id} className="h-[400px] md:h-[285px]">
+                            <VideoCard
+                                video={video}
+                                onPlay={setActiveYoutubeId}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {activeYoutubeId && (
+                <VideoModal
+                    youtubeId={activeYoutubeId}
+                    onClose={() => setActiveYoutubeId(null)}
+                />
+            )}
+        </section>
+    );
+};
+
+
+export default StudentVoice;

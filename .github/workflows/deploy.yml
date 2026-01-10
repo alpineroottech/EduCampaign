@@ -1,0 +1,116 @@
+name: Deploy to cPanel
+
+on:
+    push:
+        branches:
+        - release
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: '18'
+      # Set the mode to 'export' for a static export (recommended for cPanel public_html)
+      # or 'node' to upload the app and run it on the cPanel Node environment.
+      DEPLOY_MODE: ${{ secrets.DEPLOY_MODE }}
+      CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+      CPANEL_USERNAME: ${{ secrets.CPANEL_USERNAME }}
+      CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
+      CPANEL_SSH_PRIVATE_KEY: ${{ secrets.CPANEL_SSH_PRIVATE_KEY }}
+      CPANEL_TARGET_DIR: ${{ secrets.CPANEL_TARGET_DIR }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+            node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js
+        run: npm run build
+
+        # Static export path (recommended for deploying to cPanel public_html)
+      - name: Static export (next export)
+        if: env.DEPLOY_MODE == 'export'
+        run: npx next export -o out
+
+        # Deploy static output via SFTP (private key)
+      - name: Deploy (SFTP) - static export
+        if: env.DEPLOY_MODE == 'export' && env.CPANEL_SSH_PRIVATE_KEY != ''
+        uses: appleboy/scp-action@master
+        with:
+            host: ${{ env.CPANEL_HOST }}
+            username: ${{ env.CPANEL_USERNAME }}
+            key: ${{ env.CPANEL_SSH_PRIVATE_KEY }}
+            port: 22
+            source: "out/*"
+            target: ${{ env.CPANEL_TARGET_DIR }}
+
+        # Deploy static output via FTP/FTPS (password)
+      - name: Deploy (FTP/FTPS) - static export
+        if: env.DEPLOY_MODE == 'export' && env.CPANEL_PASSWORD != ''
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+            server: ${{ env.CPANEL_HOST }}
+            username: ${{ env.CPANEL_USERNAME }}
+            password: ${{ env.CPANEL_PASSWORD }}
+            local-dir: ./out/
+            server-dir: ${{ env.CPANEL_TARGET_DIR }}
+
+        # Node-mode: archive, upload and extract app on server via SSH
+      - name: Archive app for Node deploy
+        if: env.DEPLOY_MODE == 'node'
+        run: |
+            tar -czf app.tar.gz --exclude=node_modules --exclude=.git .
+
+      - name: Upload app archive (SFTP)
+        if: env.DEPLOY_MODE == 'node' && env.CPANEL_SSH_PRIVATE_KEY != ''
+        uses: appleboy/scp-action@master
+        with:
+            host: ${{ env.CPANEL_HOST }}
+            username: ${{ env.CPANEL_USERNAME }}
+            key: ${{ env.CPANEL_SSH_PRIVATE_KEY }}
+            port: 22
+            source: "app.tar.gz"
+            target: ${{ env.CPANEL_TARGET_DIR }}
+
+      - name: Extract & start Node app on server (SSH)
+        if: env.DEPLOY_MODE == 'node' && env.CPANEL_SSH_PRIVATE_KEY != ''
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ env.CPANEL_HOST }}
+            username: ${{ env.CPANEL_USERNAME }}
+            key: ${{ env.CPANEL_SSH_PRIVATE_KEY }}
+            port: 22
+            script: |
+                cd ${{ env.CPANEL_TARGET_DIR }}
+                tar -xzf app.tar.gz
+                rm app.tar.gz
+                # install production deps (adjust if your cPanel Node setup differs)
+                npm ci --production || true
+                # try to restart via pm2 if available, otherwise try npm start
+                if command -v pm2 >/dev/null 2>&1; then
+                    pm2 restart ecosystem.config.js || pm2 start npm --name "edu-campaign" -- start
+                else
+                    # If your cPanel uses Passenger or Setup Node app, adapt restart command accordingly
+                    echo "Please restart the Node app using cPanel's Node app manager or set up a process manager."
+                fi
+
+      - name: Cleanup generated archive
+        if: env.DEPLOY_MODE == 'node'
+        run: rm -f app.tar.gz || true
+
+    # Notes:
+    # - Add these repository secrets: CPANEL_HOST, CPANEL_USERNAME, CPANEL_PASSWORD (for FTP),
+    #   CPANEL_SSH_PRIVATE_KEY (for SFTP/SSH), CPANEL_TARGET_DIR, and DEPLOY_MODE ('export' or 'node').
+    # - For static sites use DEPLOY_MODE='export' and ensure the target dir points to the
+    #   public_html (or subdirectory) on your cPanel account.
+    # - For Node deployments you will usually need to configure the Node app via cPanel's
+    #   "Setup Node.js App" or install a process manager. The SSH extract step is a starter template
+    #   — adapt the start/restart commands to your cPanel environment.
+
