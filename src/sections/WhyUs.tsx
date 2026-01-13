@@ -2,6 +2,10 @@
 
 import { BentoCard } from "@/components/ui/BentoCard";
 import { ScrollReveal } from "@/components/ui/transitions";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 type ServiceProps = {
   title: string;
@@ -50,6 +54,16 @@ const services: ServiceProps[] = [
 ];
 
 const WhyUs = () => {
+  const [emblaRef] = useEmblaCarousel({ 
+    align: "start",
+    loop: true,
+    breakpoints: {
+      '(min-width: 768px)': { active: false }
+    }
+  }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false, playOnInit: true })
+  ]);
+
   return (
     <section className="relative py-16 md:py-24 bg-gray-50" id="why-us">
       <div className="max-w-7xl mx-auto px-standard">
@@ -65,17 +79,24 @@ const WhyUs = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {services.map((service, index) => (
-            <BentoCard
-              key={service.title}
-              title={service.title}
-              description={service.description}
-              image={service.image}
-              alt={service.alt}
-              size={index === 0 ? "hero" : "default"}
-            />
-          ))}
+        <div ref={emblaRef} className="overflow-hidden md:overflow-visible -mx-standard px-standard md:mx-0 md:px-0">
+          <div className="flex md:grid md:grid-cols-12 gap-4 md:gap-6">
+            {services.map((service, index) => (
+              <div 
+                key={service.title} 
+                className="flex-[0_0_85%] min-w-0 md:contents"
+              >
+                <BentoCard
+                  title={service.title}
+                  description={service.description}
+                  image={service.image}
+                  alt={service.alt}
+                  size={index === 0 ? "hero" : "default"}
+                  className="h-full"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
