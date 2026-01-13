@@ -1,158 +1,190 @@
 'use client';
-import Image from 'next/image'
 import React, { forwardRef } from 'react'
-import aboutBoard from '../../public/images/about-board.png'
+import { ScrollReveal } from "@/components/ui/transitions";
+import { motion } from "motion/react";
+import { Send, MapPin, Phone, Mail } from "lucide-react";
 
 const ContactSection = forwardRef<HTMLDivElement>((props, ref) => {
     const [hubValue, setHubValue] = React.useState('');
+    
     return (
-        <div className='' ref={ref}>
-            <header className="text-center max-w-4xl mx-auto">
-                <h2 id="contact-title" className=" ">
-                    Choose Your Study Destination With Us
-                </h2>
-                <p className="mt-2 text-sm sm:text-base">
-                    Reach out, and let&apos;s search the best college of possibilities together!
-                </p>
-            </header>
-            {/* // here was an isolate className, don't know why */}
-            <section className="relative py-6 sm:py-8 md:py-10 ">
-                {/* Background gradient rings */}
-                <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 -z-10 overflow-hidden w-full"
-                >
-                    <div className="absolute top-1/2 right-0 h-[300px] sm:h-[400px] lg:h-[520px] w-[600px] sm:w-[900px] lg:w-[1200px] -translate-y-1/2 rounded-full blur-3xl opacity-40 bg-[radial-gradient(closest-side,_#a855f7_60%,_transparent_30%)]" />
-                    <div className="absolute top-1/2 left-0 h-[300px] sm:h-[400px] lg:h-[520px] w-[600px] sm:w-[900px] lg:w-[1200px] -translate-y-1/2 rounded-full blur-3xl opacity-40 bg-[radial-gradient(closest-side,_#a855f7_60%,_transparent_30%)]" />
-                    <div className="absolute top-1/4 left-0 h-[300px] sm:h-[400px] lg:h-[520px] w-[600px] sm:w-[900px] lg:w-[1200px] -translate-y-1/2 rounded-full blur-3xl opacity-40 bg-[radial-gradient(closest-side,_#a855f7_60%,_transparent_30%)]" />
+        <section className="py-16 md:py-24 bg-white" ref={ref}>
+            <div className="max-w-4xl mx-auto px-standard">
+                <ScrollReveal>
+                    {/* Section Header */}
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Start Your Journey Today
+                        </h2>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Reach out and let&apos;s explore the best possibilities together for your study abroad dreams.
+                        </p>
+                    </div>
 
-                </div>
-
-
-                <div className="max-w-7xl mx-auto px-standard">
-
-                    <article className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 rounded-2xl border-2 border-gray-100 bg-white/80 backdrop-blur-sm shadow-[0_8px_40px_-8px_#E1C5ED] p-3 sm:p-4">
-                        {/* Form side */}
-                        <div className="flex flex-col p-4 sm:p-6 md:p-8">
-
-                            <form className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6 md:pt-10">
-                                
-                                <div className="sm:col-span-1">
-                                    <label htmlFor="lastName" className="sr-only">
-                                        Last Name
-                                    </label>
-                                    <input
-                                        id="lastName"
-                                        name="lastName"
-                                        type="text"
-                                        placeholder='Last Name'
-                                        required
-                                        autoComplete="family-name"
-                                        className="mt-1 block w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
-                                    />
-                                </div>
-
-                                <div className="sm:col-span-1">
-                                    <label htmlFor="firstName" className='sr-only'>
+                    {/* Contact Form Card */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="bg-gray-50 rounded-2xl p-8 md:p-10 border border-gray-100"
+                    >
+                        <form className="space-y-5">
+                            {/* Name Row */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
                                         First Name
                                     </label>
                                     <input
                                         id="firstName"
                                         name="firstName"
                                         type="text"
-                                        placeholder='First Name'
                                         required
                                         autoComplete="given-name"
-                                        className="mt-1 block w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 
+                                                 focus:border-[#6B4FA1] focus:ring-2 focus:ring-[#6B4FA1]/20 
+                                                 transition-all duration-200 outline-none"
+                                        placeholder="John"
                                     />
                                 </div>
-
-                                {/* Choose Hub Dropdown */}
-                                <div className="sm:col-span-2">
-                                    <label htmlFor="hub" className="sr-only">
-                                        Choose Study Destination
-                                    </label>
-                                    <select
-                                        id="hub"
-                                        name="hub"
-                                        required
-                                        className={`mt-1 block w-full rounded-sm border border-gray-300 bg-white px-3 py-2 shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 ${hubValue === '' ? 'text-gray-400' : 'text-gray-900'}`}
-                                        value={hubValue}
-                                        onChange={e => setHubValue(e.target.value)}
-                                    >
-                                        <option value="" disabled>Choose Study Destination</option>
-                                        <option value="japan">Japan</option>
-                                        <option value="australia">Australia</option>
-                                        <option value="uk">UK</option>
-                                        <option value="canada">Canada</option>
-                                        <option value="newzealand">New Zealand</option>
-                                        <option value="korea">Korea</option>
-                                    </select>
-                                </div>
-
-                                <div className="sm:col-span-2">
-                                    <label htmlFor="email" className='sr-only'>
-                                        Email
+                                <div>
+                                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Last Name
                                     </label>
                                     <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        placeholder='Email'
+                                        id="lastName"
+                                        name="lastName"
+                                        type="text"
                                         required
-                                        autoComplete="email"
-                                        className="mt-1 block w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                                        autoComplete="family-name"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 
+                                                 focus:border-[#6B4FA1] focus:ring-2 focus:ring-[#6B4FA1]/20 
+                                                 transition-all duration-200 outline-none"
+                                        placeholder="Doe"
                                     />
                                 </div>
+                            </div>
 
-                                <div className="sm:col-span-2">
-                                    <label htmlFor="phone" className='sr-only'>
-                                        Phone Number
-                                    </label>
-                                    <input
-                                        id="phone"
-                                        name="phone"
-                                        placeholder='Phone Number'
-                                        type="tel"
-                                        autoComplete="tel"
-                                        className="mt-1 block w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
-                                    />
-                                </div>
-                                <div className="sm:col-span-2">
-                                    <label htmlFor="message" className='sr-only'>
-                                        Message
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        placeholder='Message'
-                                        rows={4}
-                                        className="mt-1 block w-full rounded-sm border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
-                                    />
-                                </div>
+                            {/* Email */}
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                                    Email Address
+                                </label>
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    required
+                                    autoComplete="email"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 
+                                             focus:border-[#6B4FA1] focus:ring-2 focus:ring-[#6B4FA1]/20 
+                                             transition-all duration-200 outline-none"
+                                    placeholder="john@example.com"
+                                />
+                            </div>
 
-                                <div className="grid md:col-span-2">
-                                    {/* make it full width  */}
-                                    <button
-                                        type="submit"
-                                        className="items-center justify-center rounded-sm bg-[#3d1a4d] px-6 py-3 text-sm font-semibold
-                                         text-white shadow-sm transition hover:bg-purple-900 focus:outline-none focus-visible:ring-2
-                                          focus-visible:ring-purple-400 "
-                                    >
-                                        Send
-                                    </button>
-                                </div>
-                            </form>
+                            {/* Phone */}
+                            <div>
+                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                                    Phone Number
+                                </label>
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="tel"
+                                    autoComplete="tel"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 
+                                             focus:border-[#6B4FA1] focus:ring-2 focus:ring-[#6B4FA1]/20 
+                                             transition-all duration-200 outline-none"
+                                    placeholder="+977 98XXXXXXXX"
+                                />
+                            </div>
+
+                            {/* Study Destination */}
+                            <div>
+                                <label htmlFor="hub" className="block text-sm font-medium text-gray-700 mb-2">
+                                    Preferred Study Destination
+                                </label>
+                                <select
+                                    id="hub"
+                                    name="hub"
+                                    required
+                                    className={`w-full px-4 py-3 rounded-lg border border-gray-200 bg-white 
+                                              focus:border-[#6B4FA1] focus:ring-2 focus:ring-[#6B4FA1]/20 
+                                              transition-all duration-200 outline-none appearance-none
+                                              ${hubValue === '' ? 'text-gray-400' : 'text-gray-900'}`}
+                                    value={hubValue}
+                                    onChange={e => setHubValue(e.target.value)}
+                                >
+                                    <option value="" disabled>Select a destination</option>
+                                    <option value="japan">Japan</option>
+                                    <option value="australia">Australia</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <option value="canada">Canada</option>
+                                    <option value="newzealand">New Zealand</option>
+                                    <option value="korea">South Korea</option>
+                                </select>
+                            </div>
+
+                            {/* Message */}
+                            <div>
+                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                                    Your Message
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows={4}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 
+                                             focus:border-[#6B4FA1] focus:ring-2 focus:ring-[#6B4FA1]/20 
+                                             transition-all duration-200 outline-none resize-none"
+                                    placeholder="Tell us about your goals and any questions you have..."
+                                />
+                            </div>
+
+                            {/* Submit Button */}
+                            <motion.button
+                                type="submit"
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
+                                className="w-full bg-[#3d1a4d] hover:bg-[#2a1136] text-white font-semibold 
+                                         py-4 px-8 rounded-lg shadow-sm hover:shadow-md 
+                                         transition-all duration-300 flex items-center justify-center gap-2"
+                            >
+                                <span>Send Message</span>
+                                <Send className="w-4 h-4" />
+                            </motion.button>
+                        </form>
+                    </motion.div>
+
+                    {/* Contact Info */}
+                    <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="w-12 h-12 rounded-full bg-[#6B4FA1]/10 flex items-center justify-center">
+                                <MapPin className="w-5 h-5 text-[#6B4FA1]" />
+                            </div>
+                            <p className="text-sm font-medium text-gray-900">Kathmandu, Nepal</p>
+                            <p className="text-sm text-gray-500">Putalisadak</p>
                         </div>
-
-                        <div className="relative min-h-[280px] sm:min-h-[360px] md:min-h-[460px] m-[30_20_30_0]">
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-50% to-transparent rounded-xl z-10" />
-                            <Image src={aboutBoard} fill alt='image' className='rounded-xl object-cover' />
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="w-12 h-12 rounded-full bg-[#6B4FA1]/10 flex items-center justify-center">
+                                <Phone className="w-5 h-5 text-[#6B4FA1]" />
+                            </div>
+                            <p className="text-sm font-medium text-gray-900">+977-01-4168374</p>
+                            <p className="text-sm text-gray-500">Mon-Fri 9am-6pm</p>
                         </div>
-                    </article>
-                </div>
-            </section>
-        </div>
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="w-12 h-12 rounded-full bg-[#6B4FA1]/10 flex items-center justify-center">
+                                <Mail className="w-5 h-5 text-[#6B4FA1]" />
+                            </div>
+                            <p className="text-sm font-medium text-gray-900">info@educampaign.com.np</p>
+                            <p className="text-sm text-gray-500">We reply within 24h</p>
+                        </div>
+                    </div>
+                </ScrollReveal>
+            </div>
+        </section>
     )
 });
 

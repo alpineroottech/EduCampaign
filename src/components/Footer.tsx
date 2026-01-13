@@ -192,14 +192,14 @@ const Flag: React.FC<{ flag?: string }> = ({ flag }) => {
 const FooterSection: React.FC<{ section: FooterSection }> = ({ section }) => {
     return (
         <div>
-            <h3 className="text-lg font-semibold text-white mb-4"> {section.title} </h3>
-            <ul className={`space-y-3`}>
+            <h3 className="text-base font-semibold text-white mb-3">{section.title}</h3>
+            <ul className="space-y-2">
                 {section.items.map((item, index) => (
-                    <li key={index}
-                        className="break-inside-avoid flex items-center-safe gap-2">
-                        <ChevronIcon />
-                        <a href={item.href || "#"}
-                            className="text-sm text-white hover:font-semibold transition-colors">
+                    <li key={index}>
+                        <a 
+                            href={item.href || "#"}
+                            className="text-sm text-white/70 hover:text-white transition-colors"
+                        >
                             {item.label}
                         </a>
                     </li>
@@ -220,122 +220,88 @@ const Footer: React.FC<FooterProps> = ({
     const displayYear = year ?? new Date().getFullYear();
 
     return (
-        <footer className="relative w-full bg-[#b884c9]">
+        <footer className="relative w-full bg-[#3d1a4d]">
             {/* Main Content */}
-            <div className="max-w-7xl mx-auto px-6 py-12">
-                {/* First Row: 4 columns on desktop */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                    {links.slice(0, 4).map((section, index) => (
-                        <div key={index}>
-                            <FooterSection section={section} />
-                        </div>
+            <div className="max-w-7xl mx-auto px-standard py-12">
+                {/* Links Grid - 5 columns on large screens */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 mb-10">
+                    {links.map((section, index) => (
+                        <FooterSection key={index} section={section} />
                     ))}
                 </div>
 
-                {/* Second Row: Important Links + Branches + Location */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {/* Important Links */}
-                    {links[4] && (
-                        <div>
-                            <FooterSection section={links[4]} />
-                        </div>
-                    )}
-
-                    {/* Branches */}
+                {/* Contact & Map Row */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-8 border-t border-white/10">
+                    {/* Head Office */}
                     <div>
-                        <h3 className="text-lg font-semibold text-white mb-4">Head Office</h3>
-                        <ul className="space-y-4">
-                            <p className="text-white text-sm font-bold">Edu. Campaign Pvt. Ltd.</p>
-                            {branches.map((branch, index) => (
-                                <li key={index} className="flex items-center ">
-
-                                    <div>
-                                        {branch.city && (
-                                            <div className="text-white text-sm">{branch.city}</div>
-                                        )}
-                                        <div className="text-white text-sm ">{branch.country}</div>
-                                    </div>
-                                </li>
-                            ))}
-                            <Link href="/about">
-                                <p className="text-white text-sm">Contact Us</p>
-                            </Link>
-
-                        </ul>
+                        <h3 className="text-base font-semibold text-white mb-3">Head Office</h3>
+                        <p className="text-white/90 text-sm font-medium mb-1">Edu. Campaign Pvt. Ltd.</p>
+                        {branches.map((branch, index) => (
+                            <div key={index} className="text-white/70 text-sm">
+                                {branch.city && <span>{branch.city}</span>}
+                                <span>{branch.country}</span>
+                            </div>
+                        ))}
+                        <Link href="/contact" className="inline-block mt-2 text-white/90 text-sm hover:text-white transition-colors">
+                            Contact Us →
+                        </Link>
                     </div>
 
-                    {/* Our Location - spans 2 columns */}
-                    <div className="sm:col-span-2 lg:col-span-2">
-                        <h3 className="text-lg font-semibold text-white mb-1">Our Location</h3>
-
+                    {/* Map Preview - Compact */}
+                    <div className="lg:col-span-2">
+                        <h3 className="text-base font-semibold text-white mb-3">Our Location</h3>
                         {mapEmbedUrl ? (
                             <iframe
                                 src={mapEmbedUrl}
                                 title="Our Location Map"
                                 aria-label="Our Location Map"
-                                className="w-full h-48 md:h-56 lg:h-64 rounded-lg"
+                                className="w-full h-36 rounded-lg"
                                 loading="lazy"
                                 style={{ border: 0 }}
                             />
                         ) : (
-                            <svg viewBox="0 0 200 130" className="w-full h-48 md:h-56 lg:h-64 rounded-lg" aria-hidden="true">
-                                <rect width="200" height="130" rx="16" fill="#e5e7eb" />
-                                <path d="M20 30c20 5 40 0 60-10s40-15 60 0 40 20 60 10" stroke="#c4b5fd" strokeWidth="4" fill="none" />
-                                <circle cx="120" cy="60" r="12" fill="#ef4444" />
-                                <circle cx="120" cy="60" r="5" fill="#fff" />
-                            </svg>
+                            <div className="w-full h-36 rounded-lg bg-white/10 flex items-center justify-center">
+                                <div className="text-center text-white/60 text-sm">
+                                    <svg className="w-8 h-8 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    Kathmandu, Nepal
+                                </div>
+                            </div>
                         )}
                     </div>
                 </div>
             </div>
 
-            {/* Quote & Social Bar */}
-            {/* suggest tailwind class for below bg gradient from 7937c4 to 292939 */}
-            <div className="py-4 bg-gradient-to-r from-[#7937c4] to-[#5d4b9f]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-6 flex flex-col md:flex-row flex-wrap items-center justify-between gap-4">
-
+            {/* Social & Copyright Bar */}
+            <div className="py-4 bg-[#2a1136] border-t border-white/5">
+                <div className="max-w-7xl mx-auto px-standard flex flex-col sm:flex-row items-center justify-between gap-4">
                     {/* Social icons */}
-                    <div className="flex items-center justify-center w-full md:w-auto">
-                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-xl bg-white/10 border border-white/20 shadow-sm backdrop-blur-md">
-                            <span className="text-white font-semibold text-sm mr-2 whitespace-nowrap">Get In Touch With Us :</span>
-                            <div className="flex flex-wrap gap-2">
-                                {socialIcons.map((social) => (
-                                    <a
-                                        key={social.label}
-                                        href={social.href}
-                                        aria-label={social.label}
-                                        className="p-2 rounded-full bg-white/0 hover:bg-white/30 focus:bg-white/40 transition-colors outline-none focus:ring-2 focus:ring-white/50"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <span className="block w-6 h-6 text-white">{social.icon}</span>
-                                    </a>
-                                ))}
-                            </div>
+                    <div className="flex items-center gap-3">
+                        <span className="text-white/70 text-sm hidden sm:inline">Follow us:</span>
+                        <div className="flex items-center gap-1">
+                            {socialIcons.map((social) => (
+                                <a
+                                    key={social.label}
+                                    href={social.href}
+                                    aria-label={social.label}
+                                    className="p-2 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-all"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <span className="block w-5 h-5">{social.icon}</span>
+                                </a>
+                            ))}
                         </div>
                     </div>
 
                     {/* Copyright */}
-                    <div className="w-full md:w-auto text-center md:text-left">
-                        <div className="text-white text-sm">
-                            © {displayYear} Education Campaign Pvt. Ltd.
-                        </div>
+                    <div className="text-white/60 text-sm">
+                        © {displayYear} Education Campaign Pvt. Ltd.
                     </div>
                 </div>
             </div>
-
-
-
-
-            {/* Floating Chat Button */}
-            {/* <button
-                aria-label="Open chat"
-                className="fixed right-6 bottom-6 bg-white text-[#b884c9] rounded-full p-4 shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 z-50"
-            >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                </svg>
-            </button> */}
         </footer>
     );
 };

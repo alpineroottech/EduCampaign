@@ -1,8 +1,19 @@
+"use client";
+
 import {
   MoveRightIcon,
 } from "lucide-react";
-import Image from "next/image";
 import { NOTICE_EVENTS } from '@/data/eventsData';
+import { HeroCarousel } from "@/components/hero/HeroCarousel";
+import { ScrollReveal, fadeInUp, slideInLeft, slideInRight } from "@/components/ui/transitions";
+import { motion } from "motion/react";
+
+// Hero carousel images - add more images here for the carousel
+const heroImages = [
+  { src: "/images/homepage/hero.png", alt: "Students studying abroad" },
+  // Add more images as needed:
+  // { src: "/images/homepage/hero2.png", alt: "International education" },
+];
 
 type HeroProps = {
   onJoinClick?: () => void;
@@ -15,76 +26,83 @@ const LatestBlogsTable = ({
   onTitleClick?: () => void;
 }) => {
   return (
-    <div className="bg-purple-50 border border-purple-200 rounded-md shadow-lg overflow-hidden w-[220px]">
+    <motion.div 
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden w-[240px]"
+    >
       {/* Header */}
-      <div className="bg-purple-50 border-b-1 border-purple-400 py-3 px-4">
-        <h2 className="text-xl font-semibold text-gray-900 text-center">
-          Latest Notice and Events:
+      <div className="bg-[#6B4FA1] py-3 px-4">
+        <h2 className="text-base font-semibold text-white text-center">
+          Latest Notice & Events
         </h2>
       </div>
 
       {/* Blog Links */}
-      <div className="divide-y divide-purple-400">
-        {NOTICE_EVENTS.slice(0, 3).map((event, index) => (
+      <div className="divide-y divide-gray-100">
+        {NOTICE_EVENTS.slice(0, 3).map((event) => (
           <button
             key={event.id}
             onClick={onTitleClick}
-            className="w-full block py-2 px-6 text-center hover:bg-purple-100 transition-colors duration-200 cursor-pointer"
+            className="w-full block py-3 px-4 text-left hover:bg-gray-50 transition-colors duration-200 cursor-pointer group"
           >
-            <p className="text-sm font-semibold text-gray-800">{event.title}</p>
+            <p className="text-sm font-medium text-gray-800 group-hover:text-[#6B4FA1] transition-colors line-clamp-2">
+              {event.title}
+            </p>
           </button>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const Hero = ({ onJoinClick, onNoticeEventsClick }: HeroProps) => {
   return (
-    <section className="relative w-full h-auto bg-white pt-12 md:pt-10 pb-2 md:pb-10 lg:pb-0 overflow-hidden">
+    <section className="relative w-full h-auto bg-gradient-to-b from-white to-gray-50/50 pt-12 md:pt-16 pb-8 md:pb-16 overflow-hidden">
 
-      {/* Background Blobs - Absolutely positioned */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-purple-400 rounded-full blur-3xl" />
-        <div className="absolute top-10 right-10 w-72 h-72 bg-purple-400 rounded-full blur-3xl" />
+      {/* Subtle Background Elements - Flat design */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(107,79,161,0.05),transparent_50%)]" />
+        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,rgba(107,79,161,0.03),transparent_50%)]" />
       </div>
 
-      {/* Main Flex Layout - using px-standard for consistent margins */}
-      <div className="relative z-10 px-standard mx-auto flex flex-col lg:flex-row gap-6 lg:gap-4 items-center justify-between">
+      {/* Main Flex Layout */}
+      <div className="relative z-10 px-standard mx-auto flex flex-col lg:flex-row gap-8 lg:gap-4 items-center justify-between max-w-7xl">
+        
         {/* Text Content - Left Column */}
-        <div className="w-full lg:w-auto lg:flex-shrink-0 text-center lg:pr-20 lg:text-left relative z-10 order-2 lg:order-1">
-          <div className="flex flex-col gap-2 md:gap-4 mb-6">
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl leading-tight mb-4 sm:mb-5 md:mb-6">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="w-full lg:w-auto lg:flex-shrink-0 text-center lg:pr-12 lg:text-left relative z-10 order-2 lg:order-1"
+        >
+          <div className="flex flex-col gap-2 md:gap-4 mb-8">
+            <h1 className="text-4xl lg:text-5xl xl:text-6xl leading-[1.1] font-extrabold tracking-tight text-gray-900">
               A COMPLETE<br />
               SOLUTION FOR<br />
-              ABROAD<br />
-              STUDIES
+              <span className="text-[#6B4FA1]">ABROAD</span><br />
+              <span className="text-[#6B4FA1]">STUDIES</span>
             </h1>
           </div>
 
-          <button
+          <motion.button
             onClick={onJoinClick}
-            className="bg-purple-950 hover:bg-purple-900 text-white font-semibold py-3 px-6 rounded-2xl shadow-md transition-all duration-200 text-sm md:text-base cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-[#3d1a4d] hover:bg-[#2a1136] text-white font-semibold py-3.5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base cursor-pointer"
           >
-            Join us today <MoveRightIcon className="inline-block ml-2 w-4 h-4 md:w-5 md:h-5" />
-          </button>
+            Join us today 
+            <MoveRightIcon className="inline-block ml-2 w-4 h-4 md:w-5 md:h-5" />
+          </motion.button>
+        </motion.div>
+
+        {/* Hero Carousel - Center Column */}
+        <div className="flex-1 flex justify-center lg:-ml-20 mb-6 mt-6 lg:mt-0 lg:z-0 order-1 lg:order-2">
+          <HeroCarousel images={heroImages} />
         </div>
 
-        {/* Hero Image - Center Column */}
-        <div className="flex-1 flex justify-center lg:-ml-40 mb-6 mt-6 lg:mt-10 lg:z-0 order-1 lg:order-2">
-          <div className="relative flex justify-center lg:scale-110">
-            <Image
-              src="/images/homepage/hero.png"
-              alt="homepage"
-              width={560}
-              height={560}
-              className="w-[380px] lg:w-[560px] h-auto drop-shadow-2xl"
-              priority
-            />
-          </div>
-        </div>
-
-        {/* Latest Blogs Table - Right Column */}
+        {/* Latest Notice Table - Right Column */}
         <div className="w-full sm:w-auto lg:flex-shrink-0 flex justify-center lg:justify-end relative z-10 order-3">
           <LatestBlogsTable onTitleClick={onNoticeEventsClick} />
         </div>

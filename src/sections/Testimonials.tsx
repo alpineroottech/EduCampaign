@@ -1,11 +1,15 @@
+'use client';
+
 import Image from "next/image";
 import React from "react";
+import { motion } from "motion/react";
+import { ScrollReveal } from "@/components/ui/transitions";
 
 type Testimonial = {
     id: string;
     name: string;
     role: string;
-    avatarSrc: string; // place avatar images under /public/images/avatars/
+    avatarSrc: string;
     rating: 1 | 2 | 3 | 4 | 5;
     quote: string;
 };
@@ -14,26 +18,40 @@ const Star = ({ filled }: { filled: boolean }) => (
     <svg
         aria-hidden="true"
         viewBox="0 0 20 20"
-        className={`h-5 w-5 ${filled ? "fill-purple-900" : "fill-purple-200"}`}
+        className={`h-5 w-5 ${filled ? "fill-[#6B4FA1]" : "fill-gray-200"}`}
     >
         <path d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.97 5.06 16.7 6 11.2 2 7.31l5.53-.8L10 1.5z" />
     </svg>
 );
 
-const TestimonialCard: React.FC<{ t: Testimonial }> = ({ t }) => {
+const TestimonialCard: React.FC<{ t: Testimonial; index: number }> = ({ t, index }) => {
     const { name, role, avatarSrc, rating, quote } = t;
 
     return (
-        <div className="">
-            {/* Top accent line */}
-            <div className={"top-0 h-1 w-16 bg-purple-900"} aria-hidden="true" />
-
-            <article
-                className="relative flex h-full flex-col bg-white shadow-2xl"
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true }}
+        >
+            <motion.article
+                className="relative flex h-full flex-col bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
                 aria-label={`Testimonial from ${name}`}
+                whileHover={{ y: -4, boxShadow: '0 12px 40px -12px rgba(0,0,0,0.15)' }}
+                transition={{ type: 'spring', stiffness: 300 }}
             >
+                {/* Top accent line */}
+                <motion.div 
+                    className="h-1 w-full bg-[#6B4FA1]" 
+                    aria-hidden="true"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                    viewport={{ once: true }}
+                    style={{ transformOrigin: 'left' }}
+                />
 
-                <div className="px-6 pt-4 h-72">
+                <div className="px-6 pt-5 pb-4 h-64">
                     {/* Rating */}
                     <div className="flex items-center gap-1" aria-label={`${rating} out of 5 stars`}>
                         {Array.from({ length: 5 }).map((_, i) => (
@@ -42,40 +60,28 @@ const TestimonialCard: React.FC<{ t: Testimonial }> = ({ t }) => {
                         <span className="sr-only">{rating} out of 5 stars</span>
                     </div>
 
-                    {/* Quote - Scrollable without visible scrollbar */}
-                    <div 
-                        className="mt-8 leading-7 overflow-y-auto h-[calc(100%-3rem)] scrollbar-hide"
-                        style={{
-                            scrollbarWidth: 'none', /* Firefox */
-                            msOverflowStyle: 'none', /* IE and Edge */
-                        }}
-                    >
-                        <p>{quote}</p>
-                        <style jsx>{`
-                            .scrollbar-hide::-webkit-scrollbar {
-                                display: none; /* Chrome, Safari, Opera */
-                            }
-                        `}</style>
+                    {/* Quote */}
+                    <div className="mt-4 text-gray-600 leading-relaxed overflow-y-auto h-[calc(100%-2.5rem)] scrollbar-hide">
+                        <p>&ldquo;{quote}&rdquo;</p>
                     </div>
                 </div>
 
                 {/* Footer bar */}
-                <div className={`mt-auto flex items-center gap-3 px-6 py-4 bg-[#b884c9]`}>
+                <div className="mt-auto flex items-center gap-3 px-6 py-4 bg-gray-50 border-t border-gray-100">
                     <Image
                         src={avatarSrc}
                         alt={`${name} avatar`}
-                        width={40}
-                        height={40}
-                        className="h-12 w-12 rounded-full object-cover"
+                        width={48}
+                        height={48}
+                        className="h-12 w-12 rounded-full object-cover ring-2 ring-white"
                     />
-                    <div className="text-white">
-                        <div className="text-sm font-semibold">{name}</div>
-                        <div className="text-xs opacity-90">{role}</div>
+                    <div>
+                        <div className="text-sm font-semibold text-gray-900">{name}</div>
+                        <div className="text-xs text-gray-500">{role}</div>
                     </div>
                 </div>
-            </article>
-        </div>
-
+            </motion.article>
+        </motion.div>
     );
 };
 
@@ -83,7 +89,7 @@ const testimonials: ReadonlyArray<Testimonial> = [
     {
         id: "1",
         name: "Biraj Tiwari",
-        role: " Australia",
+        role: "Australia",
         avatarSrc: "/images/people/birajtiwari.png",
         rating: 5,
         quote:
@@ -120,39 +126,37 @@ const testimonials: ReadonlyArray<Testimonial> = [
 
 const Testimonials = () => {
     return (
-      <section
-        className="relative max-w-7xl mx-auto pt-6 md:pt-10 "
-        aria-labelledby="testimonials-heading"
-      >
-        <div className="mx-auto">
-          <header className="text-center max-w-3xl mx-auto mb-4 md:mb-6 ">
-            <h2 id="testimonials-heading" className="">
-              Testimonials
-            </h2>
-            <p className="mt-4 px-2">
-              From challenges to achievements, every student&apos;s story is
-              important. Curious about students&apos; experience here?
-              Don&apos;t just take our word for it—hear it straight from the
-              students themselves!
-            </p>
-          </header>
+        <section
+            className="relative py-16 md:py-24 bg-white"
+            aria-labelledby="testimonials-heading"
+        >
+            <div className="max-w-7xl mx-auto px-standard">
+                <ScrollReveal>
+                    <header className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+                        <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            What Our Students Say
+                        </h2>
+                        <p className="text-gray-600">
+                            From challenges to achievements, every student&apos;s story is
+                            important. Curious about students&apos; experience here?
+                            Don&apos;t just take our word for it—hear it straight from the
+                            students themselves!
+                        </p>
+                    </header>
+                </ScrollReveal>
 
-          <section className="py-12">
-            <div className="px-standard mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                {testimonials.map((testimonial, index) => (
-                  <div
-                    key={testimonial.id}
-                    className={index % 2 === 1 ? "lg:mt-22" : ""}
-                  >
-                    <TestimonialCard t={testimonial} />
-                  </div>
-                ))}
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {testimonials.map((testimonial, index) => (
+                        <div
+                            key={testimonial.id}
+                            className={index % 2 === 1 ? "lg:mt-8" : ""}
+                        >
+                            <TestimonialCard t={testimonial} index={index} />
+                        </div>
+                    ))}
+                </div>
             </div>
-          </section>
-        </div>
-      </section>
+        </section>
     );
 };
 

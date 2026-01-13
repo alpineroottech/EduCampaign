@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion } from 'motion/react';
+import { ScrollReveal } from '@/components/ui/transitions';
 
 // type definition for video data
 type Video = {
@@ -33,7 +35,7 @@ const VIDEOS: Video[] = [
     },
 ];
 
-// inline svg components for icons because it's bascially few bytes, no need to import entire lib
+// inline svg components for icons
 const PlayIcon = () => (
     <svg
         viewBox="0 0 24 24"
@@ -63,12 +65,19 @@ type VideoCardProps = {
     video: Video;
     onPlay: (youtubeId: string) => void;
     priority?: boolean;
+    index?: number;
 };
 
-const VideoCard = ({ video, onPlay, priority = false }: VideoCardProps) => {
+const VideoCard = ({ video, onPlay, priority = false, index = 0 }: VideoCardProps) => {
     return (
-        <article
-            className="relative group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full "
+        <motion.article
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full"
             onClick={() => onPlay(video.youtubeId)}
             role="button"
             tabIndex={0}
@@ -93,13 +102,16 @@ const VideoCard = ({ video, onPlay, priority = false }: VideoCardProps) => {
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
 
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+                    <motion.div 
+                        className="bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-2xl"
+                        whileHover={{ scale: 1.1, backgroundColor: '#ef4444' }}
+                        transition={{ type: 'spring', stiffness: 400 }}
+                    >
                         <PlayIcon />
-                    </div>
-
+                    </motion.div>
                 </div>
             </div>
-        </article>
+        </motion.article>
     );
 };
 
@@ -164,36 +176,39 @@ const StudentVoice = () => {
 
     return (
         <section
-            className="relative py-6 md:py-10 "
+            className="relative py-16 md:py-24 bg-gray-50"
             id="student-voice"
         >
-            <div className="px-standard text-center mb-8 md:mb-12 max-w-4xl mx-auto">
-                <h2 className=" mb-4">
-                    Our/ Student Voice
-                </h2>
-                <p className=" leading-relaxed">
-                    Here, we share the experiences and reflections of our students from across the globe.
-                    Their stories highlight learning, growth, and personal journeys, inspiring others to
-                    explore opportunities and pursue their dreams.
-                </p>
-            </div>
+            <div className="max-w-7xl mx-auto px-standard">
+                <ScrollReveal>
+                    <div className="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Student Voices
+                        </h2>
+                        <p className="text-gray-600 leading-relaxed">
+                            Here, we share the experiences and reflections of our students from across the globe.
+                            Their stories highlight learning, growth, and personal journeys, inspiring others to
+                            explore opportunities and pursue their dreams.
+                        </p>
+                    </div>
+                </ScrollReveal>
 
-            {/* alternatively we can make it same as width of form too , using max-w- */}
-            <div className="px-standard mx-auto ">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="h-[400px] md:h-[600px] md:row-span-2">
                         <VideoCard
                             video={featuredVideo}
                             onPlay={setActiveYoutubeId}
                             priority
+                            index={0}
                         />
                     </div>
 
-                    {otherVideos.map((video) => (
+                    {otherVideos.map((video, idx) => (
                         <div key={video.id} className="h-[400px] md:h-[285px]">
                             <VideoCard
                                 video={video}
                                 onPlay={setActiveYoutubeId}
+                                index={idx + 1}
                             />
                         </div>
                     ))}

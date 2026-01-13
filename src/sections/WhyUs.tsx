@@ -1,104 +1,89 @@
 "use client";
 
-import Image from "next/image";
-import { ShiftCard } from "@/components/ui/shift-card";
+import { BentoCard } from "@/components/ui/BentoCard";
+import { ScrollReveal } from "@/components/ui/transitions";
 
 type ServiceProps = {
   title: string;
   description: string;
   image: string;
   alt: string;
+  size?: "default" | "large" | "wide";
 };
-
 
 const services: ServiceProps[] = [
   {
-    title: "Personalized Counseling",
-    description: "Edu. Campaign carefully evaluates each student’s academic background, career goals, and financial situation to create a tailored plan, rather than following a “one-size-fits-all” approach.",
-    image: "/images/whyus/Personalized Counselling.png",
-    alt: "Counseling session",
-  },
-  {
     title: "Comprehensive Services",
-    description: "The consultancy provides end-to-end support, including test preparation (JLPT, NAT, IELTS, PTE, JFT etc.), scholarship guidance, documentation, visa processing, travel assistance, and post-departure services.",
+    description: "The consultancy provides complete end-to-end support throughout your entire study abroad journey. From initial test preparation for standardized exams (JLPT, NAT, IELTS, PTE, JFT, and more) to scholarship guidance, meticulous documentation assistance, seamless visa processing, travel arrangements, and comprehensive post-departure services.",
     image: "/images/about-board.png",
     alt: "Visa application form",
   },
   {
+    title: "Personalized Counseling",
+    description: "Edu. Campaign carefully evaluates each student's unique academic background, career aspirations, financial situation, and personal preferences to create a tailored study abroad plan. Rather than following a generic one-size-fits-all approach, our expert counselors take the time to understand your individual goals and constraints.",
+    image: "/images/whyus/Personalized Counselling.png",
+    alt: "Counseling session",
+    size: "large",
+  },
+  {
     title: "Wide Destination Options",
-    description: "Students can choose from multiple study destinations such as Australia, Japan, Canada, UK and New Zealand, offering flexibility and global opportunities.",
+    description: "Students can choose from an extensive range of premier study destinations including Australia, Japan, Canada, the United Kingdom, New Zealand, and South Korea. Each destination offers unique educational opportunities, cultural experiences, and career prospects tailored to your aspirations.",
     image: "/images/whyus/wide Destination.png",
     alt: "Official documents",
   },
   {
     title: "Affordability & Accessibility",
-    description: " Edu. Campaign works to reduce financial and procedural burdens, keeping costs reasonable and simplifying complex processes to make overseas education more accessible.",
+    description: "Edu. Campaign is committed to making overseas education accessible to students from all backgrounds. We work diligently to reduce financial and procedural burdens by keeping our service costs reasonable and transparent. Our team simplifies complex application processes and identifies scholarship opportunities.",
     image: "/images/whyus/Affordable.png",
     alt: "Student walking at airport",
+    size: "wide",
   },
   {
     title: "Post-Arrival Support",
-    description: "The consultancy provides continuous assistance to the students to reach their study destinations, adjust smoothly to a new environment. We ensure students receive post-arrival support abroad smoother and more reliable.",
+    description: "The consultancy provides continuous assistance even after you reach your study destination. We ensure smooth adjustment to your new environment through comprehensive pre-departure briefings, airport reception coordination, accommodation guidance, and local orientation support.",
     image: "/images/whyus/podt_arrival.png",
     alt: "Student taking a test",
   },
   {
-    title: "Credibility",
-    description: "Edu. Campaign upholds professional standards and enjoys a reputation for ethical practices and reliability.",
+    title: "Credibility & Trust",
+    description: "Edu. Campaign upholds the highest professional standards and has built a solid reputation for ethical practices, transparency, and reliability over years of dedicated service. Our success is measured by the achievements of our students who have successfully enrolled in prestigious institutions worldwide.",
     image: "/images/whyus/Credibility.png",
     alt: "Student accommodation",
+  },
+  {
+    title: "Alumni Success",
+    description: "Our alumni network spans across the globe, with graduates thriving in diverse fields and industries. From securing prestigious positions at multinational corporations to pursuing advanced research at top universities, our students' achievements reflect the quality of guidance and support they received throughout their journey with Edu. Campaign.",
+    image: "/images/about-board.png",
+    alt: "Successful alumni",
+    size: "wide",
   }
 ];
 
 const WhyUs = () => {
   return (
-    <section className="relative pb-4 pt-12 md:pt-20" id="why-us">
+    <section className="relative py-16 md:py-24 bg-gray-50" id="why-us">
       <div className="max-w-7xl mx-auto px-standard">
-        {/* Section Header */}
-        <div className="mb-8 md:mb-8 text-center">
-          <h2 className=" ">
-            Why Us?
-          </h2>
-          <p className="mt-4 max-w-7xl px-standard text-center mx-auto ">
-            Edu. Campaign Pvt. Ltd. is a trusted education consultancy chosen by many students for
-            its personalized counseling approach, where each student’s academic background, career
-            goals, and financial circumstances are carefully considered to create the best study plan.
-            The company provides comprehensive assistance for career counseling, scholarships,
-            documentation, visa guidance, and post-departure support. Edu. Campaign is also
-            recognized for making overseas education more affordable and accessible by reducing the
-            procedural burden for students.
+        <ScrollReveal>
+          <div className="mb-12 md:mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose Us?
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Edu. Campaign Pvt. Ltd. is a trusted education consultancy chosen by many students for 
+              its personalized counseling approach and comprehensive support services.
+            </p>
+          </div>
+        </ScrollReveal>
 
-          </p>
-          <h5 className=" my-8">
-            Strengths of Edu. Campaign Pvt. Ltd.
-          </h5>
-        </div>
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 auto-rows-fr">
           {services.map((service) => (
-            <ShiftCard
+            <BentoCard
               key={service.title}
-              topContent={
-                <h3 className="text-2xl font-semibold tracking-tight p-4 text-black dark:text-black">
-                  {service.title}
-                </h3>
-              }
-              middleContent={
-                <div className="h-full w-full p-2">
-                  <Image
-                    src={service.image}
-                    alt={service.alt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover rounded-lg transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-              }
-              bottomContent={
-                <p className="text-white text-base md:text-xl px-6 pt-6 pb-8 leading-relaxed font-medium max-h-[50%] overflow-auto break-words">
-                  {service.description}
-                </p>
-              }
+              title={service.title}
+              description={service.description}
+              image={service.image}
+              alt={service.alt}
+              size={service.size}
             />
           ))}
         </div>
