@@ -32,12 +32,11 @@ const defaultLinks: FooterSection[] = [
     {
         title: "Quick links",
         items: [
-            { label: "Japanese Language Program", href: "/studyabroad/japan/japaneselanguageprogram" },
-            { label: "Bekka Program", href: "/studyabroad/japan/bekka" },
-            { label: "Specified Skilled Worker I", href: "/testpreparation/sswpreparation?scrollTo=field&tab=ssw1" },
-            { label: "Specified Skilled Worker II", href: "/testpreparation/sswpreparation?scrollTo=field&tab=ssw2" },
+            { label: "Services", href: "/services" },
+            { label: "About Us", href: "/about" },
+            { label: "Blog", href: "/blog" },
+            { label: "Gallery", href: "/gallery" },
             { label: "Important Documents to Carry", href: "/services?scrollTo=importantDocs" },
-
         ],
     },
     {
@@ -236,7 +235,7 @@ const Footer: React.FC<FooterProps> = ({
                                     src={mapEmbedUrl}
                                     title="Our Location Map"
                                     aria-label="Our Location Map"
-                                    className="w-[80px] h-[80px] rounded-lg shadow-lg bg-white/5"
+                                    className="w-[250px] h-[200px] rounded-lg shadow-lg bg-white/5"
                                     loading="lazy"
                                     style={{ border: 0 }}
                                 />
