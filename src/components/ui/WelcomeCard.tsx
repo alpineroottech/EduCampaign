@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
 function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const isInView = useInView(ref, { once: false, margin: "-20px" });
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
 
@@ -87,7 +87,7 @@ export function WelcomeCard({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12 pt-8 border-t border-gray-100"
           >
             <div className="text-center">

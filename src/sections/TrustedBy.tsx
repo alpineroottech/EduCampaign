@@ -39,7 +39,7 @@ const TrustedBy = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5 }}
-                                viewport={{ once: true }}
+                                viewport={{ once: false }}
                                 className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm"
                             >
                                 <Link
@@ -71,7 +71,7 @@ const TrustedBy = () => {
                                 variants={staggerContainer}
                                 initial="hidden"
                                 whileInView="visible"
-                                viewport={{ once: true }}
+                                viewport={{ once: false }}
                                 className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm"
                             >
                                 <div className="flex flex-wrap justify-center lg:justify-around items-center gap-8">

@@ -26,7 +26,7 @@ const ContactSection = forwardRef<HTMLDivElement>((props, ref) => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false }}
                         className="bg-gray-50 rounded-2xl p-8 md:p-10 border border-gray-100"
                     >
                         <form className="space-y-5">
@@ -150,7 +150,7 @@ const ContactSection = forwardRef<HTMLDivElement>((props, ref) => {
                                 whileTap={{ scale: 0.99 }}
                                 className="w-full bg-[#3d1a4d] hover:bg-[#2a1136] text-white font-semibold 
                                          py-4 px-8 rounded-lg shadow-sm hover:shadow-md 
-                                         transition-all duration-300 flex items-center justify-center gap-2"
+                                         transition-all duration-300 flex items-center justify-center gap-2 active:scale-95"
                             >
                                 <span>Send Message</span>
                                 <Send className="w-4 h-4" />

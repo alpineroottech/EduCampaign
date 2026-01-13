@@ -90,7 +90,7 @@ const Hero = ({ onJoinClick, onNoticeEventsClick }: HeroProps) => {
             onClick={onJoinClick}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-[#3d1a4d] hover:bg-[#2a1136] text-white font-semibold py-3.5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base cursor-pointer"
+            className="bg-[#3d1a4d] hover:bg-[#2a1136] text-white font-semibold py-3.5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base cursor-pointer active:scale-95"
           >
             Join us today 
             <MoveRightIcon className="inline-block ml-2 w-4 h-4 md:w-5 md:h-5" />

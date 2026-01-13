@@ -74,9 +74,8 @@ const VideoCard = ({ video, onPlay, priority = false, index = 0 }: VideoCardProp
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
             className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full"
             onClick={() => onPlay(video.youtubeId)}
             role="button"

@@ -32,7 +32,7 @@ const TestimonialCard: React.FC<{ t: Testimonial; index: number }> = ({ t, index
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
         >
             <motion.article
                 className="relative flex h-full flex-col bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
@@ -47,7 +47,7 @@ const TestimonialCard: React.FC<{ t: Testimonial; index: number }> = ({ t, index
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     style={{ transformOrigin: 'left' }}
                 />
 

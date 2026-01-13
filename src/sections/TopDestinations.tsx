@@ -48,7 +48,7 @@ const TopDestinations = () => {
     skipSnaps: false,
     dragFree: false,
   }, [
-    Autoplay({ delay: 10000, stopOnInteraction: false })
+    Autoplay({ delay: 3000, stopOnInteraction: false })
   ]);
 
   const scrollPrev = useCallback(() => {

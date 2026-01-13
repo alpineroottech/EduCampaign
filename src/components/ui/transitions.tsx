@@ -174,7 +174,6 @@ export function HoverLift({ children, className = "" }: HoverLiftProps) {
         y: -4,
         transition: { duration: 0.2, ease: "easeOut" },
       }}
-      whileTap={{ scale: 0.98 }}
     >
       {children}
     </motion.div>
