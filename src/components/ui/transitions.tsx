@@ -221,4 +221,91 @@ export function StaggerWrapper({ children, className = "" }: StaggerWrapperProps
   );
 }
 
+// Animated section wrapper with repeating scroll animations
+interface AnimatedSectionProps {
+  children: React.ReactNode;
+  className?: string;
+  variants?: Variants;
+  margin?: string;
+}
+
+export function AnimatedSection({
+  children,
+  className = "",
+  variants = fadeInUp,
+  margin = "-50px",
+}: AnimatedSectionProps) {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, margin }}
+      variants={variants}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Animated grid with staggered children - repeats on scroll
+interface AnimatedGridProps {
+  children: React.ReactNode;
+  className?: string;
+  staggerDelay?: number;
+  margin?: string;
+}
+
+export function AnimatedGrid({
+  children,
+  className = "",
+  staggerDelay = 0.15,
+  margin = "-50px",
+}: AnimatedGridProps) {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: staggerDelay,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, margin }}
+      variants={containerVariants}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Animated grid item - use as direct child of AnimatedGrid
+interface AnimatedGridItemProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function AnimatedGridItem({ children, className = "" }: AnimatedGridItemProps) {
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
+  return (
+    <motion.div variants={itemVariants} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
 export { motion, AnimatePresence };
