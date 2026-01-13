@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Calendar, MapPin, Bell } from 'lucide-react';
 import { NOTICE_EVENTS, NoticeEvent } from '@/data/eventsData';
 import { forwardRef } from 'react';
+import { motion } from "motion/react";
 
 export const LearnMoreButton = ({ slug }: { slug: string }) => {
     return (
@@ -110,11 +111,33 @@ const NoticeEvents = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
             {/* Events Grid */}
             <div className=" ">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <motion.div 
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    variants={{
+                        hidden: { opacity: 0 },
+                        visible: { 
+                            opacity: 1,
+                            transition: {
+                                staggerChildren: 0.2
+                            }
+                        }
+                    }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto"
+                >
                     {NOTICE_EVENTS.map((event) => (
-                        <EventCard key={event.id} event={event} />
+                        <motion.div 
+                            key={event.id}
+                            variants={{
+                                hidden: { opacity: 0, y: 20 },
+                                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                            }}
+                        >
+                            <EventCard event={event} />
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
                 <div className='flex justify-end mt-6 px-2'>
                     <Link
                         href="/events"

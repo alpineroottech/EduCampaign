@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { countryCardProps, CountryCardProps } from '@/data/topDestinations';
 import Link from 'next/link';
@@ -42,11 +43,13 @@ const CountryCard = ({ imageSrc, title, description, href }: CountryCardProps) =
 
 const TopDestinations = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
+    loop: true,
     align: 'start',
     skipSnaps: false,
     dragFree: false,
-  });
+  }, [
+    Autoplay({ delay: 10000, stopOnInteraction: false })
+  ]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();

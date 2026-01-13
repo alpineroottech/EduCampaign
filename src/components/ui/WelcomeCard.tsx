@@ -1,7 +1,34 @@
 "use client";
 
 import { ScrollReveal } from "@/components/ui/transitions";
-import { motion } from "motion/react";
+import { motion, useInView, useMotionValue, useTransform, animate } from "motion/react";
+import { useEffect, useRef } from "react";
+
+function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, to, { duration: 2, ease: "easeOut" });
+      return controls.stop;
+    }
+  }, [isInView, to, count]);
+
+  // using ref to update text content specifically avoids react render cycle for every frame
+  useEffect(() => {
+    const unsubscribe = rounded.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = latest.toString() + suffix;
+      }
+    });
+    return unsubscribe;
+  }, [rounded, suffix]);
+
+  return <span ref={ref} className="tabular-nums">0{suffix}</span>;
+}
 
 interface WelcomeCardProps {
   title?: string;
@@ -64,15 +91,21 @@ export function WelcomeCard({
             className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12 pt-8 border-t border-gray-100"
           >
             <div className="text-center">
-              <p className="text-3xl md:text-4xl font-bold text-[#6B4FA1]">15+</p>
+              <p className="text-3xl md:text-4xl font-bold text-[#6B4FA1]">
+                <CountUp to={15} suffix="+" />
+              </p>
               <p className="text-sm text-gray-500 mt-1">Years Experience</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl md:text-4xl font-bold text-[#6B4FA1]">5000+</p>
+              <p className="text-3xl md:text-4xl font-bold text-[#6B4FA1]">
+                <CountUp to={5000} suffix="+" />
+              </p>
               <p className="text-sm text-gray-500 mt-1">Students Placed</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl md:text-4xl font-bold text-[#6B4FA1]">50+</p>
+              <p className="text-3xl md:text-4xl font-bold text-[#6B4FA1]">
+                <CountUp to={50} suffix="+" />
+              </p>
               <p className="text-sm text-gray-500 mt-1">Partner Universities</p>
             </div>
           </motion.div>

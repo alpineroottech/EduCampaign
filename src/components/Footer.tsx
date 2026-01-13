@@ -60,26 +60,6 @@ const defaultLinks: FooterSection[] = [
             { label: "PTE", href: "/testpreparation/pte" },
         ],
     },
-    {
-        title: "Services",
-        items: [
-            { label: "Career Counselling", href: "/services?scrollTo=careerCounseling" },
-            { label: "Language Preparation", href: "/services?scrollTo=languagePreparation" },
-            { label: "Interview Assistance", href: "/services?scrollTo=interviewAssistance" },
-            { label: "Visa Lodgement", href: "/services?scrollTo=visaLodgment" },
-            { label: "Documentation", href:"/services?scrollTo=documentation"},
-            { label: "Pre-departure Info", href: "/services?scrollTo=preDeparture" },
-        ],
-    },
-    {
-        title: "Important Links",
-        items: [
-            { label: "Scholarship in Japan", href: "/studyabroad/japan?scrollTo=scholarship" },
-            { label: "Visa Process In Japan", href: "/studyabroad/japan?scrollTo=visaprocess" },
-            { label: "Scholarship In Australia", href: "/studyabroad/australia?scrollTo=scholarship" },
-            { label: "SSW Japan", href: "/testpreparation/sswpreparation" },
-        ],
-    },
 ];
 
 const defaultBranches: Branch[] = [
@@ -255,12 +235,12 @@ const Footer: React.FC<FooterProps> = ({
                                 src={mapEmbedUrl}
                                 title="Our Location Map"
                                 aria-label="Our Location Map"
-                                className="w-full h-36 rounded-lg"
+                                className="w-full h-64 rounded-lg shadow-lg"
                                 loading="lazy"
                                 style={{ border: 0 }}
                             />
                         ) : (
-                            <div className="w-full h-36 rounded-lg bg-white/10 flex items-center justify-center">
+                            <div className="w-full h-64 rounded-lg bg-white/10 flex items-center justify-center">
                                 <div className="text-center text-white/60 text-sm">
                                     <svg className="w-8 h-8 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
