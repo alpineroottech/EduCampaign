@@ -203,53 +203,55 @@ const Footer: React.FC<FooterProps> = ({
         <footer className="relative w-full bg-[#3d1a4d]">
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-standard py-12">
-                {/* Links Grid - 5 columns on large screens */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 mb-10">
+                {/* Unified Desktop Grid: Links + Contact + Map */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-10">
+                    {/* Render Links Columns */}
                     {links.map((section, index) => (
-                        <FooterSection key={index} section={section} />
+                        <div key={index} className="col-span-1">
+                            <FooterSection section={section} />
+                        </div>
                     ))}
-                </div>
 
-                {/* Contact & Map Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-8 border-t border-white/10">
-                    {/* Head Office */}
-                    <div>
+                    {/* Head Office Info - takes 1 column on desktop */}
+                    <div className="col-span-2 md:col-span-1">
                         <h3 className="text-base font-semibold text-white mb-3">Head Office</h3>
                         <p className="text-white/90 text-sm font-medium mb-1">Edu. Campaign Pvt. Ltd.</p>
                         {branches.map((branch, index) => (
                             <div key={index} className="text-white/70 text-sm">
-                                {branch.city && <span>{branch.city}</span>}
-                                <span>{branch.country}</span>
+                                {branch.city && <span className="block">{branch.city}</span>}
+                                {branch.country && <span className="block">{branch.country}</span>}
                             </div>
                         ))}
-                        <Link href="/contact" className="inline-block mt-2 text-white/90 text-sm hover:text-white transition-colors">
+                        <Link href="/contact" className="inline-block mt-3 text-white/90 text-sm hover:text-white transition-colors border-b border-white/20 pb-0.5">
                             Contact Us →
                         </Link>
                     </div>
 
-                    {/* Map Preview - Compact */}
-                    <div className="lg:col-span-2">
-                        <h3 className="text-base font-semibold text-white mb-3">Our Location</h3>
-                        {mapEmbedUrl ? (
-                            <iframe
-                                src={mapEmbedUrl}
-                                title="Our Location Map"
-                                aria-label="Our Location Map"
-                                className="w-full h-64 rounded-lg shadow-lg"
-                                loading="lazy"
-                                style={{ border: 0 }}
-                            />
-                        ) : (
-                            <div className="w-full h-64 rounded-lg bg-white/10 flex items-center justify-center">
-                                <div className="text-center text-white/60 text-sm">
-                                    <svg className="w-8 h-8 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                    Kathmandu, Nepal
+                    {/* Map Preview - Compact Thumbnail */}
+                    <div className="col-span-2 lg:col-span-1">
+                        <h3 className="text-base font-semibold text-white mb-3">Location</h3>
+                        <div className="flex items-start">
+                            {mapEmbedUrl ? (
+                                <iframe
+                                    src={mapEmbedUrl}
+                                    title="Our Location Map"
+                                    aria-label="Our Location Map"
+                                    className="w-[80px] h-[80px] rounded-lg shadow-lg bg-white/5"
+                                    loading="lazy"
+                                    style={{ border: 0 }}
+                                />
+                            ) : (
+                                <div className="w-[80px] h-[80px] rounded-lg bg-white/10 flex items-center justify-center border border-white/10 shrink-0">
+                                    <div className="text-center text-white/60 text-xs">
+                                        <svg className="w-5 h-5 mx-auto mb-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Map
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

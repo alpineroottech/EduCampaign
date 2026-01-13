@@ -31,7 +31,24 @@ export function BentoCard({
   };
 
   const isHero = size === 'hero';
-  const shouldShowReadMore = !isHero && description.length > 150;
+  // Use a class-based approach for clamping instead of purely state-based
+  // This helps us control it via media queries if needed, although state is cleaner for button logic.
+  // We'll update the logic: On mobile (assumed by default CSS or user intent), we might want to avoid truncation if that's the request.
+  // However, "description.length > 150" is a JS check. JS doesn't know about mobile unless we check window width.
+  // But the prompt says "remove [truncation] and display full text when possible for phones".
+  // Since we are now using a carousel on mobile where height is less constrained, we can just opt-out of "read more" logic 
+  // via a prop or just relax the constraint check. 
+  // But to be strictly responsive without hydration errors, purely CSS line-clamp is better, 
+  // but "See More" button implies JS state.
+  // Simple pragmatic fix: We'll modify the rendering to ALWAYS show full text on mobile (via CSS) 
+  // and hide the "See More" button on mobile via CSS too?
+  // Actually, the user asked to remove the truncation.
+  
+  // Update: We'll keep the JS check for desktop but on mobile we want to "display full text".
+  // The easiest way is to use CSS `hidden md:block` for the button and `line-clamp-none` on mobile.
+  
+  const hasLongText = description.length > 150;
+  const shouldShowReadMoreButton = !isHero && hasLongText;
 
   return (
     <motion.article
@@ -74,14 +91,16 @@ export function BentoCard({
         </div>
         
         <div className="flex-1">
-          <p className={`text-gray-600 leading-relaxed ${!isHero && !isExpanded ? 'line-clamp-4' : ''}`}>
+          {/* Mobile: Always full text (no line-clamp). Desktop: line-clamp if collapsed. */}
+          <p className={`text-gray-600 leading-relaxed ${!isHero && !isExpanded ? 'md:line-clamp-4' : ''}`}>
             {description}
           </p>
           
-          {shouldShowReadMore && (
+          {shouldShowReadMoreButton && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="mt-2 text-sm font-semibold text-[#6B4FA1] hover:text-[#3d1a4d] transition-colors inline-flex items-center gap-1"
+              // Hide button on mobile (hidden), show on desktop (md:inline-flex)
+              className="mt-2 text-sm font-semibold text-[#6B4FA1] hover:text-[#3d1a4d] transition-colors hidden md:inline-flex items-center gap-1"
               aria-label={isExpanded ? "Show less" : "Show more"}
             >
               {isExpanded ? "Show less" : "See more"}
