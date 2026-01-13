@@ -79,7 +79,7 @@ const WhyUs = () => {
             <ShiftCard
               key={service.title}
               topContent={
-                <h3 className="text-2xl font-semibold tracking-tight p-4 text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-semibold tracking-tight p-4 text-black dark:text-black">
                   {service.title}
                 </h3>
               }

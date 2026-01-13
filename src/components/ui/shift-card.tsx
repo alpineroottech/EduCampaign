@@ -26,7 +26,7 @@ export function ShiftCard({
 
   return (
     <div
-      className={`group relative aspect-square w-full overflow-hidden rounded-xl bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md border border-white/10 ${className}`}
+      className={`group relative aspect-square w-full overflow-hidden rounded-xl bg-[#3d1a4d]/20 dark:bg-[#2a1136]/30 backdrop-blur-md border border-[#3d1a4d]/30 shadow-[0_8px_30px_rgba(59,26,77,0.14)] ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -57,7 +57,7 @@ export function ShiftCard({
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: "100%", opacity: 0 }}
               transition={springTransition}
-              className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent"
+              className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#2a1136]/90 to-transparent"
             >
               {bottomContent}
             </motion.div>
