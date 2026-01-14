@@ -135,7 +135,7 @@ export default function JapaneseLanguage() {
       <div className=" ">
         <Breadcrumbs />
         <HeroSection imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80" title="Japanese Language" />
-        <div className="text-center max-w-5xl mx-auto py-4 px-4">
+        <div className="text-center max-w-5xl mx-auto py-8 md:py-12 px-4">
           <p className="mt-6">
             To pursue study or employment opportunities in Japan, having strong Japanese language
             skills is essential. Various tests assess this ability, such as the JLPT, NAT, JLCT, J-CERT,

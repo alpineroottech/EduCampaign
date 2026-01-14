@@ -104,7 +104,7 @@ const Event = () => {
         <Breadcrumbs />
         <div className="relative h-[350px] grid grid-cols-6 grid-rows-1">
           <div className="grid col-span-1 row-span-1 h-full bg-[#ebe9e1] items-center">
-            <div className="absolute z-20 ml-8 bg-gradient-to-r from-white/80 to-white/10 p-15 border-l-10 border-l-[#df5252] shadow-[0_2px_24px_rgba(0,0,0,0.04)]">
+            <div className="absolute z-20 ml-8 bg-gradient-to-r from-white/80 to-white/10 p-15 border-l-8 border-l-[#df5252] shadow-[0_2px_24px_rgba(0,0,0,0.04)]">
               <h2 className="">Notice & Events</h2>
             </div>
           </div>
@@ -133,7 +133,7 @@ const Event = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        className="text-center max-w-6xl mx-auto py-10 px-4"
+        className="text-center max-w-6xl mx-auto py-8 md:py-12 px-4"
       >
         <p className="">
           Stay informed about our upcoming events, workshops, and important announcements. 

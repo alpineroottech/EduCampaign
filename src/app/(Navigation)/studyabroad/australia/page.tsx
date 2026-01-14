@@ -178,7 +178,7 @@ function PageContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, margin: "-50px" }}
               transition={{ duration: 0.6 }}
-              className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-10 bg-white"
+              className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-8 md:py-12 bg-white"
             >
                 <h2 className=" mb-6 text-center">
                     Why Australia ?
@@ -193,7 +193,7 @@ function PageContent() {
                     {iconBoxes.map((box, index) => (
                         <div
                             key={index}
-                            className="w-40 h-20 flex flex-col items-center justify-center border border-purple-300 rounded-full"
+                            className="w-40 h-20 flex flex-col items-center justify-center border border-gray-300 rounded-full"
                         >
                             <Image
                                 src={box.icon}
@@ -210,7 +210,7 @@ function PageContent() {
             </motion.div>
 
 
-            <div className="max-w-6xl mx-auto px-6 py-10 mt-8 ">
+            <div className="max-w-6xl mx-auto px-6 py-8 md:py-12 mt-8">
                 <h2 className=" mb-6  text-center">HIGHER EDUCATION &amp; STUDY PATHWAY IN AUSTRALIA</h2>
                 <p className="mb-4 max-w-6xl text-center mx-auto ">
                     Australia offers international students a well-organized journey of learning, starting with
@@ -254,7 +254,7 @@ function PageContent() {
             </div>
 
             <div
-                className="relative bg-cover bg-center bg-no-repeat py-8 px-4 mx-0 sm:mx-6"
+                className="relative bg-cover bg-center bg-no-repeat py-16 md:py-24 px-4 mx-0 sm:mx-6"
                 style={{ backgroundImage: "url('/images/tution.jpg')" }}  // <-- replace with your image
             >
                 {/* Overlay for readability */}

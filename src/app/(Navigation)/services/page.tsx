@@ -304,7 +304,7 @@ function ServicesContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        className="text-center max-w-5xl mx-auto py-10 px-4"
+        className="text-center max-w-5xl mx-auto py-8 md:py-12 px-4"
       >
         <p className="">
           If you're planning to study abroad and need expert support to navigate

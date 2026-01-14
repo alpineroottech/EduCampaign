@@ -41,7 +41,7 @@ export default function BlogPage() {
         <HeroSection imageSrc="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1600&q=80" title="Blog" />
       </div>
       {/* Main Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
 
         {/* Category Filter */}
         <CategoryFilter
@@ -105,7 +105,7 @@ export default function BlogPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="relative bg-gradient-to-r from-[#6B4FA1] to-[#8B5FD1] text-white py-16 mt-20">
+      <div className="relative bg-gradient-to-r from-[#6B4FA1] to-[#8B5FD1] text-white py-16 md:py-24 mt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Start Your Study Abroad Journey?

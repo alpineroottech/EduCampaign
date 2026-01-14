@@ -61,7 +61,7 @@ export default function AboutUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, margin: "-50px" }}
               transition={{ duration: 0.6 }}
-              className="relative max-w-7xl py-4 mx-auto px-4 sm:px-6 mt-8 sm:mt-12"
+              className="relative max-w-7xl py-8 md:py-12 mx-auto px-4 sm:px-6 mt-8 sm:mt-12"
             >
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-6">
                 <Image

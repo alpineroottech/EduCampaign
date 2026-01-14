@@ -158,7 +158,7 @@ const UniversityPage = () => {
           {/* About Section */}
           <div ref={aboutRef}>
             <h3 className="bg-gray-200 p-4">ABOUT AUSTRALIAN UNIVERSITY</h3>
-            <div className="flex flex-col gap-4 py-4 text-justify px-4">
+            <div className="flex flex-col gap-4 py-8 text-justify px-4">
               <p>
                 Australia is home to 39 universities, including public, private, and Catholic institutions, spread across metropolitan and regional areas, many with multiple campuses. These universities offer a wide range of undergraduate and postgraduate programs, from Bachelor&apos;s degrees to Doctoral studies, with some focusing on research, technology, or specialized disciplines. In addition, smaller private institutions provide niche courses in fields such as hospitality, digital media, and performing arts, catering to specific industry needs or communities.
               </p>

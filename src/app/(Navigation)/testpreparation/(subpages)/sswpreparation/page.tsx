@@ -64,7 +64,7 @@ const SSWPreparationPage = () => {
 
           <Breadcrumbs />
           <HeroSection imageSrc="/images/testpreparation/ssw.webp" title="SSW Preparation" />
-          <div className="py-12 px-standard">
+          <div className="py-16 md:py-24 px-standard">
             <div className="container-narrow mx-auto px-0 lg:px-8">
               <h2 className="bg-gray-200 p-4 w-full lg:w-[50vw]">
                 About Courses In Nepal

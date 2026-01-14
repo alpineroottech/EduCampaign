@@ -208,7 +208,7 @@ const Footer: React.FC<FooterProps> = ({
 
                     {/* Copyright */}
                     <div className="text-white/60 text-sm">
-                        © {displayYear} Education Campaign Pvt. Ltd.
+                        © {displayYear} Education Campaign Pvt. Ltd. <br /> Crafted by AlpineRoot Technologies Pvt. Ltd.
                     </div>
                 </div>
             </div>

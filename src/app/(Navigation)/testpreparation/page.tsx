@@ -72,7 +72,7 @@ export default function TestPreparation() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        className="text-center max-w-5xl mx-auto py-6 px-4"
+        className="text-center max-w-5xl mx-auto py-8 md:py-12 px-4"
       >
         <p className="">
           Japan has become one of the most popular destinations for international students who wish to combine quality education with cultural immersion. Known for its advanced technology, discipline, and academic excellence, Japan offers affordable tuition fees compared to many Western countries.

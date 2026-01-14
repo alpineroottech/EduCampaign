@@ -60,7 +60,7 @@ const TopDestinations = () => {
   }, [emblaApi]);
 
   return (
-    <section className="relative py-12 md:py-20 bg-gradient-to-b from-purple-50/50" id="top-destinations">
+    <section className="relative py-16 md:py-24 bg-gradient-to-b from-purple-50/50" id="top-destinations">
       {/* Header */}
       <div className='px-standard text-center mb-8 md:mb-12 max-w-4xl mx-auto'>
         <h2 className=" mb-4">

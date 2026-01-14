@@ -19,7 +19,7 @@ const HeroSection = ({ imageSrc, title }: HeroSectionProps) => {
     return (
         <div className="relative h-[250px] sm:h-[300px] md:h-[350px] grid grid-cols-1 sm:grid-cols-6 grid-rows-1 mb-8 sm:mb-12 transition-[height] duration-300">
             <div className="hidden sm:grid col-span-1 row-span-1 h-full bg-[#ebe9e1] items-center">
-                <div className={`absolute z-20 ml-4 sm:ml-8 bg-gradient-to-r from-white/80 to-white/10 py-8 sm:py-15 ${titlePadding} border-l-8 sm:border-l-10 border-l-[#df5252] shadow-[0_2px_24px_rgba(0,0,0,0.04)] transition-all duration-300`}>
+                <div className={`absolute z-20 ml-4 sm:ml-8 bg-gradient-to-r from-white/80 to-white/10 py-8 sm:py-15 ${titlePadding} border-l-8 border-l-[#df5252] shadow-[0_2px_24px_rgba(0,0,0,0.04)] transition-all duration-300`}>
                     <h2 className="text-2xl sm:text-3xl md:text-4xl transition-[font-size] duration-300">{title}</h2>
                 </div>
             </div>

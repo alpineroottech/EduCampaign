@@ -38,7 +38,7 @@ export default function Ielts() {
         <Breadcrumbs />
         <HeroSection imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80" title="IELTS Preparation"/>
 
-        <div className="text-center max-w-5xl mx-auto py-8 px-6">
+        <div className="text-center max-w-5xl mx-auto py-8 md:py-12 px-6">
           <p className="t leading-relaxed">
             IELTS is a widely recognized English proficiency test for study, work, and migration, accepted by over 11,000 institutions globally. It assesses listening, reading, writing, and speaking skills.
           </p>

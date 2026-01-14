@@ -91,7 +91,7 @@ export default function StudyAbroad() {
         <Breadcrumbs />
         <div className="relative h-[250px] sm:h-[300px] md:h-[350px] grid grid-cols-1 sm:grid-cols-6 grid-rows-1 mb-8 sm:mb-12">
           <div className="hidden sm:grid col-span-1 row-span-1 h-full bg-[#ebe9e1] items-center">
-            <div className="absolute z-20 ml-4 sm:ml-8 bg-gradient-to-r from-white/80 to-white/10 py-8 sm:py-15 px-12 sm:px-16 border-l-8 sm:border-l-10 border-l-[#df5252] shadow-[0_2px_24px_rgba(0,0,0,0.04)]">
+            <div className="absolute z-20 ml-4 sm:ml-8 bg-gradient-to-r from-white/80 to-white/10 py-8 sm:py-15 px-12 sm:px-16 border-l-8 border-l-[#df5252] shadow-[0_2px_24px_rgba(0,0,0,0.04)]">
               <h2 className="text-2xl sm:text-3xl md:text-4xl">Study Abroad</h2>
             </div>
           </div>
@@ -171,13 +171,13 @@ export default function StudyAbroad() {
             </div>
 
 
-            <div className="w-full py-6 px-4 text-center">
+            <div className="w-full py-8 md:py-12 px-4 text-center">
               <h5 className=" mb-4 group-hover:text-[#6B4FA1] transition-colors line-clamp-2">{card.title}</h5>
               <p className=" mb-4">{card.paragraph}</p>
               {/* <LearnMoreButton slug={card.slug} /> */}
               <Link
                 href={card.slug}
-                className="bg-[#3d1a4d] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[#2a1136] transition self-center"
+                className="bg-[#3d1a4d] text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-[#2a1136] transition self-center"
               >
                 Learn More
               </Link>
