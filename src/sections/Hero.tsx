@@ -59,7 +59,7 @@ const LatestBlogsTable = ({
 
 const Hero = ({ onJoinClick, onNoticeEventsClick }: HeroProps) => {
   return (
-    <section className="relative w-full h-auto bg-gradient-to-b from-white to-gray-50/50 pt-12 md:pt-16 pb-8 md:pb-16 overflow-hidden">
+    <section className="relative w-full h-auto bg-gradient-to-b from-white to-gray-50/50 pt-12 md:pt-16 pb-8 md:pb-6 overflow-hidden">
 
       {/* Subtle Background Elements - Flat design */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
