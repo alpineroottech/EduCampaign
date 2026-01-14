@@ -127,7 +127,7 @@ const testimonials: ReadonlyArray<Testimonial> = [
 const Testimonials = () => {
     return (
         <section
-            className="relative py-16 md:py-24 bg-white"
+            className="relative pt-16 md:pt-24 bg-white"
             aria-labelledby="testimonials-heading"
         >
             <div className="max-w-7xl mx-auto px-standard">
