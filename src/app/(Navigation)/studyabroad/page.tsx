@@ -5,6 +5,7 @@ import { LearnMoreButton } from "@/sections/NoticeEvents";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 
 const heroImages = [
   "/images/studyabroad/study-abroad.webp",
@@ -119,13 +120,27 @@ export default function StudyAbroad() {
       </div>
 
       {/* Text */}
-      <div className="text-center max-w-6xl mx-auto py-6 px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="text-center max-w-6xl mx-auto py-6 px-4"
+      >
         <p className=" ">
           Studying abroad offers a chance to explore new cultures, ideas, and perspectives while earning a quality education. It helps students grow personally and professionally by developing independence, communication skills, and global awareness. The experience fosters open-mindedness and prepares learners to succeed in an increasingly connected and competitive world.
         </p>
-      </div>
+      </motion.div>
       {/* Cards Grid (Responsive but same UI) */}
-      <div className="relative
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: "-50px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+        }}
+        className="relative
             grid 
             grid-cols-1
             sm:grid-cols-2
@@ -134,10 +149,15 @@ export default function StudyAbroad() {
             xl:grid-cols-3
             max-w-6xl mx-auto my-6 gap-3
             
-        ">
+        "
+      >
         {studyAbroad.map((card, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            }}
             className=" group overflow-hidden flex flex-col items-center rounded-2xl shadow-md m-4 bg-white hover:shadow-xl transition-all duration-300"
           >
             <div className="w-full aspect-[5/3] relative overflow-hidden">
@@ -163,9 +183,9 @@ export default function StudyAbroad() {
               </Link>
 
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

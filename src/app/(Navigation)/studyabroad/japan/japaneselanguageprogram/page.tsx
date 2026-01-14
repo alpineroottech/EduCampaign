@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { useScrollToOffset } from '@/utils/useScrollToOffset';
 import Link from "next/link";
+import { motion } from 'motion/react';
 
 
 

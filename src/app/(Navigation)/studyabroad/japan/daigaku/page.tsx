@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs';
 import { useScrollToOffset } from '@/utils/useScrollToOffset';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'motion/react';
 
 const DaigakuPage = () => {
   const [activeSection, setActiveSection] = useState("about");

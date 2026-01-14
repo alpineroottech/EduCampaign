@@ -5,6 +5,7 @@ import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import HeroSection from "@/components/hero/HeroSection";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 const SSWPreparationPage = () => {
   const [activeTab, setActiveTab] = useState("ssw1");

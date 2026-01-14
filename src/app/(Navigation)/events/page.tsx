@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Calendar, MapPin, Bell } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { NOTICE_EVENTS, NoticeEvent } from "@/data/eventsData";
+import { motion } from "motion/react";
 
 const heroImages = [
   "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80",
@@ -127,21 +128,44 @@ const Event = () => {
       </div>
 
       {/* Description Text */}
-      <div className="text-center max-w-6xl mx-auto py-10 px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="text-center max-w-6xl mx-auto py-10 px-4"
+      >
         <p className="">
           Stay informed about our upcoming events, workshops, and important announcements. 
           Join us for educational seminars, test preparation courses, and career guidance sessions 
           designed to help you achieve your academic and professional goals. Mark your calendar and 
           never miss an opportunity to advance your journey toward studying abroad.
         </p>
-      </div>
+      </motion.div>
 
       {/* Events Grid */}
-      <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 max-w-6xl mx-auto my-6 gap-6 px-4">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: "-50px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+        }}
+        className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 max-w-6xl mx-auto my-6 gap-6 px-4"
+      >
         {NOTICE_EVENTS.map((event) => (
-          <EventCard key={event.id} event={event} />
+          <motion.div 
+            key={event.id}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            }}
+          >
+            <EventCard event={event} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

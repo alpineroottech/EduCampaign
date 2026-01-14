@@ -7,6 +7,7 @@ import GalleryItemCard from '@/components/gallery/GalleryItemCard';
 import Lightbox from '@/components/gallery/Lightbox';
 import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs';
 import HeroSection from '@/components/hero/HeroSection';
+import { motion } from 'motion/react';
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>('all');
@@ -57,15 +58,31 @@ export default function GalleryPage() {
 
         {/* Gallery Grid */}
         {filteredItems.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-50px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {filteredItems.map((item, index) => (
-              <GalleryItemCard
+              <motion.div 
                 key={item.id}
-                item={item}
-                onClick={() => handleOpenLightbox(index)}
-              />
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+              >
+                <GalleryItemCard
+                  item={item}
+                  onClick={() => handleOpenLightbox(index)}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ) : (
           <div className="text-center py-20">
             <div className="text-gray-400 mb-4">

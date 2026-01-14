@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { useScrollToOffset } from '@/utils/useScrollToOffset';
+import { motion } from 'motion/react';
 
 const UniversityProgramPage = () => {
   const [activeSection, setActiveSection] = useState("about");

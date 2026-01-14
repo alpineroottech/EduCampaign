@@ -6,6 +6,7 @@ import { useScrollToOffset } from "@/utils/useScrollToOffset";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import React, { useState, ReactNode, useRef, useEffect, Suspense } from "react";
+import { motion } from "motion/react";
 
 interface AccordionProps {
   title: string;
@@ -298,13 +299,19 @@ function ServicesContent() {
         <HeroSection imageSrc="/images/service-1.webp" title="Our Services" />
 
       </div>
-      <div className="text-center max-w-5xl mx-auto py-10 px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="text-center max-w-5xl mx-auto py-10 px-4"
+      >
         <p className="">
-          If you’re planning to study abroad and need expert support to navigate
+          If you're planning to study abroad and need expert support to navigate
           choices, applications, and career planning, Edu. Campaign Pvt. Ltd. is here to guide you. We make the visa process straightforward with step-by-step assistance and provide professional help with all documentation. Whether you are
           a student, graduate, or professional, we help you achieve your goals and unlock global opportunities.
         </p>
-      </div>
+      </motion.div>
 
       {/* Category Filter and Go To Category Location*/}
 

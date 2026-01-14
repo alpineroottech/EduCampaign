@@ -3,6 +3,7 @@ import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs';
 import { useEffect, useRef, useState } from 'react';
 import { useScrollToOffset } from '@/utils/useScrollToOffset';
 import Image from 'next/image';
+import { motion } from 'motion/react';
 
 interface RelatedProgramCard {
   image: string;

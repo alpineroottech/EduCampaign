@@ -6,6 +6,7 @@ import CategoryFilter from '@/components/blog/CategoryFilter';
 import BlogCard from '@/components/blog/BlogCard';
 import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs';
 import HeroSection from '@/components/hero/HeroSection';
+import { motion } from 'motion/react';
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState<BlogCategory>('all');
@@ -59,11 +60,28 @@ export default function BlogPage() {
         )}
         {/* Blog Grid */}
         {filteredPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-50px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {filteredPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
+              <motion.div 
+                key={post.id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+              >
+                <BlogCard post={post} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ) : (
           // Empty State
           <div className="text-center py-20">

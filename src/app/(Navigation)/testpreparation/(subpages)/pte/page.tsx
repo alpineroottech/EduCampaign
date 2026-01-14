@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import HeroSection from "@/components/hero/HeroSection";
+import { motion } from "motion/react";
 
 export default function PTE() {
   const [formData, setFormData] = useState({

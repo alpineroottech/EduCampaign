@@ -5,6 +5,7 @@ import HeroSection from "@/components/hero/HeroSection";
 import Image from "next/image";
 import React from "react";
 import { socialIcons } from "@/data/socialData";
+import { motion } from "motion/react";
 
 // Interfaces
 interface TeamMember {
@@ -54,7 +55,14 @@ export default function AboutUs() {
         {/* ABOUT US CARDS */}
         {
           aboutUsCards.map((card, index) => (
-            <div key={index} className="relative max-w-7xl py-4 mx-auto px-4 sm:px-6 mt-8 sm:mt-12">
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="relative max-w-7xl py-4 mx-auto px-4 sm:px-6 mt-8 sm:mt-12"
+            >
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-6">
                 <Image
                   src={card.image}
@@ -71,12 +79,18 @@ export default function AboutUs() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
           ))
         }
       </div>
       {/* CONTACT US SECTION */}
-      <div className="max-w-4xl bg-white shadow-md rounded-xl p-6 sm:p-8 md:p-10 mx-4 sm:mx-auto mt-12 sm:mt-16 md:mt-20 mb-12 sm:mb-16 md:mb-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="max-w-4xl bg-white shadow-md rounded-xl p-6 sm:p-8 md:p-10 mx-4 sm:mx-auto mt-12 sm:mt-16 md:mt-20 mb-12 sm:mb-16 md:mb-20"
+      >
         <h5 className="text-center mb-8 sm:mb-10 md:mb-12 text-lg sm:text-xl md:text-2xl">Contact Us</h5>
         {/* 2-COLUMN LAYOUT */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
@@ -171,14 +185,29 @@ export default function AboutUs() {
 
 
         </div>
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8 sm:mt-10 md:mt-12">
         {/* MISSION & VISION CARDS */}
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-12 md:mb-14">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+          }}
+          className="relative grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-12 md:mb-14"
+        >
 
           {/* Mission */}
-          <div className="bg-white shadow-md rounded-xl p-6 sm:p-8 flex flex-col text-center hover:bg-purple-200">
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            }}
+            className="bg-white shadow-md rounded-xl p-6 sm:p-8 flex flex-col text-center hover:bg-purple-200"
+          >
             <h5 className="mb-3 text-lg sm:text-xl md:text-2xl">Our Mission</h5>
             <p className="leading-relaxed text-sm sm:text-base">
               At the heart of our consultancy lies a commitment to illuminate the educational
@@ -189,10 +218,16 @@ export default function AboutUs() {
               learner and institution we serve with clarity, confidence, and access to the
               resources they need to thrive in an ever-evolving educational landscape.
             </p>
-          </div>
+          </motion.div>
 
           {/* Vision */}
-          <div className="bg-white shadow-md rounded-xl p-6 sm:p-8 flex flex-col text-center hover:bg-purple-200">
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            }}
+            className="bg-white shadow-md rounded-xl p-6 sm:p-8 flex flex-col text-center hover:bg-purple-200"
+          >
             <h5 className="mb-3 text-lg sm:text-xl md:text-2xl">Our Vision</h5>
             <p className="leading-relaxed text-sm sm:text-base">
               To be a trusted bridge between aspiring students and top global institutions, always
@@ -202,9 +237,9 @@ export default function AboutUs() {
               opportunities and support journeys that shape the leaders, innovators, and change-
               makers of tomorrow.
             </p>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
         {/* TEAM SECTION */}
         <section className="mt-8 sm:mt-10">

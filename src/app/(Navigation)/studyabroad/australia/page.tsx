@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Suspense, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useScrollToOffset } from "@/utils/useScrollToOffset";
+import { motion } from "motion/react";
 
 
 interface IconBox {
@@ -145,7 +146,13 @@ function PageContent() {
                 <Breadcrumbs />
                 <HeroSection imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80" title="Study In Australia" />
             </div>
-            <p className=" text-center max-w-6xl mx-auto mt-6 px-2 md:px-0">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className=" text-center max-w-6xl mx-auto mt-6 px-2 md:px-0"
+            >
                 Australia continues to be a highly sought-after destination for international students,
                 particularly from Nepal, thanks to its world-class universities and practical, industry-
                 focused education. Students benefit from modern facilities, innovative teaching, and
@@ -156,7 +163,7 @@ function PageContent() {
                 even explore pathways to permanent residency, especially in fields where skilled
                 professionals are in demand, such as IT, healthcare, engineering, and teaching.
 
-            </p>
+            </motion.p>
             <p className=" text-center max-w-6xl mx-auto my-6 px-2  md:px-0">
                 Additionally, Australia offers Nepali students not just a degree but a meaningful
                 international experience through quality education, strong industry-linked learning, and
@@ -166,7 +173,13 @@ function PageContent() {
             </p>
 
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-10 bg-white">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-10 bg-white"
+            >
                 <h2 className=" mb-6 text-center">
                     Why Australia ?
                 </h2>
@@ -192,10 +205,9 @@ function PageContent() {
                                 {box.title}
                             </p>
                         </div>
-                    ))}
-                </div>
+                    ))}n                </div>
 
-            </div>
+            </motion.div>
 
 
             <div className="max-w-6xl mx-auto px-6 py-10 mt-8 ">

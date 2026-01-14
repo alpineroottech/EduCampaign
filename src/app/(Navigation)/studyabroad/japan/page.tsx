@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
+import { motion } from "motion/react";
 
 
 interface IconBox {
@@ -221,7 +222,13 @@ function ServicesContent() {
         <HeroSection imageSrc="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1600&q=80" title="Study In Japan" />
       </div>
 
-      <p className="text-center max-w-6xl mx-auto py-10 ">
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="text-center max-w-6xl mx-auto py-10 "
+      >
         Japan has become one of the most popular destinations for
         international students who wish to combine quality education with
         cultural immersion. Known for its advanced technology, discipline, and
@@ -232,9 +239,15 @@ function ServicesContent() {
         The safe living environment, rich traditions, and modern lifestyle
         make Japan an attractive choice for students aiming for both academic
         and personal growth.
-      </p>
+      </motion.p>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-10 bg-white">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-10 bg-white"
+      >
         <h2 className=" mb-6 text-center">Why Japan ?</h2>
         <p className=" mb-6 max-w-4xl text-center mx-auto  ">
           Japan provides high-quality, affordable education in a safe and
@@ -262,9 +275,8 @@ function ServicesContent() {
                 {box.title}
               </p>
             </div>
-          ))}
-        </div>
-      </div>
+          ))}n        </div>
+      </motion.div>
 
       <div className="max-w-6xl mx-auto px-6 py-10 mt-8 ">
         <h2 className=" mb-6  text-center">Study Pathway in Japan</h2>

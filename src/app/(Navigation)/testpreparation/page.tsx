@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import HeroSection from "@/components/hero/HeroSection";
 import Image from "next/image";
 import Link from 'next/link';
+import { motion } from 'motion/react';
 
 
 interface TestPreparationCard {
@@ -66,16 +67,37 @@ export default function TestPreparation() {
         <Breadcrumbs />
         <HeroSection imageSrc="/images/testpreparation/exam.webp" title="Test Preparation" />
       </div>
-      <div className="text-center max-w-5xl mx-auto py-6 px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="text-center max-w-5xl mx-auto py-6 px-4"
+      >
         <p className="">
           Japan has become one of the most popular destinations for international students who wish to combine quality education with cultural immersion. Known for its advanced technology, discipline, and academic excellence, Japan offers affordable tuition fees compared to many Western countries.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="relative grid grid-cols-1 grid-rows-4 max-w-[80vw] mx-auto mb-6">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: "-50px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+        }}
+        className="relative grid grid-cols-1 grid-rows-4 max-w-[80vw] mx-auto mb-6"
+      >
         {testPreparation.map((service, index) => (
-          <Link href={service.link} key={index
-          }>
+          <motion.div 
+            key={index}
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+            }}
+          >
+          <Link href={service.link}>
           <div key={index} className={`flex flex-col items-center rounded-2xl shadow-md m-4 p-6 cursor-pointer hover:shadow-xl transition-shadow duration-300
               ${index % 2 !== 0 ? 'md:flex-row' : 'md:flex-row-reverse'} ${service.color}
               `}>
@@ -99,10 +121,9 @@ export default function TestPreparation() {
             </div>
           </div>
           </Link>
+          </motion.div>
         ))}
-      </div>
-
-
+      </motion.div>
     </div>
   )
 }
