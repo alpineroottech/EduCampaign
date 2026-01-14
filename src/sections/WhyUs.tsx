@@ -65,7 +65,7 @@ const WhyUs = () => {
   ]);
 
   return (
-    <section className="relative pt-16 md:pt-24 bg-gray-50" id="why-us">
+    <section className="relative pt-16 pb-2 bg-gray-50" id="why-us">
       <div className="max-w-7xl mx-auto px-standard">
         <ScrollReveal>
           <div className="mb-12 md:mb-16 text-center">

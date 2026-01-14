@@ -44,7 +44,7 @@ export function WelcomeCard({
   secondaryDescription,
 }: WelcomeCardProps) {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
+    <section className="relative pt-16 pb-2 overflow-hidden">
       {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
       

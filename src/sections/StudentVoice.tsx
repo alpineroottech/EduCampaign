@@ -175,7 +175,7 @@ const StudentVoice = () => {
 
     return (
         <section
-            className="relative pt-16 md:pt-24 bg-gray-50"
+            className="relative pt-16 pb-2 bg-gray-50"
             id="student-voice"
         >
             <div className="max-w-7xl mx-auto px-standard">
