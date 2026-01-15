@@ -18,7 +18,7 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
-      align: "start",
+      align: "center",
       skipSnaps: false,
     },
     [
@@ -56,52 +56,60 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
   }, [emblaApi, onSelect]);
 
   return (
-    <Box sx={{ position: "relative", width: "100%", mx: "auto", py: { xs: 4, md: 6 } }}>
+    <Box sx={{ position: "relative", width: "100%", mx: "auto", py: { xs: 2, md: 3 } }}>
       {/* Carousel Container */}
-      <Box ref={emblaRef} sx={{ overflow: "hidden" }}>
+      <Box ref={emblaRef} sx={{ overflow: "hidden", px: { xs: 1.5, md: 3 } }}>
         <Box sx={{ display: "flex", gap: { xs: 2, md: 3 } }}>
           {cards.map((card) => (
             <Box
               key={card.id}
               sx={{
-                flex: { xs: "0 0 100%", md: "0 0 calc(50% - 12px)" },
+                flex: { xs: "0 0 calc(100% - 24px)", md: "0 0 calc(35% - 12px)" },
                 minWidth: 0,
+                px: 0,
               }}
             >
               <Link href={`/testpreparation/${card.slug}`} passHref legacyBehavior>
-                <Card
-                  component={motion.div}
+                <Box
+                  component={motion.a}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
                   sx={{
-                    position: "relative",
-                    height: "100%",
-                    minHeight: { xs: 480, md: 520 },
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    cursor: "pointer",
+                    display: "block",
                     textDecoration: "none",
-                    boxShadow: 4,
-                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                    display: "flex",
-                    flexDirection: "column",
-                    "&:hover": {
-                      transform: "translateY(-8px)",
-                      boxShadow: 10,
-                    },
+                    height: "100%",
                   }}
                 >
-                  {/* Image Section with 4:3 Aspect Ratio */}
-                  <Box
+                  <Card
                     sx={{
                       position: "relative",
-                      width: "100%",
-                      paddingTop: "75%", // 4:3 aspect ratio (3/4 = 0.75)
-                      bgcolor: card.color,
+                      height: "100%",
+                      minHeight: { xs: 336, md: 364 },
+                      borderRadius: 3,
                       overflow: "hidden",
+                      cursor: "pointer",
+                      boxShadow: 3,
+                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                      display: "flex",
+                      flexDirection: "column",
+                      mb: '10px',
+                      "&:hover": {
+                        transform: "translateY(-8px)",
+                        boxShadow: 8,
+                      },
                     }}
                   >
+                    {/* Image Section with 4:3 Aspect Ratio */}
+                    <Box
+                      sx={{
+                        position: "relative",
+                        width: "100%",
+                        paddingTop: "75%",
+                        bgcolor: card.color,
+                        overflow: "hidden",
+                      }}
+                    >
                     <Box
                       sx={{
                         position: "absolute",
@@ -140,7 +148,7 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
-                      p: { xs: 3, md: 4 },
+                      p: { xs: 2, md: 2.5 },
                       bgcolor: "white",
                     }}
                   >
@@ -149,29 +157,29 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
                       <Box
                         sx={{
                           position: "relative",
-                          width: 48,
-                          height: 48,
-                          mb: 2,
+                          width: 36,
+                          height: 36,
+                          mb: 1.5,
                         }}
                       >
                         <Image
                           src={card.icon}
                           alt={`${card.title} Icon`}
-                          width={48}
-                          height={48}
+                          width={36}
+                          height={36}
                           style={{ objectFit: "contain" }}
                         />
                       </Box>
 
                       {/* Title */}
                       <Typography
-                        variant="h5"
+                        variant="h6"
                         component="h3"
                         sx={{
                           fontWeight: "bold",
                           color: "#6B4FA1",
-                          mb: 2,
-                          fontSize: { xs: "1.1rem", md: "1.25rem" },
+                          mb: 1.5,
+                          fontSize: { xs: "0.95rem", md: "1.05rem" },
                           lineHeight: 1.3,
                         }}
                       >
@@ -183,12 +191,12 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
                         variant="body2"
                         sx={{
                           color: "text.secondary",
-                          lineHeight: 1.7,
-                          fontSize: { xs: "0.875rem", md: "0.95rem" },
+                          lineHeight: 1.6,
+                          fontSize: { xs: "0.8rem", md: "0.85rem" },
                           overflow: "hidden",
                           textOverflow: "ellipsis",
                           display: "-webkit-box",
-                          WebkitLineClamp: { xs: 4, md: 5 },
+                          WebkitLineClamp: { xs: 3, md: 4 },
                           WebkitBoxOrient: "vertical",
                         }}
                       >
@@ -197,6 +205,7 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
                     </Box>
                   </CardContent>
                 </Card>
+              </Box>
               </Link>
             </Box>
           ))}
@@ -209,16 +218,17 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
         disabled={!canScrollPrev}
         sx={{
           position: "absolute",
-          left: { xs: 4, md: -60 },
+          left: { xs: "5%", md: "3%" },
           top: "40%",
           transform: "translateY(-50%)",
-          bgcolor: "white",
-          boxShadow: 3,
-          width: { xs: 40, md: 56 },
-          height: { xs: 40, md: 56 },
+          bgcolor: "rgba(255, 255, 255, 0.85)",
+          backdropFilter: "blur(4px)",
+          boxShadow: 2,
+          width: { xs: 40, md: 48 },
+          height: { xs: 40, md: 48 },
           zIndex: 10,
           "&:hover": {
-            bgcolor: "#6B4FA1",
+            bgcolor: "rgba(107, 79, 161, 0.9)",
             color: "white",
           },
           "&:disabled": {
@@ -234,16 +244,17 @@ export default function TestPrepCarousel({ cards }: TestPrepCarouselProps) {
         disabled={!canScrollNext}
         sx={{
           position: "absolute",
-          right: { xs: 4, md: -60 },
+          right: { xs: "5%", md: "1%" },
           top: "40%",
           transform: "translateY(-50%)",
-          bgcolor: "white",
-          boxShadow: 3,
-          width: { xs: 40, md: 56 },
-          height: { xs: 40, md: 56 },
+          bgcolor: "rgba(255, 255, 255, 0.85)",
+          backdropFilter: "blur(4px)",
+          boxShadow: 2,
+          width: { xs: 40, md: 48 },
+          height: { xs: 40, md: 48 },
           zIndex: 10,
           "&:hover": {
-            bgcolor: "#6B4FA1",
+            bgcolor: "rgba(107, 79, 161, 0.9)",
             color: "white",
           },
           "&:disabled": {

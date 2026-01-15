@@ -29,10 +29,7 @@ export default function TestPreparation() {
               fontSize: { xs: "0.95rem", md: "1.05rem" },
             }}
           >
-            Japan has become one of the most popular destinations for international students who
-            wish to combine quality education with cultural immersion. Known for its advanced
-            technology, discipline, and academic excellence, Japan offers affordable tuition fees
-            compared to many Western countries.
+            Excel in your test preparation journey with EduCampaign's expert-led courses. Whether you're targeting IELTS for international education, PTE Academic for global opportunities, JLPT for Japanese language proficiency, or SSW/JFT-Basic for specialized skilled work in Japan, our comprehensive programs are designed to help you achieve your goals with confidence.
           </Typography>
         </motion.div>
       </Container>
