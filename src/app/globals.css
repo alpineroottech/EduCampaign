@@ -45,7 +45,6 @@ body {
 :root{
   --font-primary: var(--font-dm-sans);
   --font-heading: var(--font-dm-sans);
-  --font-poppins: var(--font-poppins);
   
   /* Flat Color Palette */
   --color-primary-purple: #6B4FA1;
@@ -162,6 +161,34 @@ body {
     .mx-standard {
       padding-left: 3.5rem;
       padding-right: 3.5rem;
+    }
+  }
+}
+
+@layer utilities {
+  .py-standard {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .py-standard {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .py-standard {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .py-standard {
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
     }
   }
 }
@@ -361,6 +388,7 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-dm-sans), sans-serif;
   }
 }
 
