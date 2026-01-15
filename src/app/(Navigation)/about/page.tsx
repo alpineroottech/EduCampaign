@@ -1,275 +1,553 @@
 "use client";
 
-import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import HeroSection from "@/components/hero/HeroSection";
+import { Box, Container, Typography, Paper, Card, CardContent } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { socialIcons } from "@/data/socialData";
-import { motion } from "motion/react";
-
-// Interfaces
-interface TeamMember {
-  name: string;
-  position: string;
-  image: string;
-}
-interface AboutUsCard {
-  image: string;
-  description: string;
-}
-
-//random comment
-
-
+import { introContent, teamMembers, missionVision, whyUsCards } from "@/data/aboutData";
+import { useRef } from "react";
 
 export default function AboutUs() {
+  const introRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: introRef,
+    offset: ["start end", "end start"],
+  });
 
-  const aboutUsCards: AboutUsCard[] = [
-    {
-      image: "/images/interview.jpg", // replace
-      description: "It is a privilege to welcome you to Edu. Campaign Pvt. Ltd., a trusted education consultancy established in 2008. Since our inception, we have remained committed to guiding students toward academic and professional success through ethical, transparent, and student-focused services. At Edu. Campaign, we believe education is not just about earning qualifications it is a gateway to global opportunities, broader perspectives, and brighter futures.Our philosophy is rooted in integrity and personalized support, helping students make informed decisions about studying abroad. Drawing inspiration from globally renowned universities and best practices in international education consulting, we have built a strong foundation of professionalism, accurate guidance, and ethical counseling.",
-    },
-  ];
-
-  const team: TeamMember[] = [
-    {
-      name: "Tanka Nath Dawadi",
-      position: "Managing Director",
-      image: "/images/people/team/tankanathdawadi.png", 
-    }
-  ];
-
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
 
 
   return (
-    <div className="min-h-screen pb-12 sm:pb-16 md:pb-20">
-
+    <Box sx={{ minHeight: "100vh", bgcolor: "#faf7fc" }}>
       {/* Hero Section */}
-      <div className="relative">
-        <Breadcrumbs />
-        <HeroSection imageSrc="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80" title="About Us" />
-      </div>
+      <HeroSection
+        imageSrc="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1600&q=80"
+        title="About Us"
+      />
 
-
-      <div>
-        {/* ABOUT US CARDS */}
-        {
-          aboutUsCards.map((card, index) => (
-            <motion.div 
-              key={index} 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
-              className="relative max-w-7xl py-8 md:py-12 mx-auto px-4 sm:px-6 mt-8 sm:mt-12"
+      {/* Lazy Reveal Introduction Section */}
+      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 10 } }}>
+        <motion.div ref={introRef} style={{ opacity, y }}>
+          <Paper
+            elevation={0}
+            sx={{
+              p: { xs: 3, md: 6 },
+              borderRadius: 4,
+              bgcolor: "white",
+              border: "1px solid",
+              borderColor: "grey.200",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                gap: { xs: 3, md: 6 },
+                alignItems: { xs: "center", md: "flex-start" },
+              }}
             >
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-6">
-                <Image
-                  src={card.image}
-                  alt={`About Us ${index + 1}`}
-                  className="w-full md:w-2/5 border h-60 sm:h-72 md:h-80 object-cover"
-                  width={1500}
-                  height={1300}
-                />
-                <div className="flex flex-col">
-                  <h5 className="mb-2 text-lg sm:text-xl md:text-2xl">Introduction</h5>
-                  <p className="text-sm sm:text-base md:text-left">
-                    {card.description}
-                  </p>
-                </div>
-
-              </div>
-            </motion.div>
-          ))
-        }
-      </div>
-      {/* CONTACT US SECTION */}
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, margin: "-50px" }}
-        transition={{ duration: 0.6 }}
-        className="max-w-4xl bg-white shadow-md rounded-xl p-6 sm:p-8 md:p-10 mx-4 sm:mx-auto mt-12 sm:mt-16 md:mt-20 mb-12 sm:mb-16 md:mb-20"
-      >
-        <h5 className="text-center mb-8 sm:mb-10 md:mb-12 text-lg sm:text-xl md:text-2xl">Contact Us</h5>
-        {/* 2-COLUMN LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
-
-          <div className="space-y-6 sm:space-y-8 md:space-y-10">
-
-            {/* Address */}
-            <div className="flex items-start gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-500 text-white flex items-center justify-center rounded-lg shadow flex-shrink-0">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
-                </svg>
-              </div>
-              <div>
-                <h6 className="font-semibold text-sm sm:text-base">Address</h6>
-                <p className="text-sm sm:text-base">DILLIBAZAR-30, GURJUMARGA, Kathmandu 44605, Nepal</p>
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div className="flex items-start gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 text-white flex items-center justify-center rounded-lg shadow flex-shrink-0">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59L15 15.41a1 1 0 011-.24 11.36 11.36 0 003.53.56 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.28a1 1 0 011 1 11.36 11.36 0 00.56 3.53 1 1 0 01-.24 1z" />
-                </svg>
-              </div>
-              <div>
-                <h6 className="font-semibold text-sm sm:text-base">Phone</h6>
-                <p className="text-sm sm:text-base">01-4500074</p>
-              </div>
-            </div>
-
-            {/* Mail */}
-            <div className="flex items-start gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 text-white flex items-center justify-center rounded-lg shadow flex-shrink-0">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M2 4a2 2 0 012-2h16a2 2 0 012 2v1l-10 6L2 5V4zm0 4.236V20a2 2 0 002 2h16a2 2 0 002-2V8.236l-10 6-10-6z" />
-                </svg>
-              </div>
-              <div>
-                <h6 className="font-semibold text-sm sm:text-base">Mail Us</h6>
-                <p className="text-sm sm:text-base break-words">Educampaign2008@gmail.com <br />Info@educampaign.com.np</p>
-              </div>
-            </div>
-
-          </div>
-
-          <div>
-            <div className="mb-4 sm:mb-6 mx-auto w-full flex justify-center items-center">
-              <h6 className="font-semibold text-sm sm:text-base">Follow Us</h6>
-            </div>
-
-            <div className="border border-gray-200 rounded-xl p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-
-              {/* Left Side – First Four */}
-              <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
-                {socialIcons.slice(0, 4).map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.href}
-                    target="_blank"
-                    className="flex items-center gap-3 sm:gap-4 hover:opacity-80 transition"
-                  >
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <span className="text-sm sm:text-base">{item.label}</span>
-                  </a>
-                ))}
-              </div>
-
-              {/* Right Side – Last Three */}
-              <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
-                {socialIcons.slice(4).map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.href}
-                    target="_blank"
-                    className="flex items-center gap-3 sm:gap-4 hover:opacity-80 transition"
-                  >
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <span className="text-sm sm:text-base">{item.label}</span>
-                  </a>
-                ))}
-              </div>
-
-            </div>
-          </div>
-
-
-
-        </div>
-      </motion.div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8 sm:mt-10 md:mt-12">
-        {/* MISSION & VISION CARDS */}
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, margin: "-50px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-          }}
-          className="relative grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-12 md:mb-14"
-        >
-
-          {/* Mission */}
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-            }}
-            className="bg-white shadow-md rounded-xl p-6 sm:p-8 flex flex-col text-center hover:bg-purple-200"
-          >
-            <h5 className="mb-3 text-lg sm:text-xl md:text-2xl">Our Mission</h5>
-            <p className="leading-relaxed text-sm sm:text-base">
-              At the heart of our consultancy lies a commitment to illuminate the educational
-              journeys of our clients. We dedicate ourselves to offering insightful, customized
-              advice that transforms aspirations into achievable pathways. By blending in-depth
-              knowledge with compassionate understanding, we navigate the complexities of
-              academic choices and global opportunities. Our purpose is to empower every
-              learner and institution we serve with clarity, confidence, and access to the
-              resources they need to thrive in an ever-evolving educational landscape.
-            </p>
-          </motion.div>
-
-          {/* Vision */}
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-            }}
-            className="bg-white shadow-md rounded-xl p-6 sm:p-8 flex flex-col text-center hover:bg-purple-200"
-          >
-            <h5 className="mb-3 text-lg sm:text-xl md:text-2xl">Our Vision</h5>
-            <p className="leading-relaxed text-sm sm:text-base">
-              To be a trusted bridge between aspiring students and top global institutions, always
-              upholding honesty, professionalism, and international standards. We strive to
-              guide students so that their potential turns into a bright and successful future. By
-              helping them navigate the wide world of education, we open doors to
-              opportunities and support journeys that shape the leaders, innovators, and change-
-              makers of tomorrow.
-            </p>
-          </motion.div>
-
-        </motion.div>
-
-        {/* TEAM SECTION */}
-        <section className="mt-8 sm:mt-10">
-          <h5 className="text-center mb-6 sm:mb-8 text-lg sm:text-xl md:text-2xl">
-            Meet Our Team
-          </h5>
-
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-md rounded-xl p-4 sm:p-6 w-full sm:w-[240px] md:w-[260px] text-center"
+              <Box
+                sx={{
+                  position: "relative",
+                  width: { xs: "100%", md: "40%" },
+                  height: { xs: 240, sm: 320, md: 360 },
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  flexShrink: 0,
+                }}
               >
                 <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={1500}
-                  height={1500}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 object-contain rounded-full mx-auto mb-3 sm:mb-4 shadow"
+                  src={introContent.image}
+                  alt="About Edu Campaign"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, 40vw"
                 />
-                <h6 className="text-sm sm:text-base">
-                  {member.name}
-                </h6>
-                <p className="text-gray-600 text-xs sm:text-sm">{member.position}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+              </Box>
 
-      </div>
-    </div>
+              <Box sx={{ flex: 1 }}>
+                <Typography
+                  variant="h4"
+                  component="h2"
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#3d1a4d",
+                    mb: 3,
+                    fontSize: { xs: "1.5rem", md: "2rem" },
+                  }}
+                >
+                  {introContent.title}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "text.secondary",
+                    lineHeight: 1.8,
+                    fontSize: { xs: "0.95rem", md: "1rem" },
+                  }}
+                >
+                  {introContent.paragraph}
+                </Typography>
+              </Box>
+            </Box>
+          </Paper>
+        </motion.div>
+      </Container>
+
+      {/* Horizontal Scroll - Why Choose Us Cards */}
+      <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: "#ebe9e1" }}>
+        <Container maxWidth="xl">
+          <Typography
+            variant="h4"
+            component="h2"
+            sx={{
+              textAlign: "center",
+              fontWeight: "bold",
+              color: "#3d1a4d",
+              mb: 6,
+              fontSize: { xs: "1.75rem", md: "2.25rem" },
+            }}
+          >
+            Why Choose Us?
+          </Typography>
+
+          {/* Horizontal Scroll Container with Scroll Snap */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: 3,
+              overflowX: "auto",
+              scrollSnapType: "x mandatory",
+              scrollBehavior: "smooth",
+              pb: 2,
+              // Hide scrollbar while maintaining functionality
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+              scrollbarWidth: "none",
+              // Mobile: full width cards, Desktop: fit content
+              "& > *": {
+                scrollSnapAlign: "center",
+                flexShrink: 0,
+                width: { xs: "85%", sm: "70%", md: "400px" },
+              },
+            }}
+          >
+            {whyUsCards.map((card, index) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card
+                  sx={{
+                    height: "100%",
+                    minHeight: 420,
+                    borderRadius: 4,
+                    overflow: "hidden",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    "&:hover": {
+                      transform: "translateY(-8px)",
+                      boxShadow: 8,
+                    },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: "100%",
+                      height: 200,
+                      bgcolor: "grey.200",
+                    }}
+                  >
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      style={{ objectFit: "cover" }}
+                      sizes="(max-width: 768px) 85vw, 400px"
+                    />
+                  </Box>
+                  <CardContent sx={{ p: 3 }}>
+                    <Typography
+                      variant="h6"
+                      component="h3"
+                      sx={{
+                        fontWeight: "bold",
+                        color: "#6B4FA1",
+                        mb: 2,
+                      }}
+                    >
+                      {card.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "text.secondary",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {card.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </Box>
+        </Container>
+      </Box>
+
+      {/* CONTACT US SECTION */}
+      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <Paper
+            elevation={3}
+            sx={{
+              p: { xs: 4, md: 8 },
+              borderRadius: 4,
+              bgcolor: "white",
+            }}
+          >
+            <Typography
+              variant="h4"
+              component="h2"
+              sx={{
+                textAlign: "center",
+                mb: { xs: 4, md: 6 },
+                fontWeight: "bold",
+                color: "#3d1a4d",
+                fontSize: { xs: "1.5rem", md: "2rem" },
+              }}
+            >
+              Contact Us
+            </Typography>
+
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                gap: { xs: 4, md: 6 },
+              }}
+            >
+
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                {/* Address */}
+                <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
+                  <Box
+                    sx={{
+                      width: { xs: 40, sm: 48 },
+                      height: { xs: 40, sm: 48 },
+                      bgcolor: "error.main",
+                      color: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 2,
+                      flexShrink: 0,
+                      boxShadow: 2,
+                    }}
+                  >
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
+                    </svg>
+                  </Box>
+                  <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
+                      Address
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      DILLIBAZAR-30, GURJUMARGA, Kathmandu 44605, Nepal
+                    </Typography>
+                  </Box>
+                </Box>
+
+                {/* Phone */}
+                <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
+                  <Box
+                    sx={{
+                      width: { xs: 40, sm: 48 },
+                      height: { xs: 40, sm: 48 },
+                      bgcolor: "primary.main",
+                      color: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 2,
+                      flexShrink: 0,
+                      boxShadow: 2,
+                    }}
+                  >
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59L15 15.41a1 1 0 011-.24 11.36 11.36 0 003.53.56 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.28a1 1 0 011 1 11.36 11.36 0 00.56 3.53 1 1 0 01-.24 1z" />
+                    </svg>
+                  </Box>
+                  <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
+                      Phone
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      01-4500074
+                    </Typography>
+                  </Box>
+                </Box>
+
+                {/* Mail */}
+                <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
+                  <Box
+                    sx={{
+                      width: { xs: 40, sm: 48 },
+                      height: { xs: 40, sm: 48 },
+                      bgcolor: "warning.main",
+                      color: "white",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 2,
+                      flexShrink: 0,
+                      boxShadow: 2,
+                    }}
+                  >
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M2 4a2 2 0 012-2h16a2 2 0 012 2v1l-10 6L2 5V4zm0 4.236V20a2 2 0 002 2h16a2 2 0 002-2V8.236l-10 6-10-6z" />
+                    </svg>
+                  </Box>
+                  <Box>
+                    <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
+                      Mail Us
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ wordBreak: "break-word" }}>
+                      Educampaign2008@gmail.com<br />Info@educampaign.com.np
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+
+              <Box>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    mb: 3,
+                  }}
+                >
+                  Follow Us
+                </Typography>
+
+                <Paper
+                  variant="outlined"
+                  sx={{
+                    p: { xs: 2, sm: 3 },
+                    borderRadius: 3,
+                    display: "grid",
+                    gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+                    gap: 3,
+                  }}
+                >
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    {socialIcons.slice(0, 4).map((item, index) => (
+                      <Box
+                        key={index}
+                        component="a"
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 2,
+                          textDecoration: "none",
+                          color: "text.primary",
+                          transition: "opacity 0.2s",
+                          "&:hover": { opacity: 0.7 },
+                        }}
+                      >
+                        <Box sx={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.icon}
+                        </Box>
+                        <Typography variant="body2">{item.label}</Typography>
+                      </Box>
+                    ))}
+                  </Box>
+
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    {socialIcons.slice(4).map((item, index) => (
+                      <Box
+                        key={index}
+                        component="a"
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 2,
+                          textDecoration: "none",
+                          color: "text.primary",
+                          transition: "opacity 0.2s",
+                          "&:hover": { opacity: 0.7 },
+                        }}
+                      >
+                        <Box sx={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          {item.icon}
+                        </Box>
+                        <Typography variant="body2">{item.label}</Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Paper>
+              </Box>
+            </Box>
+          </Paper>
+        </motion.div>
+      </Container>
+
+      {/* MISSION & VISION CARDS */}
+      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 10 } }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            gap: { xs: 3, md: 4 },
+          }}
+        >
+          {missionVision.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
+              <Card
+                sx={{
+                  height: "100%",
+                  p: { xs: 3, md: 4 },
+                  textAlign: "center",
+                  borderRadius: 4,
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    bgcolor: "#e9d5f5",
+                    transform: "translateY(-4px)",
+                    boxShadow: 4,
+                  },
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  component="h3"
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#6B4FA1",
+                    mb: 2,
+                    fontSize: { xs: "1.25rem", md: "1.5rem" },
+                  }}
+                >
+                  {item.title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "text.secondary",
+                    lineHeight: 1.8,
+                  }}
+                >
+                  {item.content}
+                </Typography>
+              </Card>
+            </motion.div>
+          ))}
+        </Box>
+      </Container>
+
+      {/* TEAM SECTION */}
+      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 8 }, bgcolor: "#faf7fc" }}>
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{
+            textAlign: "center",
+            mb: { xs: 4, md: 6 },
+            fontWeight: "bold",
+            color: "#3d1a4d",
+            fontSize: { xs: "1.5rem", md: "2rem" },
+          }}
+        >
+          Meet Our Team
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: { xs: 3, md: 4 },
+          }}
+        >
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card
+                sx={{
+                  width: { xs: "100%", sm: 240, md: 260 },
+                  p: { xs: 2, md: 3 },
+                  textAlign: "center",
+                  borderRadius: 4,
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-8px)",
+                    boxShadow: 6,
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: { xs: 96, md: 128 },
+                    height: { xs: 96, md: 128 },
+                    mx: "auto",
+                    mb: 2,
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    boxShadow: 2,
+                  }}
+                >
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    style={{ objectFit: "contain" }}
+                    sizes="128px"
+                  />
+                </Box>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: "bold", fontSize: { xs: "0.95rem", md: "1rem" } }}
+                >
+                  {member.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: "0.85rem", md: "0.9rem" } }}>
+                  {member.position}
+                </Typography>
+              </Card>
+            </motion.div>
+          ))}
+        </Box>
+      </Container>
+    </Box>
   );
 }

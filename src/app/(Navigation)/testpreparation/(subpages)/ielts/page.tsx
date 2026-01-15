@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+
+import { useState } from "react";
 import HeroSection from "@/components/hero/HeroSection";
+import { Box, Container, Typography, Paper, Card, CardContent, TextField, Button, Grid } from "@mui/material";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 export default function Ielts() {
   const [formData, setFormData] = useState({
@@ -21,7 +22,8 @@ export default function Ielts() {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) {
       alert("Please fill in all required fields");
       return;
@@ -30,167 +32,413 @@ export default function Ielts() {
     setFormData({ name: "", email: "", phone: "", message: "" });
     alert("Thank you for your enquiry!");
   };
+
+  const testSections = [
+    {
+      title: "Listening (30 min)",
+      description:
+        "Four recorded monologues and conversations. Tasks include multiple-choice, matching, plan/map labeling, form completion, note completion, table completion, flow-chart completion, and sentence completion using recordings of native English speakers in various contexts.",
+    },
+    {
+      title: "Reading (60 min)",
+      description:
+        "Academic: Three long reading passages with tasks from descriptive and factual to discursive and analytical. General Training: Extracts from books, magazines, notices, advertisements, and company guidelines on everyday topics.",
+    },
+    {
+      title: "Writing (60 min)",
+      description:
+        "Academic: Task 1 involves describing visual information (graphs, charts) in 150 words; Task 2 requires an essay response in 250 words. General Training: Task 1 is letter writing; Task 2 is an essay on a point of view or problem.",
+    },
+    {
+      title: "Speaking (11–14 min)",
+      description:
+        "A face-to-face interview with an examiner in three parts: Introduction and interview (4-5 min), Long turn where you speak about a topic for 1-2 minutes (3-4 min), and Discussion with examiner on abstract ideas related to Part 2 (4-5 min).",
+    },
+  ];
+
+  const features = [
+    "Comprehensive training in all four skills: Listening, Reading, Writing, and Speaking",
+    "Experienced instructors with proven track records in IELTS preparation",
+    "Regular full-length practice tests simulating actual exam conditions",
+    "Personalized feedback and one-on-one speaking practice sessions",
+    "Extensive study materials including practice books and online resources",
+    "Strategies and techniques for each section to maximize your band score",
+    "Flexible class schedules including weekend and evening batches",
+    "Small batch sizes ensuring individual attention and support",
+  ];
+
   return (
-    <div className="mb-20">
+    <Box sx={{ minHeight: "100vh", bgcolor: "#faf7fc" }}>
+      {/* Hero Section */}
+      <HeroSection
+        imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80"
+        title="IELTS Preparation"
+      />
 
-      {/* ------------------------ HERO SECTION ------------------------ */}
-      <div className="">
-        <Breadcrumbs />
-        <HeroSection imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80" title="IELTS Preparation"/>
-
-        <div className="text-center max-w-5xl mx-auto py-8 md:py-12 px-6">
-          <p className="t leading-relaxed">
-            IELTS is a widely recognized English proficiency test for study, work, and migration, accepted by over 11,000 institutions globally. It assesses listening, reading, writing, and speaking skills.
-          </p>
-        </div>
-      </div>
-
-
-
-      <div className="max-w-5xl text-center mx-auto px-4 sm:px-6">
-
-        <h4 className="max-w-5xl mx-auto mt-6 leading-relaxed text-lg sm:text-xl">The test is available in two main types:</h4>
-        <ul className="mt-4 space-y-3 text-left max-w-3xl mx-auto">
-          <li className="text-sm sm:text-base"><strong>Academic:</strong> For higher education or professional registration, focusing on academic language skills.</li>
-          <li className="text-sm sm:text-base"><strong>General Training:</strong> For migration, secondary education, or work experience, focusing on everyday English in social and workplace contexts.</li>
-        </ul>
-        <h4 className="pt-8 sm:pt-10 text-lg sm:text-xl">The test consists of four sections:</h4>
-      </div>
-
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 mt-8 sm:mt-10 px-4 sm:px-6">
-        {[
-          {
-            title: "Listening (30 min)",
-            description: "Tasks include multiple-choice, matching, labeling, and sentence completion using recordings of native speakers.",
-            button: "Learn More ",
-          },
-          {
-            title: "Reading (60 min)",
-            description: "Academic texts or general passages from everyday sources",
-            button: "Learn More ",
-          },
-          {
-            title: "Writing (60 min)",
-            description: "Academic tasks involve describing graphs and essays; General tasks include letters and essays.",
-            button: "Learn More ",
-          },
-          {
-            title: "Speaking (11–14 min)",
-            description: "A face-to-face interview with short questions, a long turn, and discussion.",
-            button: "Learn More ",
-          },
-        ].map((test, index) => (
-          <div
-            key={index}
-            className="bg-gray-100 pt-6 sm:pt-8 px-4 sm:px-8 pb-5 sm:pb-6 rounded-2xl shadow flex flex-col justify-between min-h-[200px]"
+      {/* Introduction */}
+      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <Typography
+            variant="body1"
+            sx={{
+              textAlign: "center",
+              color: "text.secondary",
+              lineHeight: 1.8,
+              fontSize: { xs: "0.95rem", md: "1.05rem" },
+              mb: 4,
+            }}
           >
-            <h3 className="text-lg sm:text-xl md:text-2xl">{test.title}</h3>
-            <p className="mt-3 text-sm sm:text-base">
-              {test.description}
-            </p>
-            <button className="bg-[#3d1a4d] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[#2a1136] transition self-center mt-4 sm:mt-6 w-full sm:w-auto">
-              {test.button}
-            </button>
-          </div>
-        ))}
-      </div>
+            IELTS (International English Language Testing System) is the world's most popular English
+            proficiency test for study, work, and migration, accepted by over 11,000 institutions globally
+            including universities, employers, immigration authorities, and professional bodies. It assesses
+            your ability to listen, read, write, and speak in English through a comprehensive evaluation
+            process recognized internationally.
+          </Typography>
+        </motion.div>
 
-      {/* ------------------------ STATS CARDS ------------------------ */}
-      <div className="flex flex-wrap justify-center gap-8 sm:gap-12 md:gap-30 bg-white border border-purple-300 shadow-lg rounded-2xl max-w-4xl mx-4 sm:mx-auto p-6 sm:p-10 my-10 mt-12 sm:mt-16">
-        {[
-          { number: "12,000", label: "Happy Students" },
-          { number: "120", label: "Expert Instructors" },
-          { number: "500", label: "Success Stories" },
-        ].map((item, index) => (
-          <div key={index} className="text-center px-4">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl">{item.number}</h3>
-            <p className="text-sm sm:text-base">{item.label}</p>
-          </div>
-        ))}
+        {/* Test Types */}
+        <Paper elevation={2} sx={{ p: { xs: 3, md: 5 }, borderRadius: 4, mb: 6 }}>
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{
+              fontWeight: "bold",
+              color: "#3d1a4d",
+              mb: 3,
+              textAlign: "center",
+            }}
+          >
+            Two Main Test Types
+          </Typography>
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 3 }}>
+            <Card sx={{ flex: 1, borderRadius: 3 }}>
+              <CardContent sx={{ p: 3 }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6B4FA1", mb: 2 }}>
+                  Academic IELTS
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                  Designed for those applying to higher education or professional registration. It assesses
+                  whether you're ready to begin studying or training in an environment where English is the
+                  language of communication, focusing on academic language and study-related contexts.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ flex: 1, borderRadius: 3 }}>
+              <CardContent sx={{ p: 3 }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: "#6B4FA1", mb: 2 }}>
+                  General Training IELTS
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                  Suitable for migration to Australia, Canada, New Zealand, and the UK, or for secondary
+                  education and work experience programs. It focuses on basic survival skills in broad social
+                  and workplace contexts, testing practical everyday English language skills.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
+        </Paper>
 
-      </div>
+        {/* Test Sections */}
+        <Typography
+          variant="h5"
+          component="h2"
+          sx={{
+            fontWeight: "bold",
+            color: "#3d1a4d",
+            mb: 4,
+            textAlign: "center",
+          }}
+        >
+          Four Test Sections
+        </Typography>
+        <Grid container spacing={3} sx={{ mb: 6 }}>
+          {testSections.map((section, index) => (
+            <Grid size={{ xs: 12, sm: 6 }} key={index}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card
+                  sx={{
+                    height: "100%",
+                    borderRadius: 4,
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                      boxShadow: 6,
+                    },
+                  }}
+                >
+                  <CardContent sx={{ p: 4 }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: "bold",
+                        color: "#6B4FA1",
+                        mb: 2,
+                      }}
+                    >
+                      {section.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                      {section.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </Grid>
+          ))}
+        </Grid>
 
-      <div className="max-w-5xl mx-auto mt-12 sm:mt-16 px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row justify-center gap-2 text-center sm:text-left">
-          <p className="text-purple-500 font-semibold">Note:</p>
-          <p className="leading-relaxed text-sm sm:text-base">Scores are reported on a 9-band scale, with each section scored individually and averaged for an overall band score. Scores are valid for two years.</p>
-        </div>
-      </div>
+        {/* Course Features */}
+        <Paper
+          elevation={2}
+          sx={{
+            p: { xs: 3, md: 5 },
+            borderRadius: 4,
+            mb: 6,
+            bgcolor: "#f5f0ff",
+          }}
+        >
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{
+              fontWeight: "bold",
+              color: "#3d1a4d",
+              mb: 4,
+              textAlign: "center",
+            }}
+          >
+            Our IELTS Preparation Course Features
+          </Typography>
+          <Grid container spacing={2}>
+            {features.map((feature, index) => (
+              <Grid size={{ xs: 12, md: 6 }} key={index}>
+                <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+                  <Typography sx={{ color: "#6B4FA1", fontSize: "1.5rem", lineHeight: 1 }}>
+                    ▸
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "text.secondary", lineHeight: 1.8 }}>
+                    {feature}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
+
+        {/* Statistics */}
+        <Paper
+          elevation={3}
+          sx={{
+            p: { xs: 4, md: 6 },
+            borderRadius: 4,
+            mb: 6,
+            border: "2px solid",
+            borderColor: "#6B4FA1",
+          }}
+        >
+          <Grid container spacing={4} sx={{ textAlign: "center" }}>
+            {[
+              { number: "12,000+", label: "Happy Students" },
+              { number: "120+", label: "Expert Instructors" },
+              { number: "500+", label: "Success Stories" },
+            ].map((item, index) => (
+              <Grid size={{ xs: 12, sm: 4 }} key={index}>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#6B4FA1",
+                    fontSize: { xs: "2rem", md: "2.5rem" },
+                  }}
+                >
+                  {item.number}
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  {item.label}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
+
+        {/* Important Note */}
+        <Paper
+          elevation={1}
+          sx={{
+            p: { xs: 3, md: 4 },
+            borderRadius: 3,
+            bgcolor: "#fff9e6",
+            borderLeft: "4px solid #6B4FA1",
+            mb: 6,
+          }}
+        >
+          <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: "bold", color: "#6B4FA1", flexShrink: 0 }}
+            >
+              Important Note:
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+              IELTS scores are reported on a 9-band scale, with each section scored individually and
+              averaged for an overall band score. Band scores range from 1 (Non-user) to 9 (Expert user).
+              Most universities require a minimum overall band score of 6.0-7.5, depending on the program.
+              Scores are valid for two years from the test date.
+            </Typography>
+          </Box>
+        </Paper>
+      </Container>
 
       {/* Enquiry Section */}
-      <div className="w-full mt-16 sm:mt-20">
-        <div className="relative h-48 sm:h-60 md:h-70 w-full mb-8 sm:mb-12">
-          <Image
-            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80"
-            alt="Enquiry Background"
-            width={4160}
-            height={3240}
-            className="w-full h-full object-cover"
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-wide text-center">Enquire More Directly</h2>
-          </div>
-        </div>
+      <Box sx={{ bgcolor: "white", py: { xs: 6, md: 10 } }}>
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              position: "relative",
+              height: { xs: 200, md: 280 },
+              borderRadius: 4,
+              overflow: "hidden",
+              mb: 6,
+            }}
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80"
+              alt="Enquiry Background"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                inset: 0,
+                bgcolor: "rgba(0,0,0,0.5)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                variant="h3"
+                sx={{
+                  color: "white",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  fontSize: { xs: "1.75rem", md: "2.5rem" },
+                  px: 2,
+                }}
+              >
+                Enquire More Directly
+              </Typography>
+            </Box>
+          </Box>
 
-        <div className="max-w-5xl mx-auto px-4 md:px-8 pb-20">
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="relative">
-                <input
-                  type="text"
+          <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 900, mx: "auto" }}>
+            <Grid container spacing={3}>
+              <Grid size={{ xs: 12, md: 4 }}>
+                <TextField
+                  fullWidth
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="Name:"
-                  className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                  placeholder="Name"
+                  variant="outlined"
+                  required
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": { borderColor: "#6B4FA1" },
+                      "&.Mui-focused fieldset": { borderColor: "#6B4FA1" },
+                    },
+                  }}
                 />
-              </div>
-              <div className="relative">
-                <input
+              </Grid>
+              <Grid size={{ xs: 12, md: 4 }}>
+                <TextField
+                  fullWidth
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Email:"
-                  className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                  placeholder="Email"
+                  variant="outlined"
+                  required
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": { borderColor: "#6B4FA1" },
+                      "&.Mui-focused fieldset": { borderColor: "#6B4FA1" },
+                    },
+                  }}
                 />
-              </div>
-              <div className="relative">
-                <input
+              </Grid>
+              <Grid size={{ xs: 12, md: 4 }}>
+                <TextField
+                  fullWidth
                   type="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  placeholder="Phone Number:"
-                  className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                  placeholder="Phone Number"
+                  variant="outlined"
+                  required
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": { borderColor: "#6B4FA1" },
+                      "&.Mui-focused fieldset": { borderColor: "#6B4FA1" },
+                    },
+                  }}
                 />
-              </div>
-            </div>
-
-            <div>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                placeholder="Message:"
-                rows={6}
-                className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 resize-none"
-              ></textarea>
-            </div>
-
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="bg-[#3D1F4E] text-white px-16 py-3 rounded-md font-semibold hover:bg-[#2a1535] transition-colors"
-              >
-                Enquiry Now
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-    </div>
+              </Grid>
+              <Grid size={{ xs: 12 }}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={6}
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder="Message"
+                  variant="outlined"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "&:hover fieldset": { borderColor: "#6B4FA1" },
+                      "&.Mui-focused fieldset": { borderColor: "#6B4FA1" },
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid size={{ xs: 12 }} sx={{ textAlign: "center" }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    bgcolor: "#3d1a4d",
+                    px: 8,
+                    py: 1.5,
+                    borderRadius: 2,
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                    "&:hover": {
+                      bgcolor: "#2a1136",
+                    },
+                  }}
+                >
+                  Enquiry Now
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Container>
+      </Box>
+    </Box>
   );
 }
