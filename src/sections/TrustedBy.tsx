@@ -28,42 +28,9 @@ const TrustedBy = () => {
         <section className="pt-16 pb-2 bg-gray-50">
             <div className="max-w-6xl mx-auto px-standard">
                 <ScrollReveal>
-                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-                        
-                        {/* Approved By */}
-                        <div className="lg:w-1/3">
-                            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                                Approved By
-                            </h3>
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5 }}
-                                viewport={{ once: false }}
-                                className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm"
-                            >
-                                <Link
-                                    href="https://www.moest.gov.np"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex flex-col items-center group"
-                                >
-                                    <Image
-                                        src="/images/homepage/Emblem_of_Nepal.svg"
-                                        className="object-contain transition-transform duration-300 group-hover:scale-105"
-                                        width={80}
-                                        height={80}
-                                        alt="Ministry of Education Nepal Logo"
-                                    />
-                                    <p className="mt-3 text-center text-sm text-gray-700 font-medium group-hover:text-[#6B4FA1] transition-colors">
-                                        Ministry of Education, Nepal
-                                    </p>
-                                </Link>
-                            </motion.div>
-                        </div>
-
+                    <div className="flex flex-col">
                         {/* Trusted By */}
-                        <div className="lg:w-2/3">
+                        <div>
                             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
                                 Trusted By
                             </h3>

@@ -3,8 +3,7 @@
 import { BentoCard } from "@/components/ui/BentoCard";
 import { ScrollReveal } from "@/components/ui/transitions";
 import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { cn } from "@/lib/utils";
 
 type ServiceProps = {
@@ -16,6 +15,13 @@ type ServiceProps = {
 };
 
 const services: ServiceProps[] = [
+  {
+    title: "Credibility",
+    description: "Edu. Campaign Pvt. Ltd. is officially registered and approved by the Ministry of Education, Government of Nepal, ensuring that we meet all regulatory standards for educational consultancy services. Our credibility is further reinforced by our strong partnerships with globally recognized universities and institutions across Australia, Japan, Canada, the United Kingdom, New Zealand, and South Korea. We maintain transparent operations, ethical practices, and a proven track record of successfully placing thousands of students in their dream institutions worldwide.",
+    image: "/images/homepage/Emblem_of_Nepal.svg",
+    alt: "Ministry of Education approval",
+    size: "default",
+  },
   {
     title: "Personalized Counseling",
     description: "Edu. Campaign carefully evaluates each student's unique academic background, career aspirations, financial situation, and personal preferences to create a tailored study abroad plan. Rather than following a generic one-size-fits-all approach, our expert counselors take the time to understand your individual goals and constraints. We analyze your academic strengths, identify suitable programs that align with your career objectives, and ensure that every recommendation is customized to maximize your chances of success in your chosen destination.",
@@ -54,15 +60,21 @@ const services: ServiceProps[] = [
 ];
 
 const WhyUs = () => {
-  const [emblaRef] = useEmblaCarousel({ 
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
     align: "start",
-    loop: true,
+    loop: false,
     breakpoints: {
       '(min-width: 768px)': { active: false }
     }
-  }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false, playOnInit: true })
-  ]);
+  });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   return (
     <section className="relative pt-16 pb-2 bg-gray-50" id="why-us">
@@ -79,23 +91,55 @@ const WhyUs = () => {
           </div>
         </ScrollReveal>
 
-        <div ref={emblaRef} className="overflow-hidden md:overflow-visible -mx-standard px-standard md:mx-0 md:px-0">
-          <div className="flex md:grid md:grid-cols-12 gap-4 md:gap-6">
-            {services.map((service, index) => (
-              <div 
-                key={service.title} 
-                className="flex-[0_0_85%] min-w-0 md:contents"
-              >
-                <BentoCard
-                  title={service.title}
-                  description={service.description}
-                  image={service.image}
-                  alt={service.alt}
-                  size={index === 0 ? "hero" : "default"}
-                  className="h-full"
-                />
-              </div>
-            ))}
+        <div className="relative">
+          {/* Mobile Scroll Arrows */}
+          <button
+            onClick={scrollPrev}
+            className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 transition-all"
+            aria-label="Previous slide"
+          >
+            <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={scrollNext}
+            className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 transition-all"
+            aria-label="Next slide"
+          >
+            <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <div ref={emblaRef} className="overflow-hidden md:overflow-visible -mx-standard px-standard md:mx-0 md:px-0">
+            <div className="flex md:grid md:grid-cols-12 gap-4 md:gap-6">
+              {services.map((service, index) => {
+                const getGridClass = () => {
+                  if (index === 1) return "md:col-span-12";
+                  return "md:col-span-6";
+                };
+                
+                return (
+                  <div 
+                    key={service.title} 
+                    className={cn(
+                      "flex-[0_0_85%] min-w-0",
+                      getGridClass()
+                    )}
+                  >
+                    <BentoCard
+                      title={service.title}
+                      description={service.description}
+                      image={service.image}
+                      alt={service.alt}
+                      size={index === 1 ? "hero" : "default"}
+                      className="h-full"
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

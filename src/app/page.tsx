@@ -7,7 +7,6 @@ import StudentVoice from "@/sections/StudentVoice";
 import Testimonials from "@/sections/Testimonials";
 import TopDestinations from "@/sections/TopDestinations";
 import WhyUs from "@/sections/WhyUs";
-import TrustedBy from "@/sections/TrustedBy";
 import { useRef } from "react";
 import { useScrollToOffset } from "@/utils/useScrollToOffset";
 
@@ -34,9 +33,6 @@ export default function Home() {
       
       {/* Welcome / About Section */}
       <AboutSection />
-      
-      {/* Trust Indicators - Moved up after Welcome */}
-      <TrustedBy />
       
       {/* Why Choose Us */}
       <WhyUs />
