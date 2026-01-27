@@ -27,7 +27,7 @@ const services: ServiceProps[] = [
     description: "Edu. Campaign carefully evaluates each student's unique academic background, career aspirations, financial situation, and personal preferences to create a tailored study abroad plan. Rather than following a generic one-size-fits-all approach, our expert counselors take the time to understand your individual goals and constraints. We analyze your academic strengths, identify suitable programs that align with your career objectives, and ensure that every recommendation is customized to maximize your chances of success in your chosen destination.",
     image: "/images/whyus/Personalized Counselling.png",
     alt: "Counseling session",
-    size: "large",
+    size: "default",
   },
   {
     title: "Comprehensive Services",
@@ -116,7 +116,7 @@ const WhyUs = () => {
             <div className="flex md:grid md:grid-cols-12 gap-4 md:gap-6">
               {services.map((service, index) => {
                 const getGridClass = () => {
-                  if (index === 1) return "md:col-span-12";
+                  if (index === 0 || index === 1) return "md:col-span-6";
                   return "md:col-span-6";
                 };
                 
@@ -133,7 +133,7 @@ const WhyUs = () => {
                       description={service.description}
                       image={service.image}
                       alt={service.alt}
-                      size={index === 1 ? "hero" : "default"}
+                      size="default"
                       className="h-full"
                     />
                   </div>

@@ -72,7 +72,7 @@ const TopDestinations = () => {
       </div>
 
       {/* Carousel Container */}
-      <div className='relative px-standard mx-auto w-full'>
+      <div className='relative max-w-7xl mx-auto px-standard'>
         {/* Embla Carousel Wrapper */}
 
         <div ref={emblaRef} className='overflow-hidden rounded-lg' >

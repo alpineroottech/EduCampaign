@@ -2,7 +2,7 @@
 import React, { forwardRef } from 'react'
 import { ScrollReveal } from "@/components/ui/transitions";
 import { motion } from "motion/react";
-import { Send, MapPin, Phone, Mail } from "lucide-react";
+import { Send } from "lucide-react";
 
 const ContactSection = forwardRef<HTMLDivElement>((props, ref) => {
     const [hubValue, setHubValue] = React.useState('');
@@ -157,31 +157,6 @@ const ContactSection = forwardRef<HTMLDivElement>((props, ref) => {
                             </motion.button>
                         </form>
                     </motion.div>
-
-                    {/* Contact Info */}
-                    <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                        <div className="flex flex-col items-center gap-2">
-                            <div className="w-12 h-12 rounded-full bg-[#6B4FA1]/10 flex items-center justify-center">
-                                <MapPin className="w-5 h-5 text-[#6B4FA1]" />
-                            </div>
-                            <p className="text-sm font-medium text-gray-900">Kathmandu, Nepal</p>
-                            <p className="text-sm text-gray-500">Putalisadak</p>
-                        </div>
-                        <div className="flex flex-col items-center gap-2">
-                            <div className="w-12 h-12 rounded-full bg-[#6B4FA1]/10 flex items-center justify-center">
-                                <Phone className="w-5 h-5 text-[#6B4FA1]" />
-                            </div>
-                            <p className="text-sm font-medium text-gray-900">+977-01-4168374</p>
-                            <p className="text-sm text-gray-500">Mon-Fri 9am-6pm</p>
-                        </div>
-                        <div className="flex flex-col items-center gap-2">
-                            <div className="w-12 h-12 rounded-full bg-[#6B4FA1]/10 flex items-center justify-center">
-                                <Mail className="w-5 h-5 text-[#6B4FA1]" />
-                            </div>
-                            <p className="text-sm font-medium text-gray-900">info@educampaign.com.np</p>
-                            <p className="text-sm text-gray-500">We reply within 24h</p>
-                        </div>
-                    </div>
                 </ScrollReveal>
             </div>
         </section>
