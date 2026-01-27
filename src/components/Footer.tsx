@@ -194,7 +194,7 @@ const Footer: React.FC<FooterProps> = ({
             </div>
 
             {/* Social & Copyright Bar */}
-            <div className="py-4 bg-[#2a1136] border-t border-white/5">
+            <div className="py-3 bg-[#2a1136] border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-standard flex flex-col sm:flex-row items-center justify-between gap-4">
                     {/* Social icons */}
                     <div className="flex items-center gap-3">

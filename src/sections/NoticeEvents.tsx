@@ -23,7 +23,7 @@ const EventCard = ({ event }: { event: NoticeEvent }) => {
     const isEvent = event.type === 'event';
 
     return (
-        <article className="group overflow-hidden flex flex-col rounded-2xl shadow-md bg-white hover:shadow-xl transition-all duration-300">
+        <article className="group overflow-hidden flex flex-col rounded-2xl shadow-md bg-white hover:shadow-xl transition-all duration-300 h-full">
             {/* Image with type badge */}
             <div className="relative w-full aspect-[16/10] flex-shrink-0 overflow-hidden">
                 <Image
@@ -40,17 +40,17 @@ const EventCard = ({ event }: { event: NoticeEvent }) => {
             </div>
 
             {/* Content */}
-            <div className="p-6 flex flex-col flex-grow">
+            <div className="p-6 flex flex-col flex-1">
                 {/* Title - fixed height for 2 lines */}
-                <div className="h-14 mb-3">
-                    <h5 className="group-hover:text-[#6B4FA1] transition-colors line-clamp-2">
+                <div className="mb-3">
+                    <h5 className="group-hover:text-[#6B4FA1] transition-colors line-clamp-2 min-h-[3.5rem]">
                         {event.title}
                     </h5>
                 </div>
 
                 {/* Description - fixed height for 3 lines */}
-                <div className="h-[4.5rem] mb-4">
-                    <p className="text-sm text-gray-600 line-clamp-3">
+                <div className="mb-4">
+                    <p className="text-sm text-gray-600 line-clamp-3 min-h-[4.5rem]">
                         {event.description}
                     </p>
                 </div>
@@ -71,18 +71,19 @@ const EventCard = ({ event }: { event: NoticeEvent }) => {
 
                 {/* Location - Only for events */}
                 {isEvent && event.location && (
-                    <div className="flex items-start gap-2 text-gray-600 mb-4 flex-grow">
+                    <div className="flex items-start gap-2 text-gray-600 mb-4">
                         <MapPin className="w-4 h-4 flex-shrink-0 text-[#6B4FA1] mt-0.5" />
-                        <span className="text-sm">{event.location}</span>
+                        <span className="text-sm line-clamp-2">{event.location}</span>
                     </div>
                 )}
 
-                {!isEvent && <div className="flex-grow" />}
+                {/* Spacer to push button to bottom */}
+                <div className="flex-1 min-h-[1rem]" />
 
                 <Link
                     href={event.openingImg || event.imageSrc}
                     target="_blank"
-                    className="bg-[#3d1a4d] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[#2a1136] transition self-center"
+                    className="bg-[#3d1a4d] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[#2a1136] transition self-center mt-auto"
                 >
                     Learn More
                 </Link>

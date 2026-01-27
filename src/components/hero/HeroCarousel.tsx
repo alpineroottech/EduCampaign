@@ -64,9 +64,9 @@ export function HeroCarousel({ images, className = "" }: HeroCarouselProps) {
                 <Image
                   src={image.src}
                   alt={image.alt}
-                  width={560}
-                  height={560}
-                  className="w-[380px] lg:w-[560px] h-auto drop-shadow-2xl"
+                  width={700}
+                  height={700}
+                  className="w-[475px] lg:w-[700px] h-auto drop-shadow-2xl"
                   priority={index === 0}
                 />
               </motion.div>

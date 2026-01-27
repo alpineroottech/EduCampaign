@@ -25,6 +25,8 @@ const LatestBlogsTable = ({
 }: { 
   onTitleClick?: () => void;
 }) => {
+  const displayCount = Math.min(NOTICE_EVENTS.length, 5);
+  
   return (
     <motion.div 
       initial={{ opacity: 0, x: 20 }}
@@ -40,8 +42,8 @@ const LatestBlogsTable = ({
       </div>
 
       {/* Blog Links */}
-      <div className="divide-y divide-gray-100">
-        {NOTICE_EVENTS.slice(0, 3).map((event) => (
+      <div className="divide-y divide-gray-100 max-h-[400px] overflow-y-auto">
+        {NOTICE_EVENTS.slice(0, displayCount).map((event) => (
           <button
             key={event.id}
             onClick={onTitleClick}
@@ -78,7 +80,7 @@ const Hero = ({ onJoinClick, onNoticeEventsClick }: HeroProps) => {
           className="w-full lg:w-auto lg:flex-shrink-0 text-center lg:pr-12 lg:text-left relative z-10 order-2 lg:order-1"
         >
           <div className="flex flex-col gap-2 md:gap-4 mb-8">
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl leading-[1.1] font-extrabold tracking-tight text-gray-900">
+            <h1 className="text-3xl lg:text-4xl xl:text-5xl leading-[1.1] font-extrabold tracking-tight text-gray-900">
               A COMPLETE<br />
               SOLUTION FOR<br />
               <span className="text-[#6B4FA1]">ABROAD</span><br />
