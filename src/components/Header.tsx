@@ -203,35 +203,33 @@ const Header = () => {
                   {/* Invisible bridge to prevent dropdown from disappearing */}
                   <div className="absolute -left-60 right-0 w-140 h-6 top-full opacity-0 invisible group-hover:opacity-100 group-hover:visible" />
 
-                  {/* Full-width Dropdown Menu */}
-                  <div className="fixed left-0 right-0 top-full opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <div className="bg-white shadow-lg border-t border-gray-200 py-3">
-                      <div className="max-w-8xl mx-auto px-4 sm:px-6">
-                        <div className="flex justify-center gap-2.5 overflow-x-auto sub-nav-links">
-                          {link.dropdown.map((item, idx) => (
-                            <Link
-                              key={idx}
-                              href={item.href}
-                              className={`flex items-center justify-between px-5  py-2 bg-white border border-gray-200 rounded-lg text-[13px] shadow-sm hover:shadow-md  whitespace-nowrap hover:bg-gray-100 ${item.disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
+                  {/* Vertical Dropdown Menu */}
+                  <div className="absolute left-0 top-full opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pt-2">
+                    <div className="bg-white shadow-lg border border-gray-200 rounded-lg py-2 min-w-[220px]">
+                      <div className="flex flex-col sub-nav-links">
+                        {link.dropdown.map((item, idx) => (
+                          <Link
+                            key={idx}
+                            href={item.href}
+                            className={`flex items-center justify-between px-4 py-2.5 text-sm hover:bg-gray-100 transition-colors ${item.disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
+                          >
+                            <div>{item.label}</div>
+                            <svg
+                              className="w-4 h-4 text-purple-600 flex-shrink-0 ml-2"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
                             >
-                              <div>{item.label}</div>
-                              <svg
-                                className="w-4 h-4 text-purple-600 flex-shrink-0 ml-2"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M9 5l7 7-7 7"
-                                />
-                              </svg>
-                            </Link>
-                          ))}
-                        </div>
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   </div>
