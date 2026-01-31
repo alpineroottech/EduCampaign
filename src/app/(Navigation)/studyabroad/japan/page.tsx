@@ -10,6 +10,11 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
 import { motion } from "motion/react";
+import { Paper, Box, Typography } from "@mui/material";
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import YardIcon from '@mui/icons-material/Yard';
 
 
 interface IconBox {
@@ -186,30 +191,34 @@ function ServicesContent() {
 
   ];
 
-  const intakeCards: IntakeCard[] = [
+  const intakeCards = [
     {
-      title: "❄️ Janaury Intake",
-      desc: "Limited winter intake",
+      title: "January Intake",
+      desc: "Limited Winter Intake",
       paragraph: "Mainly for short term and specialized language programs.",
-      image: "/images/intake/janaury.jpg",
+      icon: AcUnitIcon,
+      color: "#64B5F6",
     },
     {
-      title: "🏵️ April Intake",
+      title: "April Intake",
       desc: "Main & Largest Intake",
-      paragraph: "Mainly for short term and specialized language programs.",
-      image: "/images/intake/april.png",
+      paragraph: "Ideal for students starting their academic journey in Japan's primary admission period.",
+      icon: LocalFloristIcon,
+      color: "#F06292",
     },
     {
-      title: "🍃 July Intake",
+      title: "July Intake",
       desc: "Mid-Year Admission",
-      paragraph: "Mainly for short term and specialized language programs.",
-      image: "/images/intake/july.jpg",
+      paragraph: "Perfect for students seeking flexible enrollment options during the summer season.",
+      icon: WbSunnyIcon,
+      color: "#FFD54F",
     },
     {
-      title: "🍂 October Intake",
+      title: "October Intake",
       desc: "Second Major Intake",
-      paragraph: "Mainly for short term and specialized language programs.",
-      image: "/images/intake/october.jpg",
+      paragraph: "Popular choice for students preparing for spring semester enrollment.",
+      icon: YardIcon,
+      color: "#FF8A65",
     },
   ];
 
@@ -452,42 +461,139 @@ function ServicesContent() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-standard mt-20">
-        <h2 className="mb-10 text-center">Intake Available</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {intakeCards.map((intake, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.15,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }}
-              viewport={{ once: false, margin: "-50px" }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]"
-            >
-              <div 
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${intake.image})` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
-              <div className="relative h-full flex flex-col justify-end p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">
-                  {intake.title}
-                </h3>
-                <p className="text-purple-300 font-medium mb-2">
-                  {intake.desc}
-                </p>
-                <p className="text-sm text-gray-200">
-                  {intake.paragraph}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+      <div className="max-w-5xl mx-auto px-standard mt-20 mb-16">
+        <h2 className="mb-16 text-center">Intake Available</h2>
+        
+        {/* Timeline Container */}
+        <Box sx={{ position: 'relative', px: { xs: 2, md: 4 } }}>
+          {/* Central Vertical Line */}
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              top: 0,
+              bottom: 0,
+              width: '3px',
+              bgcolor: '#e0e0e0',
+              transform: 'translateX(-50%)',
+              display: { xs: 'none', md: 'block' }
+            }}
+          />
+
+          {/* Timeline Items */}
+          {intakeCards.map((intake, index) => {
+            const isLeft = index % 2 === 0;
+            const IconComponent = intake.icon;
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                viewport={{ once: false, margin: "-100px" }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: { xs: 'center', md: isLeft ? 'flex-start' : 'flex-end' },
+                    mb: 6,
+                    position: 'relative'
+                  }}
+                >
+                  {/* Timeline Dot (Desktop) */}
+                  <Box
+                    sx={{
+                      position: { xs: 'static', md: 'absolute' },
+                      left: { md: '50%' },
+                      top: { md: '20px' },
+                      transform: { md: 'translateX(-50%)' },
+                      width: { xs: 48, md: 56 },
+                      height: { xs: 48, md: 56 },
+                      borderRadius: '50%',
+                      bgcolor: intake.color,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: 3,
+                      zIndex: 2,
+                      mb: { xs: 2, md: 0 }
+                    }}
+                  >
+                    <IconComponent sx={{ fontSize: { xs: 28, md: 32 }, color: 'white' }} />
+                  </Box>
+
+                  {/* Content Card */}
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      width: { xs: '100%', md: '45%' },
+                      p: 3,
+                      borderRadius: 3,
+                      position: 'relative',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                        boxShadow: 6
+                      },
+                      border: `2px solid ${intake.color}20`
+                    }}
+                  >
+                    {/* Connector Line (Desktop) */}
+                    <Box
+                      sx={{
+                        position: { xs: 'none', md: 'absolute' },
+                        display: { xs: 'none', md: 'block' },
+                        top: '28px',
+                        [isLeft ? 'right' : 'left']: '-40px',
+                        width: '40px',
+                        height: '2px',
+                        bgcolor: intake.color,
+                        opacity: 0.4
+                      }}
+                    />
+
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: 700,
+                        mb: 1,
+                        color: '#1a1a1a'
+                      }}
+                    >
+                      {intake.title}
+                    </Typography>
+
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontWeight: 600,
+                        mb: 2,
+                        color: intake.color
+                      }}
+                    >
+                      {intake.desc}
+                    </Typography>
+
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'text.secondary',
+                        lineHeight: 1.7
+                      }}
+                    >
+                      {intake.paragraph}
+                    </Typography>
+                  </Paper>
+                </Box>
+              </motion.div>
+            );
+          })}
+        </Box>
       </div>
 
       <div ref={visaprocess} className="mx-auto px-standard mt-20 max-w-7xl">
