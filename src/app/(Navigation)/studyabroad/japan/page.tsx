@@ -15,6 +15,9 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import YardIcon from '@mui/icons-material/Yard';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SchoolIcon from '@mui/icons-material/School';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 
 interface IconBox {
@@ -121,30 +124,28 @@ function ServicesContent() {
 
   ];
 
-  const languageSchools: LanguageSchoolCard[] = [
+  const pathwayItems = [
     {
-      image: "/images/studyabroad/university.png",
+      icon: MenuBookIcon,
       title: "Japanese Language School",
-      description:
-        "Training for non-native speakers, covering general communication, business Japanese, and advanced academic skills.",
+      description: "Training for non-native speakers, covering general communication, business Japanese, and advanced academic skills.",
       slug: "/studyabroad/japan/japaneselanguageprogram",
+      color: "#6B4FA1"
     },
     {
-      image: "/images/studyabroad/university.png",
+      icon: SchoolIcon,
       title: "Preparatory Japanese Language (Bekka) Program",
-      description:
-        "The Bekka Program in Japan is a preparatory course designed for international students who wish to continue their studies at Japanese universities.",
+      description: "The Bekka Program in Japan is a preparatory course designed for international students who wish to continue their studies at Japanese universities.",
       slug: "/studyabroad/japan/bekka",
+      color: "#5a3f8a"
     },
-  ];
-
-  const universityCards: UniversityCard[] = [
     {
-      image: "/images/studyabroad/university.png",
+      icon: AccountBalanceIcon,
       title: "University Program",
       description: "In Japan, \"Daigaku\" means university and refers to institutions offering higher education and research opportunities.",
-      slug: "/studyabroad/japan/universityprogram"
-    },
+      slug: "/studyabroad/japan/universityprogram",
+      color: "#3d1a4d"
+    }
   ];
 
   const scholarshipCards: ScholarshipCard[] = [
@@ -295,50 +296,145 @@ function ServicesContent() {
         </p>
 
         <div className="max-w-4xl mx-auto mt-8 px-4">
-          <div className="border border-purple-300 rounded-2xl p-4 sm:p-6">
-            <h5 className="text-center mb-6">Japanese Language Program</h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {languageSchools.map((school, index) => (
-                <Link href={school.slug} key={index} className="h-full">
-                  <div
-                    className="border relative w-full h-full min-h-[200px] sm:min-h-[220px] rounded-lg overflow-hidden"
-                  >
-                    <div
-                      className="absolute inset-0 bg-cover bg-center"
-                      style={{ backgroundImage: `url(${school.image})` }}
-                    />
-                    <div className="relative h-full p-4 sm:p-5 flex flex-col justify-center text-center">
-                      <h6 className="font-bold text-base sm:text-lg mb-2 mt-1">{school.title}</h6>
-                      <p className="text-xs sm:text-sm leading-relaxed">{school.description}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          {/* Ladder Timeline Structure */}
+          <Box sx={{ position: 'relative', px: { xs: 2, md: 4 } }}>
+            {/* Central Vertical Line */}
+            <Box
+              sx={{
+                position: 'absolute',
+                left: '50%',
+                top: 0,
+                bottom: 0,
+                width: '3px',
+                bgcolor: '#e0e0e0',
+                transform: 'translateX(-50%)',
+                display: { xs: 'none', md: 'block' }
+              }}
+            />
 
-          <div className="flex justify-center mt-6">
-            {universityCards.map((school, index) => (
-              <Link
-                href={school.slug}
-                key={index}
-                className="w-full max-w-2xl h-full"
-              >
-                <div
-                  className="border relative w-full h-full min-h-[160px] sm:min-h-[180px] rounded-lg overflow-hidden"
+            {/* Pathway Items */}
+            {pathwayItems.map((pathway, index) => {
+              const isLeft = index % 2 === 0;
+              const IconComponent = pathway.icon;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.15,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  viewport={{ once: false, margin: "-100px" }}
                 >
-                  <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${school.image})` }}
-                  />
-                  <div className="relative h-full p-4 sm:p-5 flex flex-col justify-center text-center">
-                    <h6 className="font-bold text-base sm:text-lg mb-2 mt-1">{school.title}</h6>
-                    <p className="text-xs sm:text-sm leading-relaxed">{school.description}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: { xs: 'column', md: isLeft ? 'row' : 'row-reverse' },
+                      alignItems: 'center',
+                      mb: 6,
+                      gap: { xs: 2, md: 4 }
+                    }}
+                  >
+                    {/* Content Card */}
+                    <Box sx={{ flex: 1, width: { xs: '100%', md: 'auto' } }}>
+                      <Link href={pathway.slug}>
+                        <Paper
+                          elevation={2}
+                          sx={{
+                            p: { xs: 3, md: 4 },
+                            borderRadius: 2,
+                            bgcolor: 'white',
+                            transition: 'all 0.3s ease',
+                            cursor: 'pointer',
+                            '&:hover': {
+                              transform: 'translateY(-4px)',
+                              boxShadow: 6,
+                              borderColor: pathway.color
+                            },
+                            border: '2px solid transparent'
+                          }}
+                        >
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              fontWeight: 600,
+                              mb: 2,
+                              color: '#2a1136',
+                              fontSize: { xs: '1rem', md: '1.25rem' }
+                            }}
+                          >
+                            {pathway.title}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: '#6b7280',
+                              lineHeight: 1.6,
+                              fontSize: { xs: '0.875rem', md: '1rem' }
+                            }}
+                          >
+                            {pathway.description}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              mt: 2,
+                              color: pathway.color,
+                              fontWeight: 500,
+                              fontSize: '0.875rem'
+                            }}
+                          >
+                            Learn More →
+                          </Typography>
+                        </Paper>
+                      </Link>
+                    </Box>
+
+                    {/* Timeline Dot (Desktop) */}
+                    <Box
+                      sx={{
+                        display: { xs: 'none', md: 'flex' },
+                        width: 56,
+                        height: 56,
+                        borderRadius: '50%',
+                        bgcolor: pathway.color,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        zIndex: 2,
+                        boxShadow: '0 4px 12px rgba(107, 79, 161, 0.3)'
+                      }}
+                    >
+                      <IconComponent sx={{ color: 'white', fontSize: 28 }} />
+                    </Box>
+
+                    {/* Spacer */}
+                    <Box sx={{ flex: 1, display: { xs: 'none', md: 'block' } }} />
+                  </Box>
+
+                  {/* Mobile Icon */}
+                  <Box
+                    sx={{
+                      display: { xs: 'flex', md: 'none' },
+                      width: 48,
+                      height: 48,
+                      borderRadius: '50%',
+                      bgcolor: pathway.color,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      mx: 'auto',
+                      mb: 4,
+                      boxShadow: '0 4px 12px rgba(107, 79, 161, 0.3)'
+                    }}
+                  >
+                    <IconComponent sx={{ color: 'white', fontSize: 24 }} />
+                  </Box>
+                </motion.div>
+              );
+            })}
+          </Box>
         </div>
       </div>
 
