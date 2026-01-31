@@ -192,8 +192,8 @@ const StudentVoice = () => {
                     </div>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="h-[400px] md:h-[600px] md:row-span-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="h-[400px] md:h-[350px]">
                         <VideoCard
                             video={featuredVideo}
                             onPlay={setActiveYoutubeId}
@@ -203,7 +203,7 @@ const StudentVoice = () => {
                     </div>
 
                     {otherVideos.map((video, idx) => (
-                        <div key={video.id} className="h-[400px] md:h-[285px]">
+                        <div key={video.id} className="h-[400px] md:h-[350px]">
                             <VideoCard
                                 video={video}
                                 onPlay={setActiveYoutubeId}
