@@ -9,6 +9,14 @@ import { Suspense, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useScrollToOffset } from "@/utils/useScrollToOffset";
 import { motion } from "motion/react";
+import { Paper, Box, Typography } from "@mui/material";
+import SchoolIcon from '@mui/icons-material/School';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import PublicIcon from '@mui/icons-material/Public';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 
 interface IconBox {
@@ -89,51 +97,56 @@ function PageContent() {
 
     ];
 
-    const languageSchools: LanguageSchoolCard[] = [
+    const pathwayItems = [
         {
-            image: "/images/studyabroad/university.png",
-            title: "VET ( VOCATIONAL COLLEGES)",
+            icon: SchoolIcon,
+            title: "VET (VOCATIONAL COLLEGES)",
             description: "TAFE and private institutions offering VET courses for specialized knowledge and job-ready skills.",
-            slug: "/studyabroad/australia/vet"
+            slug: "/studyabroad/australia/vet",
+            color: "#6B4FA1"
         },
         {
-            image: "/images/studyabroad/university.png",
+            icon: AccountBalanceIcon,
             title: "UNIVERSITY",
             description: "World-class universities offering undergraduate, postgraduate, and doctoral programs with global recognition.",
-            slug: "/studyabroad/australia/university"
+            slug: "/studyabroad/australia/university",
+            color: "#5a3f8a"
         },
     ];
 
 
 
-    const scholarshipCards: ScholarshipCard[] = [
+    const scholarshipItems = [
         {
-            title: "Australia Awards Scholarships (AAS) ",
-            p1: " Funded by the Australian Government, these scholarships cover tuition, living costs, travel, and health insurance, helping students from Asia, the Pacific, Africa, and the Middle East study in Australia without financial worries.",
-            image: "/images/scholarship/aas.jpg",
+            icon: CardGiftcardIcon,
+            title: "Australia Awards Scholarships (AAS)",
+            description: "Funded by the Australian Government, these scholarships cover tuition, living costs, travel, and health insurance, helping students from Asia, the Pacific, Africa, and the Middle East study in Australia without financial worries.",
+            color: "#6B4FA1"
         },
         {
-            title: "Research Training Program (RTP) Scholarships ",
-            p1: "Offered by universities for research-based postgraduate degrees, RTP scholarships provide tuition, living stipends, and research support to help students focus entirely on their studies.",
-            image: "/images/scholarship/rtp.png",
+            icon: WorkspacePremiumIcon,
+            title: "Research Training Program (RTP) Scholarships",
+            description: "Offered by universities for research-based postgraduate degrees, RTP scholarships provide tuition, living stipends, and research support to help students focus entirely on their studies.",
+            color: "#5a3f8a"
         },
         {
-            title: "Endeavour Postgraduate Scholarships ",
-            p1: "These awards support international postgraduate students with tuition, travel, and health coverage, combining advanced study with professional and academic opportunities.   ",
-            image: "/images/scholarship/eps.jpg",
+            icon: EmojiEventsIcon,
+            title: "Endeavour Postgraduate Scholarships",
+            description: "These awards support international postgraduate students with tuition, travel, and health coverage, combining advanced study with professional and academic opportunities.",
+            color: "#3d1a4d"
         },
         {
-            title: " University-Specific Scholarships",
-            p1: "Top universities like Sydney, UNSW, Monash, and Melbourne offer merit-based scholarships to reward academic excellence, leadership, or financial need.",
-            image: "/images/scholarship/university.jpg",
+            icon: PublicIcon,
+            title: "University-Specific Scholarships",
+            description: "Top universities like Sydney, UNSW, Monash, and Melbourne offer merit-based scholarships to reward academic excellence, leadership, or financial need.",
+            color: "#6B4FA1"
         },
         {
-            title: "Destination Australia Scholarship ",
-            p1: "Encouraging study in regional Australia, this scholarship offers up to AUD 15,000 per year to help cover living and study costs while experiencing vibrant, multicultural communities.",
-            image: "/images/scholarship/das.jpg",
+            icon: LocationCityIcon,
+            title: "Destination Australia Scholarship",
+            description: "Encouraging study in regional Australia, this scholarship offers up to AUD 15,000 per year to help cover living and study costs while experiencing vibrant, multicultural communities.",
+            color: "#5a3f8a"
         },
-
-
     ];
 
 
@@ -229,25 +242,145 @@ function PageContent() {
                 </p>
 
                 <div className="max-w-4xl mx-auto mt-8 sm:px-4">
-                    <div className="border border-purple-300 rounded-2xl p-4 sm:p-6">
-                        <h5 className="text-center mb-6">Educational Institutions</h5>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {languageSchools.map((school, index) => (
-                                <Link href={school.slug} key={index} className="h-full">
-                                    <div className="border relative w-full h-full min-h-[200px] sm:min-h-[220px] rounded-lg overflow-hidden">
-                                        <div
-                                            className="absolute inset-0 bg-cover bg-center"
-                                            style={{ backgroundImage: `url(${school.image})` }}
-                                        />
-                                        <div className="relative h-full p-4 sm:p-5 flex flex-col justify-center text-center">
-                                            <h6 className="font-bold text-base sm:text-lg mb-2 mt-1">{school.title}</h6>
-                                            <p className="text-xs sm:text-sm leading-relaxed">{school.description}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
+                    {/* Ladder Timeline Structure */}
+                    <Box sx={{ position: 'relative', px: { xs: 2, md: 4 } }}>
+                        {/* Central Vertical Line */}
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                left: '50%',
+                                top: 0,
+                                bottom: 0,
+                                width: '3px',
+                                bgcolor: '#e0e0e0',
+                                transform: 'translateX(-50%)',
+                                display: { xs: 'none', md: 'block' }
+                            }}
+                        />
+
+                        {/* Pathway Items */}
+                        {pathwayItems.map((pathway, index) => {
+                            const isLeft = index % 2 === 0;
+                            const IconComponent = pathway.icon;
+
+                            return (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: index * 0.15,
+                                        ease: [0.25, 0.46, 0.45, 0.94]
+                                    }}
+                                    viewport={{ once: false, margin: "-100px" }}
+                                >
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: { xs: 'column', md: isLeft ? 'row' : 'row-reverse' },
+                                            alignItems: 'center',
+                                            mb: 6,
+                                            gap: { xs: 2, md: 4 }
+                                        }}
+                                    >
+                                        {/* Content Card */}
+                                        <Box sx={{ flex: 1, width: { xs: '100%', md: 'auto' } }}>
+                                            <Link href={pathway.slug}>
+                                                <Paper
+                                                    elevation={2}
+                                                    sx={{
+                                                        p: { xs: 3, md: 4 },
+                                                        borderRadius: 2,
+                                                        bgcolor: 'white',
+                                                        transition: 'all 0.3s ease',
+                                                        cursor: 'pointer',
+                                                        '&:hover': {
+                                                            transform: 'translateY(-4px)',
+                                                            boxShadow: 6,
+                                                            borderColor: pathway.color
+                                                        },
+                                                        border: '2px solid transparent'
+                                                    }}
+                                                >
+                                                    <Typography
+                                                        variant="h6"
+                                                        sx={{
+                                                            fontWeight: 600,
+                                                            mb: 2,
+                                                            color: '#2a1136',
+                                                            fontSize: { xs: '1rem', md: '1.25rem' }
+                                                        }}
+                                                    >
+                                                        {pathway.title}
+                                                    </Typography>
+                                                    <Typography
+                                                        variant="body2"
+                                                        sx={{
+                                                            color: '#6b7280',
+                                                            lineHeight: 1.6,
+                                                            fontSize: { xs: '0.875rem', md: '1rem' }
+                                                        }}
+                                                    >
+                                                        {pathway.description}
+                                                    </Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            mt: 2,
+                                                            color: pathway.color,
+                                                            fontWeight: 500,
+                                                            fontSize: '0.875rem'
+                                                        }}
+                                                    >
+                                                        Learn More →
+                                                    </Typography>
+                                                </Paper>
+                                            </Link>
+                                        </Box>
+
+                                        {/* Timeline Dot (Desktop) */}
+                                        <Box
+                                            sx={{
+                                                display: { xs: 'none', md: 'flex' },
+                                                width: 56,
+                                                height: 56,
+                                                borderRadius: '50%',
+                                                bgcolor: pathway.color,
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                flexShrink: 0,
+                                                zIndex: 2,
+                                                boxShadow: '0 4px 12px rgba(107, 79, 161, 0.3)'
+                                            }}
+                                        >
+                                            <IconComponent sx={{ color: 'white', fontSize: 28 }} />
+                                        </Box>
+
+                                        {/* Spacer */}
+                                        <Box sx={{ flex: 1, display: { xs: 'none', md: 'block' } }} />
+                                    </Box>
+
+                                    {/* Mobile Icon */}
+                                    <Box
+                                        sx={{
+                                            display: { xs: 'flex', md: 'none' },
+                                            width: 48,
+                                            height: 48,
+                                            borderRadius: '50%',
+                                            bgcolor: pathway.color,
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            mx: 'auto',
+                                            mb: 4,
+                                            boxShadow: '0 4px 12px rgba(107, 79, 161, 0.3)'
+                                        }}
+                                    >
+                                        <IconComponent sx={{ color: 'white', fontSize: 24 }} />
+                                    </Box>
+                                </motion.div>
+                            );
+                        })}
+                    </Box>
 
 
                 </div>
@@ -311,42 +444,133 @@ function PageContent() {
                 <p className="mb-4 max-w-4xl text-center mx-auto px-2">
                     There are several scholarship opportunities available for international students. A brief Explanation widens your concerns as follows.
                 </p>
-                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-4">
-                    {scholarshipCards.map((scholarship, index) => (
-                        <div
-                            key={index}
-                            className="flex flex-col bg-white border border-gray-400 rounded-xl p-2 sm:p-3 hover:shadow-lg transition-shadow duration-300"
-                        >
-                            {/* Title Header */}
-                            <div className="bg-purple-200 rounded-md p-3 sm:p-4 mb-3 sm:mb-4">
-                                <h4 className="text-base sm:text-lg font-semibold text-center sm:text-left">
-                                    {scholarship.title}
-                                </h4>
-                            </div>
-                            
-                            {/* Content Section */}
-                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                                {/* Text */}
-                                <div className="flex-1 text-sm sm:text-base text-gray-700 text-justify order-2 sm:order-1">
-                                    {scholarship.p1 && (
-                                        <p className="border-b-2 border-gray-200 pb-2">{scholarship.p1}</p>
-                                    )}
-                                </div>
-                                
-                                {/* Image */}
-                                <div className="relative w-full sm:w-36 md:w-44 lg:w-48 h-44 sm:h-auto sm:min-h-[120px] flex-shrink-0 order-1 sm:order-2 rounded-lg overflow-hidden border border-gray-200">
-                                    <Image
-                                        src={scholarship.image}
-                                        alt={scholarship.title}
-                                        fill
-                                        sizes="(max-width: 640px) 100vw, 200px"
-                                        className="object-cover"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                
+                {/* Ladder Timeline Structure */}
+                <Box sx={{ position: 'relative', px: { xs: 2, md: 4 }, mt: 8, maxWidth: '1000px', mx: 'auto' }}>
+                    {/* Central Vertical Line */}
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            left: '50%',
+                            top: 0,
+                            bottom: 0,
+                            width: '3px',
+                            bgcolor: '#e0e0e0',
+                            transform: 'translateX(-50%)',
+                            display: { xs: 'none', md: 'block' }
+                        }}
+                    />
+
+                    {/* Scholarship Items */}
+                    {scholarshipItems.map((scholarship, index) => {
+                        const isLeft = index % 2 === 0;
+                        const IconComponent = scholarship.icon;
+
+                        return (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: index * 0.15,
+                                    ease: [0.25, 0.46, 0.45, 0.94]
+                                }}
+                                viewport={{ once: false, margin: "-100px" }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: { xs: 'column', md: isLeft ? 'row' : 'row-reverse' },
+                                        alignItems: 'center',
+                                        mb: 6,
+                                        gap: { xs: 2, md: 4 }
+                                    }}
+                                >
+                                    {/* Content Card */}
+                                    <Box sx={{ flex: 1, width: { xs: '100%', md: 'auto' } }}>
+                                        <Paper
+                                            elevation={2}
+                                            sx={{
+                                                p: { xs: 3, md: 4 },
+                                                borderRadius: 2,
+                                                bgcolor: 'white',
+                                                transition: 'all 0.3s ease',
+                                                '&:hover': {
+                                                    transform: 'translateY(-4px)',
+                                                    boxShadow: 6,
+                                                    borderColor: scholarship.color
+                                                },
+                                                border: '2px solid transparent'
+                                            }}
+                                        >
+                                            <Typography
+                                                variant="h6"
+                                                sx={{
+                                                    fontWeight: 600,
+                                                    mb: 2,
+                                                    color: '#2a1136',
+                                                    fontSize: { xs: '1rem', md: '1.25rem' }
+                                                }}
+                                            >
+                                                {scholarship.title}
+                                            </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                sx={{
+                                                    color: '#6b7280',
+                                                    lineHeight: 1.6,
+                                                    fontSize: { xs: '0.875rem', md: '1rem' }
+                                                }}
+                                            >
+                                                {scholarship.description}
+                                            </Typography>
+                                        </Paper>
+                                    </Box>
+
+                                    {/* Timeline Dot (Desktop) */}
+                                    <Box
+                                        sx={{
+                                            display: { xs: 'none', md: 'flex' },
+                                            width: 56,
+                                            height: 56,
+                                            borderRadius: '50%',
+                                            bgcolor: scholarship.color,
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            flexShrink: 0,
+                                            zIndex: 2,
+                                            boxShadow: '0 4px 12px rgba(107, 79, 161, 0.3)'
+                                        }}
+                                    >
+                                        <IconComponent sx={{ color: 'white', fontSize: 28 }} />
+                                    </Box>
+
+                                    {/* Spacer */}
+                                    <Box sx={{ flex: 1, display: { xs: 'none', md: 'block' } }} />
+                                </Box>
+
+                                {/* Mobile Icon */}
+                                <Box
+                                    sx={{
+                                        display: { xs: 'flex', md: 'none' },
+                                        width: 48,
+                                        height: 48,
+                                        borderRadius: '50%',
+                                        bgcolor: scholarship.color,
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mx: 'auto',
+                                        mb: 4,
+                                        boxShadow: '0 4px 12px rgba(107, 79, 161, 0.3)'
+                                    }}
+                                >
+                                    <IconComponent sx={{ color: 'white', fontSize: 24 }} />
+                                </Box>
+                            </motion.div>
+                        );
+                    })}
+                </Box>
             </div>
 
 
