@@ -160,7 +160,6 @@ const BekkaPage = () => {
                   key={item.id}
                   onClick={() => {
                     setActiveSection(item.id);
-                    scrollToCategory(item.id);
                   }}
                   className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${activeSection === item.id
                       ? "bg-purple-200 text-gray-900"
@@ -179,6 +178,7 @@ const BekkaPage = () => {
           {/* Main Content Sections with refs */}
           <div className="h-full">
             <div className="flex flex-col flex-1 min-w-0 bg-white my-12 px-4 lg:px-0 .scrollable-container ">
+              {activeSection === "about" && (
               <div ref={aboutRef}>
                 <h3 className="bg-gray-200 p-4  ">
                   ABOUT BEKKA PROGRAM
@@ -199,8 +199,9 @@ const BekkaPage = () => {
                   </p>
                 </div>
               </div>
-
-              <h3 ref={whyRef} className="bg-gray-200 p-4 mt-15  ">
+              )}
+              {activeSection === "why" && (
+              <>              <h3 ref={whyRef} className="bg-gray-200 p-4 mt-15  ">
                 WHY BEKKA PROGRAM?
               </h3>
               <div className="flex py-4 text-justify">
@@ -264,8 +265,11 @@ const BekkaPage = () => {
                   </li>
                 </ul>
               </div>
+              </>
+              )}
 
               {/* Course Duration Section */}
+              {activeSection === "duration" && (
               <section
                 ref={durationRef}
                 id="duration"
@@ -308,8 +312,10 @@ const BekkaPage = () => {
                   </table>
                 </div>
               </section>
+              )}
 
               {/* Requirements Section */}
+              {activeSection === "requirements" && (
               <section
                 ref={requirementsRef}
                 id="requirements"
@@ -347,8 +353,10 @@ const BekkaPage = () => {
                   </li>
                 </ul>
               </section>
+              )}
 
               {/* Admission Guide Section */}
+              {activeSection === "admission" && (
               <section
                 ref={admissionRef}
                 id="admission"
@@ -412,8 +420,10 @@ const BekkaPage = () => {
                   </ul>
                 </div>
               </section>
+              )}
 
               {/* Career Path Section */}
+              {activeSection === "career" && (
               <section ref={careerRef} id="career" className="bg-white py-12">
                 <h3 className="bg-gray-200 p-4">
                   CAREER PATH AFTER GRADUATION
@@ -487,8 +497,10 @@ const BekkaPage = () => {
                   </div>
                 </div>
               </section>
+              )}
 
               {/* FAQ Section */}
+              {activeSection === "faq" && (
               <section ref={faqRef} id="faq" className="bg-white py-12">
                 <h3 className="bg-gray-200 p-4">FAQ</h3>
                 <p className="text-justify max-w-6xl mx-auto py-4 px-4">
@@ -544,6 +556,7 @@ const BekkaPage = () => {
                   ))}
                 </div>
               </section>
+              )}
             </div>
           </div>
         </div>

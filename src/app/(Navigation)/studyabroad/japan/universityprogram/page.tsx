@@ -150,7 +150,6 @@ const UniversityProgramPage = () => {
                   key={item.id}
                   onClick={() => {
                     setActiveSection(item.id);
-                    scrollToCategory(item.id);
                   }}
                   className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${
                     activeSection === item.id
@@ -167,6 +166,7 @@ const UniversityProgramPage = () => {
 
         {/* Main Content Sections with refs */}
         <div className="flex-1 min-w-0 bg-white my-10 px-4 lg:px-0">
+          {activeSection === "about" && (
           <div ref={aboutRef}>
             <h3 className="bg-gray-200 p-4  ">ABOUT JAPANESE UNIVERSITY</h3>
             <div className="flex py-4 px-4 text-justify">
@@ -202,7 +202,10 @@ const UniversityProgramPage = () => {
               </p>
             </div>
           </div>
+          )}
 
+          {activeSection === "why" && (
+          <>
           <h3 ref={whyRef} className="bg-gray-200  p-4 mt-15  ">
             WHY JAPANESE UNIVERSITY?
           </h3>
@@ -260,8 +263,11 @@ const UniversityProgramPage = () => {
               </li>
             </ul>
           </div>
+          </>
+          )}
 
           {/* Course Section */}
+          {activeSection === "course" && (
           <section ref={courseRef} id="course" className="bg-white py-12">
             <h3 className="bg-gray-200  p-4  ">ABOUT COURSE</h3>
             <p className="py-4 text-justify px-4">
@@ -313,8 +319,10 @@ const UniversityProgramPage = () => {
               </table>
             </div>
           </section>
+          )}
 
           {/* Requirements Section */}
+          {activeSection === "requirements" && (
           <section
             ref={requirementsRef}
             id="requirements"
@@ -374,8 +382,10 @@ const UniversityProgramPage = () => {
               requirements are met.
             </p>
           </section>
+          )}
 
           {/* Admission Guide Section */}
+          {activeSection === "admission" && (
           <section ref={admissionRef} id="admission" className="bg-white py-10">
             <h3 className="bg-gray-200  p-4  ">ADMISSION GUIDE</h3>
             <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -429,8 +439,10 @@ const UniversityProgramPage = () => {
               </li>
             </ul>
           </section>
+          )}
 
           {/* Top Universities Section */}
+          {activeSection === "universities" && (
           <section
             ref={universitiesRef}
             id="universities"
@@ -448,8 +460,10 @@ const UniversityProgramPage = () => {
               ))}
             </div>
           </section>
+          )}
 
           {/* FAQ Section */}
+          {activeSection === "faq" && (
           <section ref={faqRef} id="faq" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">FAQ</h3>
             <p className="text-justify max-w-6xl mx-auto py-4 px-4">
@@ -505,6 +519,7 @@ const UniversityProgramPage = () => {
               ))}
             </div>
           </section>
+          )}
         </div>
       </div>
     </div>

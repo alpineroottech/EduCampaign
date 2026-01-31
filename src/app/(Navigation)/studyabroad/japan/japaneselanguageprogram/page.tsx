@@ -203,7 +203,6 @@ const JapaneseLanguageProgramPage = () => {
                   key={item.id}
                   onClick={() => {
                     setActiveSection(item.id);
-                    scrollToCategory(item.id);
                   }}
                   className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${activeSection === item.id
                     ? "bg-purple-200 text-gray-900"
@@ -219,6 +218,7 @@ const JapaneseLanguageProgramPage = () => {
 
         {/* Main Content Sections with refs */}
         <div className="flex-1 min-w-0 bg-white my-12 px-4 lg:px-0">
+          {activeSection === "about" && (
           <div ref={aboutRef}>
             <h3 className="bg-gray-200 p-4  ">
               ABOUT JAPANESE LANGUAGE PROGRAM
@@ -234,8 +234,11 @@ const JapaneseLanguageProgramPage = () => {
               </p>
             </div>
           </div>
+          )}
 
-          <h3 ref={whyRef} className="bg-gray-200  p-4 mt-15 ">
+          {activeSection === "why" && (
+          <div ref={whyRef}>
+          <h3 className="bg-gray-200  p-4 mt-15 ">
             WHY JAPANESE LANGUAGE PROGRAM?
           </h3>
           <div className="flex py-4 text-justify">
@@ -262,8 +265,11 @@ const JapaneseLanguageProgramPage = () => {
               </li>
             </ul>
           </div>
+          </div>
+          )}
 
           {/* Course Duration Section */}
+          {activeSection === "duration" && (
           <section ref={durationRef} id="duration" className="bg-white py-12">
             <h3 className="bg-gray-200  p-4  ">COURSE DURATION</h3>
             <p className="py-4 text-justify px-4">
@@ -308,8 +314,10 @@ const JapaneseLanguageProgramPage = () => {
               *Earlier graduation from a Japanese language school is possible in rare cases if a student demonstrates advanced proficiency, exceptional academic performance, or completes all curriculum and requirements ahead of schedule. It depends on the school&apos;s policies and approval.
             </p>
           </section>
+          )}
 
           {/* Requirements Section */}
+          {activeSection === "requirements" && (
           <section ref={requirementsRef} id="requirements" className="bg-white py-12">
             <h3 className="bg-gray-200  p-4  ">Application Requirement</h3>
             <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -342,8 +350,10 @@ const JapaneseLanguageProgramPage = () => {
               *As per your interest to the specific school/course, we can check its exact requirements for you.
             </p>
           </section>
+          )}
 
           {/* Admission Guide Section */}
+          {activeSection === "admission" && (
           <section ref={admissionRef} id="admission" className="bg-white py-12">
             <h3 className="bg-gray-200  p-4  ">ADMISSION GUIDE</h3>
             <p className="py-6 px-4">The process from application to Enrollment</p>
@@ -398,6 +408,7 @@ const JapaneseLanguageProgramPage = () => {
               *The Certificate of Eligibility is valid for three months.
             </p>
           </section>
+          )}
 
           {/* Tuition Fee Section */}
           {/* <section ref={tuitionRef} id="tuition" className="bg-white py-12">
@@ -447,6 +458,7 @@ const JapaneseLanguageProgramPage = () => {
           </section> */}
 
           {/* Career Path Section */}
+          {activeSection === "career" && (
           <section ref={careerRef} id="career" className="bg-white pt-12">
             <h3 className="bg-gray-200  p-4">CAREER PATH AFTER GRADUATION</h3>
             <p className="py-4 text-justify px-4">
@@ -474,8 +486,10 @@ const JapaneseLanguageProgramPage = () => {
               </div>
             </div>
           </section>
+          )}
 
           {/* FAQ Section */}
+          {activeSection === "faq" && (
           <section ref={faqRef} id="faq" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">FAQ</h3>
             <p className="text-justify max-w-6xl mx-auto py-4 px-4">
@@ -531,6 +545,7 @@ const JapaneseLanguageProgramPage = () => {
               ))}
             </div>
           </section>
+          )}
         </div>
       </div>
     </div>

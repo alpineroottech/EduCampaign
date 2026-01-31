@@ -138,7 +138,6 @@ const VETPage = () => {
                   key={item.id}
                   onClick={() => {
                     setActiveSection(item.id);
-                    scrollToCategory(item.id);
                   }}
                   className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${activeSection === item.id
                     ? "bg-purple-200 text-gray-900"
@@ -155,50 +154,57 @@ const VETPage = () => {
         {/* Main Content */}
         <div className="flex-1 min-w-0 bg-white my-12 px-4 lg:px-0">
           {/* About Section */}
-          <div ref={aboutRef}>
-            <h3 className="bg-gray-200 p-4">ABOUT VET PROGRAM</h3>
-            <div className="flex flex-col gap-4 py-4 text-justify px-4">
-              <p>
-                There are TAFE and private educational institutions that offer VET (Vocational Education and Training) courses to acquire specialized knowledge useful for jobs in Australia. Public schools are called TAFE, and private schools are called vocational schools. The TAFE sector is the largest education and training sector in Australia. At the VET level, private providers offer VET qualifications alongside government-funded TAFE institutes and are classified as Registered Training Organizations (RTOs).
-              </p>
-              <p>
-                <strong>Diploma / Advanced Diploma:</strong> Higher-level VET qualifications that build on certificate courses, providing specialized skills and knowledge, often leading to professional employment or further higher education pathways.
-              </p>
-              <p>
-                Each VET qualification can be a first step towards a new job or a new skill, or a pathway to further study. Diploma and Advanced Diploma courses may also provide study credit towards a higher education (university level) degree.
-              </p>
+          {activeSection === "about" && (
+            <div ref={aboutRef}>
+              <h3 className="bg-gray-200 p-4">ABOUT VET PROGRAM</h3>
+              <div className="flex flex-col gap-4 py-4 text-justify px-4">
+                <p>
+                  There are TAFE and private educational institutions that offer VET (Vocational Education and Training) courses to acquire specialized knowledge useful for jobs in Australia. Public schools are called TAFE, and private schools are called vocational schools. The TAFE sector is the largest education and training sector in Australia. At the VET level, private providers offer VET qualifications alongside government-funded TAFE institutes and are classified as Registered Training Organizations (RTOs).
+                </p>
+                <p>
+                  <strong>Diploma / Advanced Diploma:</strong> Higher-level VET qualifications that build on certificate courses, providing specialized skills and knowledge, often leading to professional employment or further higher education pathways.
+                </p>
+                <p>
+                  Each VET qualification can be a first step towards a new job or a new skill, or a pathway to further study. Diploma and Advanced Diploma courses may also provide study credit towards a higher education (university level) degree.
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Why VET Program Section */}
-          <h3 ref={whyRef} className="bg-gray-200 p-4 mt-15">WHY VET PROGRAM?</h3>
-          <div className="flex py-4 text-justify">
-            <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2"><strong>Practical, career-focused training:</strong> VET and Diploma programs in Australia provide hands-on learning in fields like business, IT, healthcare, hospitality, and skilled trades.</span>
-              </li>
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2"><strong>Job-ready skills:</strong> These courses equip students with real-world skills for professional roles or entrepreneurial opportunities.</span>
-              </li>
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2"><strong>Pathway to further study:</strong> They offer opportunities to continue into higher education programs.</span>
-              </li>
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2"><strong>Blend of theory and practice:</strong> Students gain both essential theoretical knowledge and practical experience.</span>
-              </li>
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2"><strong>Confidence and competence:</strong> Programs help learners build industry competence, self-assurance, and expertise to succeed in their chosen careers.</span>
-              </li>
-            </ul>
-          </div>
+          {activeSection === "why" && (
+            <div ref={whyRef}>
+              <h3 className="bg-gray-200 p-4 mt-15">WHY VET PROGRAM?</h3>
+              <div className="flex py-4 text-justify">
+                <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2"><strong>Practical, career-focused training:</strong> VET and Diploma programs in Australia provide hands-on learning in fields like business, IT, healthcare, hospitality, and skilled trades.</span>
+                  </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2"><strong>Job-ready skills:</strong> These courses equip students with real-world skills for professional roles or entrepreneurial opportunities.</span>
+                  </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2"><strong>Pathway to further study:</strong> They offer opportunities to continue into higher education programs.</span>
+                  </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2"><strong>Blend of theory and practice:</strong> Students gain both essential theoretical knowledge and practical experience.</span>
+                  </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2"><strong>Confidence and competence:</strong> Programs help learners build industry competence, self-assurance, and expertise to succeed in their chosen careers.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
 
           {/* About Course Section */}
-          <section ref={courseRef} id="course" className="bg-white py-12">
+          {activeSection === "course" && (
+            <section ref={courseRef} id="course" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">ABOUT COURSE</h3>
             <div className="flex flex-col gap-4 py-4 text-justify px-4">
               <p>
@@ -245,9 +251,11 @@ const VETPage = () => {
               </table>
             </div>
           </section>
+          )}
 
           {/* Application Requirements Section */}
-          <section ref={requirementsRef} id="requirements" className="bg-white py-12">
+          {activeSection === "requirements" && (
+            <section ref={requirementsRef} id="requirements" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">APPLICATION REQUIREMENT</h3>
             <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
               <li className='flex'>
@@ -272,9 +280,11 @@ const VETPage = () => {
               *Requirements may vary depending on the specific institution and course. Contact us for personalized guidance.
             </p>
           </section>
+          )}
 
           {/* Admission Guide Section */}
-          <section ref={admissionRef} id="admission" className="bg-white py-12">
+          {activeSection === "admission" && (
+            <section ref={admissionRef} id="admission" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">ADMISSION GUIDE</h3>
             <div className="flex flex-col gap-4 py-4 text-justify px-4">
               <p>
@@ -323,9 +333,11 @@ const VETPage = () => {
               </table>
             </div>
           </section>
+          )}
 
           {/* Career Path Section */}
-          <section ref={careerRef} id="career" className="bg-white pt-12 ">
+          {activeSection === "career" && (
+            <section ref={careerRef} id="career" className="bg-white pt-12 ">
             <h3 className="bg-gray-200 p-4">CAREER PATH AFTER GRADUATION</h3>
             <div className="flex flex-col gap-4 py-4 text-justify px-4">
               <p>
@@ -354,13 +366,12 @@ const VETPage = () => {
                 <span className="ml-2 pt-2"><strong>Skilled Visa Pathways:</strong> Explore skilled visa options to live and work long-term in Australia.</span>
               </li>
             </ul>
-
-
-
           </section>
+          )}
 
           {/* FAQ Section */}
-          <section ref={faqRef} id="faq" className="bg-white py-12">
+          {activeSection === "faq" && (
+            <section ref={faqRef} id="faq" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">FAQ</h3>
             <p className="text-justify max-w-6xl mx-auto py-4 px-4">
               Find answers to common questions about studying in Australia.
@@ -407,6 +418,7 @@ const VETPage = () => {
               ))}
             </div>
           </section>
+          )}
         </div>
       </div>
     </div>

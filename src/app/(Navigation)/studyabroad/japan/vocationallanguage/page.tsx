@@ -185,7 +185,6 @@ const VocationalLanguagePage = () => {
                   key={item.id}
                   onClick={() => {
                     setActiveSection(item.id);
-                    scrollToCategory(item.id);
                   }}
                   className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${activeSection === item.id
                     ? "bg-purple-200 text-gray-900"
@@ -201,230 +200,248 @@ const VocationalLanguagePage = () => {
 
         {/* Main Content Sections with refs */}
         <div className="flex-1 min-w-0 bg-white my-12 px-4 lg:px-0">
-          <div ref={aboutRef}>
-            <h3 className="bg-gray-200 p-4  ">
-              ABOUT VOCATIONAL SCHOOL
-            </h3>
-            <div className="flex py-4 px-4 text-justify">
-              <p>
-                Vocational school is career-focused institutions that provide practical and technical education in specialized
-                fields such as IT, business, design, animation, hospitality, culinary arts, fashion, nursing, and automobile
-                technology. They combine classroom learning with hands-on training, preparing students for direct
-                employment or university transfer after graduation.
-              </p>
+          {activeSection === "about" && (
+            <div ref={aboutRef}>
+              <h3 className="bg-gray-200 p-4  ">
+                ABOUT VOCATIONAL SCHOOL
+              </h3>
+              <div className="flex py-4 px-4 text-justify">
+                <p>
+                  Vocational school is career-focused institutions that provide practical and technical education in specialized
+                  fields such as IT, business, design, animation, hospitality, culinary arts, fashion, nursing, and automobile
+                  technology. They combine classroom learning with hands-on training, preparing students for direct
+                  employment or university transfer after graduation.
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
-          <h3 ref={featureRef} className="bg-gray-200 p-4 mt-15  ">
-            FEATURES OF VOCATIONAL SCHOOL
-          </h3>
-          <div className="flex py-4 text-justify px-4">
-            <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Students learn communication and cultural skills essential for living and working in Japan.
-                </span>
-              </li>
+          {activeSection === "features" && (
+            <>
+              <h3 ref={featureRef} className="bg-gray-200 p-4 mt-15  ">
+                FEATURES OF VOCATIONAL SCHOOL
+              </h3>
+              <div className="flex py-4 text-justify px-4">
+                <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      Students learn communication and cultural skills essential for living and working in Japan.
+                    </span>
+                  </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Vocational schools emphasize career readiness, industry links, and practical Japanese use.
-                </span>
-              </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      Vocational schools emphasize career readiness, industry links, and practical Japanese use.
+                    </span>
+                  </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Graduates gain both technical and intercultural competencies valuable in Japanese workplaces.
-                </span>
-              </li>
-            </ul>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      Graduates gain both technical and intercultural competencies valuable in Japanese workplaces.
+                    </span>
+                  </li>
+                </ul>
 
-          </div>
+              </div>
+            </>
+          )}
 
           {/* Course Section */}
-          <section ref={courseRef} id="course" className="bg-white py-12">
-            <h3 className="bg-gray-200 p-4  ">COURSE DURATION</h3>
-            <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Most vocational programs last 2 years, starting in April (main intake).
-                </span>
-              </li>
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Some schools offer 1.5– year courses depending on the field.
-                </span>
-              </li>
-            </ul>
-          </section>
+          {activeSection === "course" && (
+            <section ref={courseRef} id="course" className="bg-white py-12">
+              <h3 className="bg-gray-200 p-4  ">COURSE DURATION</h3>
+              <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
+                <li className='flex'>
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Most vocational programs last 2 years, starting in April (main intake).
+                  </span>
+                </li>
+                <li className='flex'>
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Some schools offer 1.5– year courses depending on the field.
+                  </span>
+                </li>
+              </ul>
+            </section>
+          )}
 
           {/* Requirements Section */}
-          <section ref={requirementsRef} id="requirements" className="bg-white py-12">
-            <h3 className="bg-gray-200 p-4  ">REQUIREMENTS</h3>
-            <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Completion of 12 years of education (or equivalent).
-                </span>
-              </li>
+          {activeSection === "requirements" && (
+            <section ref={requirementsRef} id="requirements" className="bg-white py-12">
+              <h3 className="bg-gray-200 p-4  ">REQUIREMENTS</h3>
+              <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
+                <li className='flex'>
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Completion of 12 years of education (or equivalent).
+                  </span>
+                </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Japanese proficiency (JLPT N2 or higher) required; some accept N3.
-                </span>
-              </li>
+                <li className='flex'>
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Japanese proficiency (JLPT N2 or higher) required; some accept N3.
+                  </span>
+                </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Financial proof, academic transcripts, passport, and study records.
-                </span>
-              </li>
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Interview and clear career purpose are important for admission.
-                </span>
-              </li>
-            </ul>
+                <li className='flex'>
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Financial proof, academic transcripts, passport, and study records.
+                  </span>
+                </li>
+                <li className='flex'>
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Interview and clear career purpose are important for admission.
+                  </span>
+                </li>
+              </ul>
 
-            <p className=" mt-2 px-4">
-              <span className='font-semibold'>Note:</span> Nepali students can go directly to a Japanese Vocational school if they have JLPT N2/N3, completed 12 years of education, sufficient finances, and school acceptance though most first study Japanese language in Japan.
-            </p>
-          </section>
+              <p className=" mt-2 px-4">
+                <span className='font-semibold'>Note:</span> Nepali students can go directly to a Japanese Vocational school if they have JLPT N2/N3, completed 12 years of education, sufficient finances, and school acceptance though most first study Japanese language in Japan.
+              </p>
+            </section>
+          )}
 
           {/* Admission Guide Section */}
-          <section ref={admissionRef} id="admission" className="bg-white py-12">
-            <h3 className="bg-gray-200 p-4  ">ADMISSION GUIDE</h3>
-            <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Attend information session/counseling.
-                </span>
-              </li>
+          {activeSection === "admission" && (
+            <>
+              <section ref={admissionRef} id="admission" className="bg-white py-12">
+                <h3 className="bg-gray-200 p-4  ">ADMISSION GUIDE</h3>
+                <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      Attend information session/counseling.
+                    </span>
+                  </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Submit application and screening fee.
-                </span>
-              </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      Submit application and screening fee.
+                    </span>
+                  </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  School interviews and internal screening.
-                </span>
-              </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      School interviews and internal screening.
+                    </span>
+                  </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  School applies for Certificate of Eligibility (COE).
-                </span>
-              </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      School applies for Certificate of Eligibility (COE).
+                    </span>
+                  </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Receive COE, pay tuition, and apply for student visa.
-                </span>
-              </li>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      Receive COE, pay tuition, and apply for student visa.
+                    </span>
+                  </li>
 
-              <li className='flex'>
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Beginning of study.
-                </span>
-              </li>
-            </ul>
+                  <li className='flex'>
+                    <div className="text-purple-500 text-3xl">▸</div>
+                    <span className="ml-2 pt-2">
+                      Beginning of study.
+                    </span>
+                  </li>
+                </ul>
 
-          </section>
+              </section>
 
-          <Image src="/images/assets/VocationalPage.png" width={1024} height={1440} alt='Application Process Image' />
+              <Image src="/images/assets/VocationalPage.png" width={1024} height={1440} alt='Application Process Image' />
+            </>
+          )}
 
           {/* Pathway Section */}
-          <section ref={pathwayRef} id="pathway" className="bg-white py-12">
-            <h3 className="bg-gray-200 p-4">CAREER PATH AFTER GRADUATION</h3>
-            <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
-              <li className="flex">
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  <span className='font-semibold'>Employment in Japan</span> with a proper work visa (Engineer, Specialist, or Designated Activities).
-                </span>
-              </li>
+          {activeSection === "pathway" && (
+            <section ref={pathwayRef} id="pathway" className="bg-white py-12">
+              <h3 className="bg-gray-200 p-4">CAREER PATH AFTER GRADUATION</h3>
+              <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
+                <li className="flex">
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    <span className='font-semibold'>Employment in Japan</span> with a proper work visa (Engineer, Specialist, or Designated Activities).
+                  </span>
+                </li>
 
 
-              <li className="flex">
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  <span className='font-semibold'>Transfer to universities</span> for higher education (special recommendation routes available).
-                </span>
-              </li>
-              <li className="flex">
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Opportunity to earn <span className='font-semibold'>professional certifications</span> and build long-term careers.
-                </span>
-              </li>
-              <li className="flex">
-                <div className="text-purple-500 text-3xl">▸</div>
-                <span className="ml-2 pt-2">
-                  Graduates may pursue <span className='font-semibold'>residency</span> or <span className='font-semibold'>international career opportunities</span> with Japanese firms.
-                </span>
-              </li>
-            </ul>
+                <li className="flex">
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    <span className='font-semibold'>Transfer to universities</span> for higher education (special recommendation routes available).
+                  </span>
+                </li>
+                <li className="flex">
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Opportunity to earn <span className='font-semibold'>professional certifications</span> and build long-term careers.
+                  </span>
+                </li>
+                <li className="flex">
+                  <div className="text-purple-500 text-3xl">▸</div>
+                  <span className="ml-2 pt-2">
+                    Graduates may pursue <span className='font-semibold'>residency</span> or <span className='font-semibold'>international career opportunities</span> with Japanese firms.
+                  </span>
+                </li>
+              </ul>
 
-          </section>
+            </section>
+          )}
 
           {/* FAQ Section */}
-          <div ref={faqRef} className="mt-2">
-            <h3 className="bg-gray-200 p-4">
-              FAQ
-            </h3>
-            <p className="   text-justify max-w-6xl mx-auto py-4 px-4">
-              Find answers to common questions about flights, packing, airport procedures, and more.
-            </p>
+          {activeSection === "faq" && (
+            <div ref={faqRef} className="mt-2">
+              <h3 className="bg-gray-200 p-4">
+                FAQ
+              </h3>
+              <p className="   text-justify max-w-6xl mx-auto py-4 px-4">
+                Find answers to common questions about flights, packing, airport procedures, and more.
+              </p>
 
-            <div className="mt-4 max-w-6xl mx-auto space-y-4 px-4">
-              {faqData.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="border-b pb-4 cursor-pointer"
-                  onClick={() => togglePD(idx)}
-                >
-                  <div className="flex items-center justify-between py-4 hover:scale-105  transition-transform duration-200">
-                    <div className="flex items-center space-x-3 ">
-                      <span className="text-purple-400 font-bold text-lg w-12">
-                        {item.title.split(".")[0]}.
-                      </span>
-                      <h3 className="text-lg font-semibold">
-                        {item.title.substring(4)}
-                      </h3>
+              <div className="mt-4 max-w-6xl mx-auto space-y-4 px-4">
+                {faqData.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="border-b pb-4 cursor-pointer"
+                    onClick={() => togglePD(idx)}
+                  >
+                    <div className="flex items-center justify-between py-4 hover:scale-105  transition-transform duration-200">
+                      <div className="flex items-center space-x-3 ">
+                        <span className="text-purple-400 font-bold text-lg w-12">
+                          {item.title.split(".")[0]}.
+                        </span>
+                        <h3 className="text-lg font-semibold">
+                          {item.title.substring(4)}
+                        </h3>
+                      </div>
+
+                      <div className="text-3xl text-gray-500">
+                        {openPD === idx ? "−" : "+"}
+                      </div>
                     </div>
 
-                    <div className="text-3xl text-gray-500">
-                      {openPD === idx ? "−" : "+"}
-                    </div>
+                    {openPD === idx && (
+                      <div className="pl-14 pr-4 pb-4 text-gray-700 leading-relaxed">
+                        {item.content}
+                      </div>
+                    )}
                   </div>
-
-                  {openPD === idx && (
-                    <div className="pl-14 pr-4 pb-4 text-gray-700 leading-relaxed">
-                      {item.content}
-                    </div>
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 

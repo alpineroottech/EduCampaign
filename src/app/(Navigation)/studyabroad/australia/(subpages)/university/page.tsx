@@ -139,7 +139,6 @@ const UniversityPage = () => {
                   key={item.id}
                   onClick={() => {
                     setActiveSection(item.id);
-                    scrollToCategory(item.id);
                   }}
                   className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${activeSection === item.id
                     ? "bg-purple-200   text-gray-900"
@@ -156,6 +155,7 @@ const UniversityPage = () => {
         {/* Main Content */}
         <div className="flex-1 min-w-0 bg-white my-12 px-4 lg:px-0">
           {/* About Section */}
+          {activeSection === "about" && (
           <div ref={aboutRef}>
             <h3 className="bg-gray-200 p-4">ABOUT AUSTRALIAN UNIVERSITY</h3>
             <div className="flex flex-col gap-4 py-8 text-justify px-4">
@@ -170,8 +170,11 @@ const UniversityPage = () => {
               </p>
             </div>
           </div>
+          )}
 
           {/* Why Australian University Section */}
+          {activeSection === "why" && (
+          <>
           <h3 ref={whyRef} className="bg-gray-200 p-4 mt-15">WHY AUSTRALIAN UNIVERSITIES?</h3>
           <div className="flex py-4 text-justify">
             <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -193,8 +196,11 @@ const UniversityPage = () => {
               </li>
             </ul>
           </div>
+          </>
+          )}
 
           {/* About Course Section */}
+          {activeSection === "course" && (
           <section ref={courseRef} id="course" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">ABOUT COURSE</h3>
             <div className="flex flex-col gap-4 py-4 text-justify px-4">
@@ -252,8 +258,10 @@ const UniversityPage = () => {
               </table>
             </div>
           </section>
+          )}
 
           {/* Application Requirements Section */}
+          {activeSection === "requirements" && (
           <section ref={requirementsRef} id="requirements" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">APPLICATION REQUIREMENT</h3>
             <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -298,8 +306,10 @@ const UniversityPage = () => {
               *Requirements may vary depending on the specific university and course. Contact us for personalized guidance.
             </p>
           </section>
+          )}
 
           {/* Admission Guide Section */}
+          {activeSection === "admission" && (
           <section ref={admissionRef} id="admission" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">ADMISSION GUIDE</h3>
             <p className="py-4 px-4">Follow these steps for a smooth admission process to Australian Universities:</p>
@@ -346,8 +356,10 @@ const UniversityPage = () => {
               </table>
             </div>
           </section>
+          )}
 
           {/* Career Path Section */}
+          {activeSection === "career" && (
           <section ref={careerRef} id="career" className="bg-white pt-12">
             <h3 className="bg-gray-200 p-4">CAREER AND INTERNSHIP PATHWAYS</h3>
             <div className="flex flex-col gap-4 py-4 text-justify px-4">
@@ -380,8 +392,10 @@ const UniversityPage = () => {
 
 
           </section>
+          )}
 
           {/* FAQ Section */}
+          {activeSection === "faq" && (
           <section ref={faqRef} id="faq" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">FAQ</h3>
             <p className="text-justify max-w-6xl mx-auto py-4 px-4">
@@ -429,6 +443,7 @@ const UniversityPage = () => {
               ))}
             </div>
           </section>
+          )}
         </div>
       </div>
     </div>

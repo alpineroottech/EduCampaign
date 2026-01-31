@@ -176,11 +176,7 @@ const DaigakuPage = () => {
               {menuItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => {
-                      setActiveSection(item.id);
-                      scrollToCategory(item.id);
-                  }
-                  }
+                  onClick={() => setActiveSection(item.id)}
                   className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${activeSection === item.id
                     ? "bg-[#e9d4ff] text-gray-900"
                     : "text-gray-700 hover:bg-gray-100"
@@ -195,22 +191,28 @@ const DaigakuPage = () => {
 
         <div ref={aboutRef} className="flex-1 min-w-0 bg-white my-12 px-4 lg:px-0">
           <div className="">
-            <h2 className="bg-gray-200 p-4">
-              ABOUT JUNIOR COLLEGE (TANKI DAIGAKU)
-            </h2>
+            {activeSection === "about" && (
+              <>
+                <h2 className="bg-gray-200 p-4">
+                  ABOUT JUNIOR COLLEGE (TANKI DAIGAKU)
+                </h2>
 
-            <div className="flex py-4 px-4 text-justify">
-              <p>
-                Tanki Daigaku, or Junior Colleges, are 2–3-year higher education institutions offering both academic and practical training. They grant an Associate Degree and focus on areas like education, childcare, nutrition, business, languages, and design.
-              </p>
-            </div>
+                <div className="flex py-4 px-4 text-justify">
+                  <p>
+                    Tanki Daigaku, or Junior Colleges, are 2–3-year higher education institutions offering both academic and practical training. They grant an Associate Degree and focus on areas like education, childcare, nutrition, business, languages, and design.
+                  </p>
+                </div>
+              </>
+            )}
 
-            <h2 ref={featureRef} className="bg-gray-200 p-4 mt-15  ">
-              FEATURES OF JUNIOR COLLEGE
-            </h2>
+            {activeSection === "features" && (
+              <>
+                <h2 ref={featureRef} className="bg-gray-200 p-4 mt-15  ">
+                  FEATURES OF JUNIOR COLLEGE
+                </h2>
 
-            <div className="flex py-4 px-4 text-justify">
-              <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
+                <div className="flex py-4 px-4 text-justify">
+                  <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
                   <li className="flex items-start gap-2">
                     <span className="text-purple-500 text-xl sm:text-2xl leading-6 flex-shrink-0 mt-0.5">▸</span>
                     <span className="text-sm sm:text-base leading-relaxed">
@@ -238,13 +240,16 @@ const DaigakuPage = () => {
                       Pathways to employment or transfer to four-year universities.
                     </span>
                   </li>
-                </ul>
+                    </ul>
 
-            </div>
+                </div>
+              </>
+            )}
 
             {/* Course Section */}
-            <section ref={durationRef} id="course" className="bg-white py-12">
-              <h2 className="bg-gray-200 p-4  ">COURSE DURATION</h2>
+            {activeSection === "duration" && (
+              <section ref={durationRef} id="course" className="bg-white py-12">
+                <h2 className="bg-gray-200 p-4  ">COURSE DURATION</h2>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
                 <li className='flex items-start gap-2'>
                   <span className="text-purple-500 text-xl sm:text-2xl leading-6 flex-shrink-0 mt-0.5">▸</span>
@@ -258,12 +263,14 @@ const DaigakuPage = () => {
                     Includes <span className='font-semibold'>general education</span> and <span className='font-semibold'>specialized major courses.</span>
                   </span>
                 </li>
-              </ul>
-            </section>
+                </ul>
+              </section>
+            )}
 
             {/* Requirements Section */}
-            <section ref={requirementsRef} id="requirements" className="bg-white py-12">
-              <h2 className="bg-gray-200 p-4  ">APPLICATION REQUIREMENTS</h2>
+            {activeSection === "requirements" && (
+              <section ref={requirementsRef} id="requirements" className="bg-white py-12">
+                <h2 className="bg-gray-200 p-4  ">APPLICATION REQUIREMENTS</h2>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
                 <li className='flex items-start gap-2'>
                   <span className="text-purple-500 text-xl sm:text-2xl leading-6 flex-shrink-0 mt-0.5">▸</span>
@@ -284,13 +291,16 @@ const DaigakuPage = () => {
                   <span className="text-purple-500 text-xl sm:text-2xl leading-6 flex-shrink-0 mt-0.5">▸</span>
                   <span className="text-sm sm:text-base leading-relaxed">Interview/entrance exam for admission.</span>
                 </li>
-              </ul>
+                </ul>
 
-            </section>
+              </section>
+            )}
 
             {/* Admission Guide Section */}
-            <section ref={processRef} id="admission" className="bg-white py-12">
-              <h2 className="bg-gray-200 p-4  ">ADMISSION PROCESS</h2>
+            {activeSection === "process" && (
+              <>
+                <section ref={processRef} id="admission" className="bg-white py-12">
+                  <h2 className="bg-gray-200 p-4  ">ADMISSION PROCESS</h2>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
                   <li className='flex items-start gap-2'>
                     <span className="text-purple-500 text-xl sm:text-2xl leading-6 flex-shrink-0 mt-0.5">▸</span>
@@ -313,13 +323,16 @@ const DaigakuPage = () => {
                   </li>
                 </ul>
 
-            </section>
+                </section>
 
-            <Image src="/images/assets/VocationalPage.png" width={1024} height={1440} alt='Application Process Image' className="w-full h-auto" />
+                <Image src="/images/assets/VocationalPage.png" width={1024} height={1440} alt='Application Process Image' className="w-full h-auto" />
+              </>
+            )}
 
             {/* Pathway Section */}
-            <section ref={pathwayRef} id="pathway" className="bg-white py-12">
-              <h2 className="bg-gray-200 p-4">CAREER PATH AFTER GRADUATION</h2>
+            {activeSection === "pathway" && (
+              <section ref={pathwayRef} id="pathway" className="bg-white py-12">
+                <h2 className="bg-gray-200 p-4">CAREER PATH AFTER GRADUATION</h2>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
                 <li className="flex">
                   <div className="text-purple-500 text-3xl">▸</div>
@@ -348,15 +361,17 @@ const DaigakuPage = () => {
                     Opportunity for long-term work or residence in Japan.
                   </span>
                 </li>
-              </ul>
+                </ul>
 
-            </section>
+              </section>
+            )}
 
             {/* FAQ Section */}
-            <div ref={faqRef} className="mt-10">
-              <h2 className="bg-gray-200 p-4">
-                FAQ
-              </h2>
+            {activeSection === "faq" && (
+              <div ref={faqRef} className="mt-10">
+                <h2 className="bg-gray-200 p-4">
+                  FAQ
+                </h2>
               <p className="text-gray-600 text-justify max-w-6xl mx-auto py-4 px-5">
                 Find answers to common questions about flights, packing, airport procedures, and more.
               </p>
@@ -390,8 +405,9 @@ const DaigakuPage = () => {
                     )}
                   </div>
                 ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
         </div>
