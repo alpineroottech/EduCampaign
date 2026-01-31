@@ -391,81 +391,101 @@ function ServicesContent() {
         </div>
       </div>
 
-      <div ref={scholarship} className="max-w-7xl mx-auto px-4 sm:px-6 md:px-16 mt-20">
+      <div ref={scholarship} className="max-w-7xl mx-auto px-standard mt-20">
         <h2 className="mb-6 text-center">Scholarships in Japan</h2>
-        <p className="mb-4 max-w-4xl text-center mx-auto px-4">
+        <p className="mb-12 max-w-4xl text-center mx-auto">
           There are several scholarship opportunities available for
           international students. A brief Explanation widens your concerns as
           follows.
         </p>
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {scholarshipCards.map((scholarship, index) => (
-            <div
+            <motion.article
               key={index}
-              className="flex flex-col md:flex-row bg-white border border-purple-200 shadow-lg rounded-3xl overflow-hidden"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: false }}
+              className="group overflow-hidden flex flex-col rounded-2xl shadow-md bg-white hover:shadow-xl transition-all duration-300 border border-gray-100"
             >
-              {/* LEFT TEXT SECTION */}
-              <div className="w-full md:w-2/3 p-4 sm:p-6 flex flex-col">
-                {/* Title Background */}
-                <div className="bg-purple-200 rounded-lg mb-4 p-3 sm:p-4">
-                  <h4 className="text-base sm:text-lg font-semibold">
-                    {scholarship.title}
-                  </h4>
-                </div>
-                {/* Scholarship Section */}
-                <ul className="space-y-2 mb-4 text-sm sm:text-base text-gray-700 flex-grow">
-                  {[scholarship.p1, scholarship.p2, scholarship.p3, scholarship.p4, scholarship.p5]
-                    .filter(Boolean)
-                    .map((text, idx) => (
-                      <li key={idx} className="flex">
-                        <div className="text-purple-500 text-3xl mr-2 -mt-1">▸</div>
-                        <span className="pt-1">{text}</span>
-                      </li>
-                    ))}
-                </ul>
-
-                <Link href={scholarship.lernMoreText} target="_blank" rel="noopener noreferrer">
-                  <button className="font-semibold text-gray-800 px-4 py-2 rounded-lg bg-purple-200 hover:bg-purple-300 transition-colors text-sm sm:text-base">
-                    Learn more →
-                  </button>
-                </Link>
-              </div>
-
-              {/* RIGHT IMAGE SECTION */}
-              <div className="relative w-full md:w-1/3 min-h-[250px] md:min-h-0">
+              {/* Image with 16:10 aspect ratio */}
+              <div className="relative w-full aspect-[16/10] overflow-hidden">
                 <Image
                   src={scholarship.image}
                   alt={scholarship.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h4 className="text-white font-bold text-xl">{scholarship.title}</h4>
+                </div>
               </div>
-            </div>
+
+              {/* Content Section */}
+              <div className="p-6 flex flex-col flex-1">
+                <ul className="space-y-2 mb-4 text-sm text-gray-700 flex-grow">
+                  {[scholarship.p1, scholarship.p2, scholarship.p3, scholarship.p4, scholarship.p5]
+                    .filter(Boolean)
+                    .map((text, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <div className="text-purple-500 text-lg mr-2 flex-shrink-0">▸</div>
+                        <span>{text}</span>
+                      </li>
+                    ))}
+                </ul>
+
+                <Link 
+                  href={scholarship.lernMoreText} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-auto"
+                >
+                  <button className="w-full font-semibold text-white px-4 py-2.5 rounded-lg bg-[#6B4FA1] hover:bg-[#5a3f8a] transition-colors text-sm">
+                    Learn more →
+                  </button>
+                </Link>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-20">
+      <div className="max-w-7xl mx-auto px-standard mt-20">
         <h2 className="mb-10 text-center">Intake Available</h2>
-        <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap justify-around gap-4 sm:gap-2 lg:gap-0 mx-4 px-2 sm:px-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {intakeCards.map((intake, index) => (
-            <div
+            <motion.div
               key={index}
-              className="relative w-full sm:w-[calc(50%-0.5rem)] lg:w-55 h-50 shadow-md bg-cover bg-center flex items-center justify-center"
-              style={{ backgroundImage: `url(${intake.image})` }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.15,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              viewport={{ once: false, margin: "-50px" }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 aspect-[4/3]"
             >
-              <div className="absolute inset-0 bg-black/60"></div>
-              <div className="flex flex-col p-4 relative z-10 ">
-                <h3 className="relative text-xl font-light text-white z-10 mb-2">
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${intake.image})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+              <div className="relative h-full flex flex-col justify-end p-6 text-white">
+                <h3 className="text-2xl font-bold mb-2">
                   {intake.title}
                 </h3>
-                <div className="flex justify-center ">
-                  <span className="text-white">┗━ {intake.desc}</span>
-                </div>
-                <p className="text-white text-center">{intake.paragraph}</p>
+                <p className="text-purple-300 font-medium mb-2">
+                  {intake.desc}
+                </p>
+                <p className="text-sm text-gray-200">
+                  {intake.paragraph}
+                </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -610,31 +630,6 @@ function ServicesContent() {
             attendance, can result in visa denial or deportation.
           </p>
         </div>
-      </div>
-
-      <div className="max-w-7xl px-standard mx-auto mt-20 flex flex-col md:flex-row items-center md:items-start gap-10">
-        <div className="flex flex-col justify-center text-center md:text-left px-4">
-          <h2 className=" p-4 bg-gray-200 max-w-2xl mx-auto md:mx-0">
-            Career Outcomes
-          </h2>
-          <p className="mt-6 text-justify">
-            Regarding career outcomes, Japanese school and university
-            qualifications are widely recognized. International students
-            seeking work experience in Japan can find opportunities with
-            various companies. The Japanese government supports this through
-            platforms like Open for Professionals by JETRO, which provides
-            information and contacts for companies actively hiring foreign
-            employees.
-          </p>
-        </div>
-
-        <Image
-          src="/images/career.png"
-          alt="Career Outcomes"
-          width={1080}
-          height={1080}
-          className="md:w-[800px] h-[220px]"
-        />
       </div>
     </div>
   );
