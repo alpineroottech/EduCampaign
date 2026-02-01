@@ -18,6 +18,7 @@ const UniversityPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const initialTopRef = useRef<number | null>(null);
@@ -73,6 +74,20 @@ const UniversityPage = () => {
       const rect = sidebarRef.current.getBoundingClientRect();
       initialTopRef.current = rect.top + window.scrollY;
     }
+  }, []);
+
+  // Detect mobile vs desktop
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   // Toggle sticky class based on scroll position and stop before footer
@@ -200,7 +215,7 @@ const UniversityPage = () => {
           )}
 
           {/* About Course Section */}
-          {activeSection === "course" && (
+          {(isMobile || activeSection === "course") && (
           <section ref={courseRef} id="course" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">ABOUT COURSE</h3>
             <div className="flex flex-col gap-4 py-4 text-justify px-4">
@@ -309,7 +324,7 @@ const UniversityPage = () => {
           )}
 
           {/* Admission Guide Section */}
-          {activeSection === "admission" && (
+          {(isMobile || activeSection === "admission") && (
           <section ref={admissionRef} id="admission" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">ADMISSION GUIDE</h3>
             <p className="py-4 px-4">Follow these steps for a smooth admission process to Australian Universities:</p>
@@ -359,7 +374,7 @@ const UniversityPage = () => {
           )}
 
           {/* Career Path Section */}
-          {activeSection === "career" && (
+          {(isMobile || activeSection === "career") && (
           <section ref={careerRef} id="career" className="bg-white pt-12">
             <h3 className="bg-gray-200 p-4">CAREER AND INTERNSHIP PATHWAYS</h3>
             <div className="flex flex-col gap-4 py-4 text-justify px-4">
@@ -395,7 +410,7 @@ const UniversityPage = () => {
           )}
 
           {/* FAQ Section */}
-          {activeSection === "faq" && (
+          {(isMobile || activeSection === "faq") && (
           <section ref={faqRef} id="faq" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">FAQ</h3>
             <p className="text-justify max-w-6xl mx-auto py-4 px-4">
