@@ -157,7 +157,7 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
                           {service.slug === "interview-assistance" && <RecordVoiceOver sx={{ fontSize: 40, color: "#ffffff" }} />}
                           {service.slug === "visa-lodgment" && <AirplaneTicket sx={{ fontSize: 40, color: "#ffffff" }} />}
                           {service.slug === "documentation" && <Description sx={{ fontSize: 40, color: "#ffffff" }} />}
-                          {service.slug === "pre-departure-information" && <Luggage sx={{ fontSize: 40, color: "#ffffff" }} />}
+                          {service.slug === "pre-departure-info" && <Luggage sx={{ fontSize: 40, color: "#ffffff" }} />}
                         </Avatar>
 
                         {/* Title */}
