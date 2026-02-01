@@ -1,6 +1,7 @@
 import HeroSection from "@/components/hero/HeroSection";
 import { servicesData } from "../../../data/servicesData";
 import ServicesGrid from "@/components/services/ServicesGrid";
+import ImportantDocuments from "@/components/services/ImportantDocuments";
 
 export const metadata = {
   title: "Services | EduCampaign",
@@ -12,6 +13,7 @@ export default function ServicesPage() {
     <>
       <HeroSection imageSrc="/images/service-1.webp" title="SERVICES" />
       <ServicesGrid services={servicesData} />
+      <ImportantDocuments />
     </>
   );
 }

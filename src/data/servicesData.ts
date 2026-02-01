@@ -14,7 +14,7 @@ export const servicesData: ServiceDetail[] = [
     id: "1",
     slug: "career-counseling",
     title: "Career Counseling",
-    icon: "/images/career.png",
+    icon: "/images/whyus/Personalized Counselling.png",
     image: "/images/Career Counselling.png",
     description: [
       "Choosing the right career path and study destination is a crucial step toward a successful future. We ensure from career guidance to course giving you the clarity and confidence to make informed choices. Our expert counselors help you explore comprehensive career counseling, educational and professional guidance to help you to identify your interests, and aspirations.",
@@ -29,7 +29,7 @@ export const servicesData: ServiceDetail[] = [
     id: "2",
     slug: "language-preparation",
     title: "Language Preparation",
-    icon: "/images/Learning.png",
+    icon: "/images/studyabroad/icons/language.png",
     image: "/images/langyage.png",
     description: [
       "Language proficiency is the key to unlocking global opportunities. Our Language Preparation classes focus on building strong reading, writing, listening, and speaking skills for effective communication in an academic or professional setting.",
@@ -43,7 +43,7 @@ export const servicesData: ServiceDetail[] = [
     id: "3",
     slug: "interview-assistance",
     title: "Interview Assistance",
-    icon: "/images/Learning.png",
+    icon: "/images/people/team/interview.png",
     image: "/images/interview.jpg",
     description: [
       "Facing an interview—whether for university admission or a visa—can be daunting. Our Interview Assistance program is designed to help candidates showcase their skills, intent, and confidence effectively.",
@@ -59,7 +59,7 @@ export const servicesData: ServiceDetail[] = [
     id: "4",
     slug: "visa-lodgment",
     title: "Visa Lodgment",
-    icon: "/images/password.png",
+    icon: "/images/documents/visadocs.png",
     image: "/images/password.png",
     description: [
       "Visa lodgment is the formal process of submitting a visa application to the relevant immigration authority. It is often the most complex part of the study abroad journey, involving strict deadlines and precise documentation.",
@@ -75,7 +75,7 @@ export const servicesData: ServiceDetail[] = [
     id: "5",
     slug: "documentation",
     title: "Documentation",
-    icon: "/images/documents/visadocs.png",
+    icon: "/images/documents/importantDocs.png",
     image: "/images/service-1.webp",
     description: [
       "Documentation is the backbone of your application process. Organizing essential records, supporting proofs, and relevant papers is critical for a smooth experience. Edu. Campaign assists by providing guidance, verifying accuracy, and ensuring completeness.",
@@ -92,7 +92,7 @@ export const servicesData: ServiceDetail[] = [
     id: "6",
     slug: "pre-departure-info",
     title: "Pre Departure Info",
-    icon: "/images/documents/tickets.png",
+    icon: "/images/whyus/Affordable.png",
     image: "/images/service-1.webp",
     description: [
       "With our warm support and dedication, we make sure every item on the pre-departure checklist is thoroughly completed, giving you confidence and peace of mind for a successful journey abroad.",
@@ -105,25 +105,25 @@ export const servicesData: ServiceDetail[] = [
       "6. Financial Preparation: Guidance on carrying currency (Forex card vs Cash), opening a bank account abroad, and managing monthly expenses (carry at least 2–3 months' worth).",
       "7. Academic Expectations: Briefing on the education system, attendance rules, and maintaining academic integrity."
     ]
-  },
-  {
-    id: "7",
-    slug: "important-documents",
-    title: "Important Documents",
-    icon: "/images/documents/importantDocs.png",
-    image: "/images/service-1.webp",
-    description: [
-      "Before you head to the airport, ensure you have your document folder ready and accessible (in your carry-on luggage).",
-      "Must-Carry Documents:",
-      "• Original Passport with valid Student Visa",
-      "• Flight Tickets and Itinerary",
-      "• University Offer Letter and ECOE (Electronic Confirmation of Enrolment)",
-      "• Original Academic Documents and English Proficiency Scores",
-      "• Proof of Accommodation and Airport Pickup details",
-      "• Evidence of Financial Support (Drafts, Forex Card, Cash)",
-      "• Travel Insurance Policy",
-      "• Emergency Contact Numbers (University, Embassy, Agent)",
-      "Tip: Keep digital copies of all these documents in your email or cloud storage for emergency access."
-    ]
   }
 ];
+
+// Important Documents - kept separate from main services
+export interface ImportantDocument {
+  title: string;
+  items: string[];
+}
+
+export const importantDocuments: ImportantDocument = {
+  title: "Important Documents",
+  items: [
+    "Original Passport with valid Student Visa",
+    "Flight Tickets and Itinerary",
+    "University Offer Letter and ECOE (Electronic Confirmation of Enrolment)",
+    "Original Academic Documents and English Proficiency Scores",
+    "Proof of Accommodation and Airport Pickup details",
+    "Evidence of Financial Support (Drafts, Forex Card, Cash)",
+    "Travel Insurance Policy",
+    "Emergency Contact Numbers (University, Embassy, Agent)"
+  ]
+};
