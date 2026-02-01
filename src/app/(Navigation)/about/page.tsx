@@ -1,6 +1,7 @@
 "use client";
 
 import HeroSection from "@/components/hero/HeroSection";
+import ContactForm from "@/components/ContactForm";
 import { Box, Container, Typography, Paper, Card, CardContent } from "@mui/material";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -97,110 +98,6 @@ export default function AboutUs() {
       </Container>
 
       {/* Horizontal Scroll - Why Choose Us Cards */}
-      <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: "#ebe9e1" }}>
-        <Container maxWidth="xl">
-          <Typography
-            variant="h4"
-            component="h2"
-            sx={{
-              textAlign: "center",
-              fontWeight: "bold",
-              color: "#3d1a4d",
-              mb: 6,
-              fontSize: { xs: "1.75rem", md: "2.25rem" },
-            }}
-          >
-            Why Choose Us?
-          </Typography>
-
-          {/* Horizontal Scroll Container with Scroll Snap */}
-          <Box
-            sx={{
-              display: "flex",
-              gap: 3,
-              overflowX: "auto",
-              scrollSnapType: "x mandatory",
-              scrollBehavior: "smooth",
-              pb: 2,
-              // Hide scrollbar while maintaining functionality
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-              scrollbarWidth: "none",
-              // Mobile: full width cards, Desktop: fit content
-              "& > *": {
-                scrollSnapAlign: "center",
-                flexShrink: 0,
-                width: { xs: "85%", sm: "70%", md: "400px" },
-              },
-            }}
-          >
-            {whyUsCards.map((card, index) => (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Card
-                  sx={{
-                    height: "100%",
-                    minHeight: 420,
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                    "&:hover": {
-                      transform: "translateY(-8px)",
-                      boxShadow: 8,
-                    },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      position: "relative",
-                      width: "100%",
-                      height: 200,
-                      bgcolor: "grey.200",
-                    }}
-                  >
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      sizes="(max-width: 768px) 85vw, 400px"
-                    />
-                  </Box>
-                  <CardContent sx={{ p: 3 }}>
-                    <Typography
-                      variant="h6"
-                      component="h3"
-                      sx={{
-                        fontWeight: "bold",
-                        color: "#6B4FA1",
-                        mb: 2,
-                      }}
-                    >
-                      {card.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: "text.secondary",
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      {card.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </Box>
-        </Container>
-      </Box>
-
       {/* CONTACT US SECTION */}
       <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
         <motion.div
@@ -228,7 +125,7 @@ export default function AboutUs() {
                 fontSize: { xs: "1.5rem", md: "2rem" },
               }}
             >
-              Contact Us
+              Get in Touch
             </Typography>
 
             <Box
@@ -238,7 +135,22 @@ export default function AboutUs() {
                 gap: { xs: 4, md: 6 },
               }}
             >
+              {/* Contact Form */}
+              <Box>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    fontWeight: "bold",
+                    mb: 3,
+                    color: "#3d1a4d",
+                  }}
+                >
+                  Send us a Message
+                </Typography>
+                <ContactForm />
+              </Box>
 
+              {/* Contact Info and Map */}
               <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {/* Address */}
                 <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
@@ -294,7 +206,19 @@ export default function AboutUs() {
                     <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
                       Phone
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      component="a"
+                      href="tel:+97714500074"
+                      variant="body2"
+                      sx={{
+                        color: "text.secondary",
+                        textDecoration: "none",
+                        "&:hover": {
+                          color: "primary.main",
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
                       01-4500074
                     </Typography>
                   </Box>
@@ -324,87 +248,64 @@ export default function AboutUs() {
                     <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
                       Mail Us
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ wordBreak: "break-word" }}>
-                      Educampaign2008@gmail.com<br />Info@educampaign.com.np
-                    </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+                      <Typography
+                        component="a"
+                        href="mailto:Educampaign2008@gmail.com"
+                        variant="body2"
+                        sx={{
+                          color: "text.secondary",
+                          textDecoration: "none",
+                          wordBreak: "break-word",
+                          "&:hover": {
+                            color: "primary.main",
+                            textDecoration: "underline",
+                          },
+                        }}
+                      >
+                        Educampaign2008@gmail.com
+                      </Typography>
+                      <Typography
+                        component="a"
+                        href="mailto:Info@educampaign.com.np"
+                        variant="body2"
+                        sx={{
+                          color: "text.secondary",
+                          textDecoration: "none",
+                          wordBreak: "break-word",
+                          "&:hover": {
+                            color: "primary.main",
+                            textDecoration: "underline",
+                          },
+                        }}
+                      >
+                        Info@educampaign.com.np
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
 
-              <Box>
-                <Typography
-                  variant="subtitle1"
+                {/* Google Maps Preview */}
+                <Box
                   sx={{
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    mb: 3,
+                    width: "100%",
+                    height: { xs: 250, md: 300 },
+                    borderRadius: 2,
+                    overflow: "hidden",
+                    boxShadow: 2,
                   }}
                 >
-                  Follow Us
-                </Typography>
-
-                <Paper
-                  variant="outlined"
-                  sx={{
-                    p: { xs: 2, sm: 3 },
-                    borderRadius: 3,
-                    display: "grid",
-                    gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
-                    gap: 3,
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                    {socialIcons.slice(0, 4).map((item, index) => (
-                      <Box
-                        key={index}
-                        component="a"
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 2,
-                          textDecoration: "none",
-                          color: "text.primary",
-                          transition: "opacity 0.2s",
-                          "&:hover": { opacity: 0.7 },
-                        }}
-                      >
-                        <Box sx={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          {item.icon}
-                        </Box>
-                        <Typography variant="body2">{item.label}</Typography>
-                      </Box>
-                    ))}
-                  </Box>
-
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                    {socialIcons.slice(4).map((item, index) => (
-                      <Box
-                        key={index}
-                        component="a"
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 2,
-                          textDecoration: "none",
-                          color: "text.primary",
-                          transition: "opacity 0.2s",
-                          "&:hover": { opacity: 0.7 },
-                        }}
-                      >
-                        <Box sx={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          {item.icon}
-                        </Box>
-                        <Typography variant="body2">{item.label}</Typography>
-                      </Box>
-                    ))}
-                  </Box>
-                </Paper>
+                  <iframe
+                    src="https://maps.google.com/maps?width=400&height=300&hl=en&q=Edu.%20Campaign%20Pvt&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Edu Campaign Office Location"
+                  />
+                </Box>
               </Box>
             </Box>
           </Paper>
