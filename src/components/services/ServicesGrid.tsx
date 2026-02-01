@@ -2,10 +2,17 @@
 
 import { Box, Container, Grid, Typography, Card, CardActionArea, CardContent, Avatar } from "@mui/material";
 import Link from "next/link";
-import Image from "next/image";
 import { ServiceDetail } from "../../data/servicesData";
 import { motion } from "motion/react";
-import { ArrowForward } from "@mui/icons-material";
+import { 
+  ArrowForward, 
+  School, 
+  Language, 
+  RecordVoiceOver, 
+  AirplaneTicket, 
+  Description, 
+  Luggage 
+} from "@mui/icons-material";
 
 interface ServicesGridProps {
   services: ServiceDetail[];
@@ -145,14 +152,12 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
                             boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
                           }}
                         >
-                          <Box sx={{ position: "relative", width: 48, height: 48 }}>
-                            <Image
-                              src={service.icon}
-                              alt={service.title}
-                              fill
-                              style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
-                            />
-                          </Box>
+                          {service.slug === "career-counseling" && <School sx={{ fontSize: 40, color: "#ffffff" }} />}
+                          {service.slug === "language-preparation" && <Language sx={{ fontSize: 40, color: "#ffffff" }} />}
+                          {service.slug === "interview-assistance" && <RecordVoiceOver sx={{ fontSize: 40, color: "#ffffff" }} />}
+                          {service.slug === "visa-lodgment" && <AirplaneTicket sx={{ fontSize: 40, color: "#ffffff" }} />}
+                          {service.slug === "documentation" && <Description sx={{ fontSize: 40, color: "#ffffff" }} />}
+                          {service.slug === "pre-departure-information" && <Luggage sx={{ fontSize: 40, color: "#ffffff" }} />}
                         </Avatar>
 
                         {/* Title */}
