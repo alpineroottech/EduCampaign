@@ -154,7 +154,7 @@ export default function JapaneseLanguage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto md:p-10 px-standard">
+      <div className="max-w-5xl mx-auto md:p-10 px-standard">
 
         {japaneseLanguage.map((card: JapaneseLanguageCard, index: number) => (
           <motion.div
