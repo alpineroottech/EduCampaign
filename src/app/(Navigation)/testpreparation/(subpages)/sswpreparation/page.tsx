@@ -112,41 +112,39 @@ const SSWPreparationPage = () => {
               <h2 className="bg-gray-200 p-4 w-full text-3xl font-bold text-gray-900">
                 Features of SSW
               </h2>
-              <div className="space-y-4 pl-6">
-                <ul className="list-disc list-inside py-5 text-justify leading-12">
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    SSW visa operates under a government-to-Government (G2G) framework between
-                    Japan and Nepal.
+              <div className="space-y-4 mt-8">
+                <ul className="space-y-3 text-justify">
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">SSW visa operates under a government-to-Government (G2G) framework between Japan and Nepal.</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    It is an employment-based visa allowing direct hiring by Japanese companies in
-                    approved industries.
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">It is an employment-based visa allowing direct hiring by Japanese companies in approved industries.</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    A university degree is not required to apply for the SSW visa.                  </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    Those who have completed the Technical Intern Training Program (TITP) can transfer
-                    to SSW Type 1 without retaking some exams.                  </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    SSW Type 1 allows a stay of up to 5 years, renewable in 1-year increments.
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">A university degree is not required to apply for the SSW visa.</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    SSW workers receive the same salary and benefits as Japanese employees, including
-                    base pay, overtime, bonuses, and allowances.
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">Those who have completed the Technical Intern Training Program (TITP) can transfer to SSW Type 1 without retaking some exams.</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    Holders of SSW Type 2 visas can call family members to Japan under a dependent visa.
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">SSW Type 1 allows a stay of up to 5 years, renewable in 1-year increments.</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    SSW Type 2 is renewable indefinitely and provides a pathway to permanent residence.
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">SSW workers receive the same salary and benefits as Japanese employees, including base pay, overtime, bonuses, and allowances.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">Holders of SSW Type 2 visas can call family members to Japan under a dependent visa.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">SSW Type 2 is renewable indefinitely and provides a pathway to permanent residence.</span>
                   </li>
 
                 </ul>
@@ -177,27 +175,27 @@ const SSWPreparationPage = () => {
               </h2>
               <p className="mt-4">To Qualify for <strong> SSW (I)</strong>, The Students Must:</p>
 
-              <div className="space-y-4 pl-6">
-                <ul className="list-disc list-inside py-5 text-justify leading-12">
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    Be 18 years or Older
+              <div className="mt-8">
+                <ul className="space-y-3 text-justify">
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">Be 18 years or Older</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    Pass a Skills Test in the relevant industry
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">Pass a Skills Test in the relevant industry</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    Demonstrate Japanese language proficiency ( {<Link target="_blank" href={`https://www.jitco.or.jp/en`}><strong className="px-1">JLPT N4 </strong></Link>}  or JFT- basic).
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">Demonstrate Japanese language proficiency ( {<Link target="_blank" href={`https://www.jitco.or.jp/en`}><strong className="px-1">JLPT N4 </strong></Link>}  or JFT- basic).</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    Be in Good Health.
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">Be in Good Health.</span>
                   </li>
-                  <li className="flex">
-                    <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                    Have no serious criminal record.
+                  <li className="flex items-start gap-3">
+                    <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                    <span className="flex-1">Have no serious criminal record.</span>
                   </li>
                 </ul>
               </div>
@@ -308,32 +306,31 @@ const SSWPreparationPage = () => {
             Application Process
           </h2>
 
-          <div className="my-2">
-            <ul className="list-disc list-inside py-5 text-justify leading-12">
-              <li className="flex">
-                <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                Confirm eligibility and choose an industry.
+          <div className="mt-8">
+            <ul className="space-y-3 text-justify">
+              <li className="flex items-start gap-3">
+                <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                <span className="flex-1">Confirm eligibility and choose an industry.</span>
               </li>
-              <li className="flex">
-                <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                Pass language and skill tests of respective Field.
+              <li className="flex items-start gap-3">
+                <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                <span className="flex-1">Pass language and skill tests of respective Field.</span>
               </li>
-              <li className="flex">
-                <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                Secure a job offer from an approved Japanese employer.
+              <li className="flex items-start gap-3">
+                <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                <span className="flex-1">Secure a job offer from an approved Japanese employer.</span>
               </li>
-              <li className="flex">
-                <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                Employer applies for a  <strong> Certificate of Eligibility (CoE)</strong>.
+              <li className="flex items-start gap-3">
+                <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                <span className="flex-1">Employer applies for a  <strong> Certificate of Eligibility (CoE)</strong>.</span>
               </li>
-              <li className="flex">
-                <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                Submit visa application at a Japanese embassy or consulate
+              <li className="flex items-start gap-3">
+                <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                <span className="flex-1">Submit visa application at a Japanese embassy or consulate</span>
               </li>
-              <li className="flex">
-                <div className=" text-purple-500 text-3xl mt-1">▸</div>
-                Upon arrival, undergo immigration checks to receive your Status
-                of Residence
+              <li className="flex items-start gap-3">
+                <span className="text-purple-500 text-2xl leading-none flex-shrink-0">▸</span>
+                <span className="flex-1">Upon arrival, undergo immigration checks to receive your Status of Residence</span>
               </li>
             </ul>
           </div>

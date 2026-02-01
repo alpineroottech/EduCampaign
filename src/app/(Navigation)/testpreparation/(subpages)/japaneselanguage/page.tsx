@@ -221,16 +221,17 @@ export default function JapaneseLanguage() {
                       fullWidth
                       endIcon={<ChevronRightIcon />}
                       sx={{
-                        justifyContent: 'space-between',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start',
                         textAlign: 'left',
-                        py: 2,
+                        py: 3,
                         px: 3,
                         borderBottom: linkIndex < card.links.length - 1 ? '1px solid #e9d5ff' : 'none',
                         borderRadius: 0,
                         bgcolor: 'transparent',
                         color: '#2a1136',
-                        fontWeight: 600,
-                        fontSize: { xs: '0.9rem', md: '1rem' },
                         textTransform: 'none',
                         borderLeft: '4px solid transparent',
                         transition: 'all 0.2s ease',
@@ -238,10 +239,17 @@ export default function JapaneseLanguage() {
                           bgcolor: '#f3e8ff',
                           borderLeftColor: '#6B4FA1',
                           pl: 4
+                        },
+                        '& .MuiButton-endIcon': {
+                          position: 'absolute',
+                          right: '16px',
+                          top: '50%',
+                          transform: 'translateY(-50%)'
                         }
                       }}
                     >
-                      <span>{link.title}</span>
+                      <span className="font-bold text-lg mb-2">{link.title}</span>
+                      <span className="font-normal text-sm text-gray-600">{link.description}</span>
                     </Button>
                   </Link>
                 ))}

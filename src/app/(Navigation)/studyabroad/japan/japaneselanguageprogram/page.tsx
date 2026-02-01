@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useScrollToOffset } from '@/utils/useScrollToOffset';
 import Link from "next/link";
 import { motion } from 'motion/react';
+import { Card, CardMedia, CardContent, Stack, Button } from '@mui/material';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 
 
@@ -482,23 +484,55 @@ const JapaneseLanguageProgramPage = () => {
             <p className="py-4 text-justify px-4"> 
                The following is a list of Vocational College, Tanki Daigakku, undergraduate and graduate (University) Programs which employ the special admission options.
             </p>
-            <div className="px-4 py-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {languageSchools.map((school, index) => (
-              <Link href={school.slug} key={index} className="h-full">
-                <div className="border relative w-full h-full min-h-[180px] sm:min-h-[200px] rounded-lg overflow-hidden">
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${school.image})` }}
-                  />
-                  <div className="relative h-full p-4 flex flex-col justify-center text-center">
-                    <h6 className="mb-2 mt-1 text-center font-semibold text-sm sm:text-base">{school.title}</h6>
-                    <p className="text-xs sm:text-sm">{school.description}</p>
-                  </div>
-                </div>
-              </Link>
-              ))}
-              </div>
+            <div className="px-4 py-8">
+              <Stack 
+                spacing={0} 
+                sx={{ 
+                  bgcolor: '#faf7fc',
+                  border: '2px solid #e9d5ff',
+                  borderRadius: 3,
+                  overflow: 'hidden'
+                }}
+              >
+                {languageSchools.map((school, index) => (
+                  <Link href={school.slug} key={index} style={{ textDecoration: 'none' }}>
+                    <Button
+                      fullWidth
+                      endIcon={<ChevronRightIcon />}
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start',
+                        textAlign: 'left',
+                        py: 3,
+                        px: 3,
+                        borderBottom: index < languageSchools.length - 1 ? '1px solid #e9d5ff' : 'none',
+                        borderRadius: 0,
+                        bgcolor: 'transparent',
+                        color: '#2a1136',
+                        textTransform: 'none',
+                        borderLeft: '4px solid transparent',
+                        transition: 'all 0.2s ease',
+                        '&:hover': {
+                          bgcolor: '#f3e8ff',
+                          borderLeftColor: '#6B4FA1',
+                          pl: 4
+                        },
+                        '& .MuiButton-endIcon': {
+                          position: 'absolute',
+                          right: '16px',
+                          top: '50%',
+                          transform: 'translateY(-50%)'
+                        }
+                      }}
+                    >
+                      <span className="font-bold text-lg mb-2">{school.title}</span>
+                      <span className="font-normal text-sm text-gray-600">{school.description}</span>
+                    </Button>
+                  </Link>
+                ))}
+              </Stack>
             </div>
           </section>
           )}
