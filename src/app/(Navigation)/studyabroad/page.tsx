@@ -125,7 +125,7 @@ export default function StudyAbroad() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        className="text-center max-w-6xl mx-auto py-6 px-4"
+        className="text-center max-w-6xl mx-auto pt-16 pb-2 px-4"
       >
         <p className=" ">
           Studying abroad offers a chance to explore new cultures, ideas, and perspectives while earning a quality education. It helps students grow personally and professionally by developing independence, communication skills, and global awareness. The experience fosters open-mindedness and prepares learners to succeed in an increasingly connected and competitive world.

@@ -237,7 +237,7 @@ function ServicesContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        className="text-center max-w-6xl mx-auto py-10 "
+        className="text-center max-w-6xl mx-auto pt-16 pb-2"
       >
         Japan has become one of the most popular destinations for
         international students who wish to combine quality education with
@@ -256,7 +256,7 @@ function ServicesContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-10 bg-white"
+        className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl bg-white pt-16 pb-2"
       >
         <h2 className=" mb-6 text-center">Why Japan ?</h2>
         <p className=" mb-6 max-w-4xl text-center mx-auto  ">

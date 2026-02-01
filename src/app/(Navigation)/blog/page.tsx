@@ -41,7 +41,8 @@ export default function BlogPage() {
         <HeroSection imageSrc="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1600&q=80" title="Blog" />
       </div>
       {/* Main Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div className="relative pt-16 pb-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Category Filter */}
         <CategoryFilter
@@ -102,6 +103,7 @@ export default function BlogPage() {
             </button>
           </div>
         )}
+        </div>
       </div>
 
       {/* CTA Section */}

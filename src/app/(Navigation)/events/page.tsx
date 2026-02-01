@@ -133,7 +133,7 @@ const Event = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        className="text-center max-w-6xl mx-auto py-8 md:py-12 px-4"
+        className="text-center max-w-6xl mx-auto pt-16 pb-2 px-4"
       >
         <p className="">
           Stay informed about our upcoming events, workshops, and important announcements. 

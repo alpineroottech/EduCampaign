@@ -29,8 +29,9 @@ export default function AboutUs() {
       />
 
       {/* Lazy Reveal Introduction Section */}
-      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 10 } }}>
-        <motion.div ref={introRef} style={{ opacity, y }}>
+      <div className="pt-16 pb-2">
+        <Container maxWidth="xl">
+          <motion.div ref={introRef} style={{ opacity, y }}>
           <Paper
             elevation={0}
             sx={{
@@ -95,11 +96,13 @@ export default function AboutUs() {
             </Box>
           </Paper>
         </motion.div>
-      </Container>
+        </Container>
+      </div>
 
       {/* Horizontal Scroll - Why Choose Us Cards */}
       {/* CONTACT US SECTION */}
-      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
+      <div className="pt-16 pb-2">
+        <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -310,10 +313,12 @@ export default function AboutUs() {
             </Box>
           </Paper>
         </motion.div>
-      </Container>
+        </Container>
+      </div>
 
       {/* MISSION & VISION CARDS */}
-      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 10 } }}>
+      <div className="pt-16 pb-2">
+        <Container maxWidth="xl">
         <Box
           sx={{
             display: "grid",
@@ -368,10 +373,12 @@ export default function AboutUs() {
             </motion.div>
           ))}
         </Box>
-      </Container>
+        </Container>
+      </div>
 
       {/* TEAM SECTION */}
-      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 8 }, bgcolor: "#faf7fc" }}>
+      <div className="pt-16 pb-2 bg-[#faf7fc]">
+        <Container maxWidth="xl">
         <Typography
           variant="h4"
           component="h2"
@@ -448,7 +455,8 @@ export default function AboutUs() {
             </motion.div>
           ))}
         </Box>
-      </Container>
+        </Container>
+      </div>
     </Box>
   );
 }

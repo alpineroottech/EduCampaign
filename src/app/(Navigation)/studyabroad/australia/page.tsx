@@ -191,7 +191,7 @@ function PageContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, margin: "-50px" }}
               transition={{ duration: 0.6 }}
-              className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl py-8 md:py-12 bg-white"
+              className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl bg-white pt-16 pb-2"
             >
                 <h2 className=" mb-6 text-center">
                     Why Australia ?
@@ -223,7 +223,7 @@ function PageContent() {
             </motion.div>
 
 
-            <div className="max-w-6xl mx-auto px-6 py-8 md:py-12 mt-8">
+            <div className="max-w-6xl mx-auto px-6 mt-8 pt-16 pb-2">
                 <h2 className=" mb-6  text-center">HIGHER EDUCATION &amp; STUDY PATHWAY IN AUSTRALIA</h2>
                 <p className="mb-4 max-w-6xl text-center mx-auto ">
                     Australia offers international students a well-organized journey of learning, starting with

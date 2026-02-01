@@ -50,7 +50,8 @@ export default function GalleryPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div className="relative pt-16 pb-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FilterTabs
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
@@ -94,6 +95,7 @@ export default function GalleryPage() {
             <p className="text-gray-500">Try selecting a different category</p>
           </div>
         )}
+        </div>
       </div>
 
       {/* Lightbox */}

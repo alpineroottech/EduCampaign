@@ -12,7 +12,7 @@ interface ServiceDetailViewProps {
 
 export default function ServiceDetailView({ currentService, allServices }: ServiceDetailViewProps) {
   return (
-    <Box sx={{ py: 8, bgcolor: "#faf7fc", minHeight: "100vh" }}>
+    <div className="pt-16 pb-2 bg-[#faf7fc] min-h-screen">
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           {/* Sidebar (Left Column) - 3 columns */}
@@ -53,6 +53,6 @@ export default function ServiceDetailView({ currentService, allServices }: Servi
           </Grid>
         </Grid>
       </Container>
-    </Box>
+    </div>
   );
 }

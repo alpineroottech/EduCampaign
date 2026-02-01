@@ -59,7 +59,7 @@ export default function UniversityProgram() {
             className="  grid col-span-5 h-full w-full object-cover"
           />
         </div>
-        <div className="text-center max-w-5xl mx-auto py-8 md:py-12 px-4">
+        <div className="text-center max-w-5xl mx-auto pt-16 pb-2 px-4">
           <h2 className="text-4xl font-bold text-gray-800">University Programs</h2>
           <p className="text-gray-600 font-light mt-5">
             If you’re planning to study abroad and need expert support to navigate
@@ -67,7 +67,7 @@ export default function UniversityProgram() {
             a student, graduate, or professional, we help you achieve your goals and unlock global opportunities.
           </p>
         </div>
-        <div className="border rounded-2xl shadow-lg max-w-5xl mx-auto py-8 px-4 md:px-6">
+        <div className="border rounded-2xl shadow-lg max-w-5xl mx-auto pt-16 pb-2 px-4 md:px-6">
           <h6 className="font-normal">University Requirements </h6>
           <ul className="list-disc px-6 mt-2">
             <li className="text-gray-600 font-light">Offered by Japan’s Ministry of Education</li>

@@ -28,7 +28,7 @@ const itemVariants = {
 
 export default function ServicesGrid({ services }: ServicesGridProps) {
   return (
-    <Box sx={{ py: 8, bgcolor: "#faf7fc" }}>
+    <div className="pt-16 pb-2 bg-[#faf7fc]">
       <Container maxWidth="xl">
         {/* Main Content Title */}
         <Box sx={{ textAlign: "center", mb: 8 }}>
@@ -180,6 +180,6 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
           </Grid>
         </motion.div>
       </Container>
-    </Box>
+    </div>
   );
 }
