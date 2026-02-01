@@ -5,6 +5,8 @@ import Breadcrumbs from '@/components/breadcrumbs/breadcrumbs';
 import HeroSection from '@/components/hero/HeroSection';
 import Link from 'next/link';
 import { motion } from 'motion/react';
+import { Card, CardMedia, CardContent, Stack, Button, Typography } from '@mui/material';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 interface JapaneseLanguageCard {
   title: string;
@@ -155,57 +157,97 @@ export default function JapaneseLanguage() {
       <div className="max-w-7xl mx-auto md:p-10 px-standard">
 
         {japaneseLanguage.map((card: JapaneseLanguageCard, index: number) => (
-          <div
+          <motion.div
             key={index}
-            className="flex flex-col md:flex-row bg-white border border-purple-200 shadow-lg rounded-3xl overflow-hidden mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
           >
-            {/* LEFT TEXT SECTION */}
-            <div className="w-full md:w-2/3 p-6">
-              {/* Title Background */}
-              <h2 className="  p-4 bg-gray-200">
-                {card.title}
-              </h2>
-
-              <p className="mt-6 leading-relaxed text-justify">
-                {card.description1}
-              </p>
-
-              <p className="mt-4  leading-relaxed text-justify">
-                {card.description2}
-              </p>
-
-              <div className="px-4 py-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {card.links.map((school, index) => (
-                    <Link href={school.slug} key={index} className="h-full">
-                      <div className="border relative w-full h-full min-h-[180px] sm:min-h-[200px] rounded-lg overflow-hidden">
-                        <div 
-                          className="absolute inset-0 bg-cover bg-center"
-                          style={{ backgroundImage: `url(${school.image})` }}
-                        />
-                        <div className="relative h-full p-4 flex flex-col justify-center text-center">
-                          <h6 className="mb-2 mt-1 text-center font-semibold text-sm sm:text-base">{school.title}</h6>
-                          <p className="text-xs sm:text-sm">{school.description}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-            {/* RIGHT IMAGE SECTION */}
-            <div className="relative w-full md:w-1/3 min-h-[300px] md:min-h-0">
-              <Image
-                src={card.image}
+            <Card 
+              sx={{
+                mb: 5,
+                borderRadius: 3,
+                overflow: 'hidden',
+                border: '2px solid #e9d5ff',
+                boxShadow: '0 4px 12px rgba(107, 79, 161, 0.15)',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  boxShadow: '0 8px 24px rgba(107, 79, 161, 0.25)',
+                  transform: 'translateY(-4px)'
+                }
+              }}
+            >
+              {/* Top Image Section - 16:10 Aspect Ratio */}
+              <CardMedia
+                component="img"
+                image={card.image}
                 alt={card.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover"
+                sx={{
+                  width: '100%',
+                  aspectRatio: '16/10',
+                  objectFit: 'cover'
+                }}
               />
-            </div>
-          </div>
+
+              {/* Middle Content Section */}
+              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+                {/* Title */}
+                <h2 className="text-2xl md:text-3xl font-bold p-4 bg-gray-200 rounded-lg mb-6">
+                  {card.title}
+                </h2>
+
+                {/* Description Paragraphs */}
+                <p className="mt-4 leading-relaxed text-justify text-gray-700">
+                  {card.description1}
+                </p>
+
+                <p className="mt-4 leading-relaxed text-justify text-gray-700">
+                  {card.description2}
+                </p>
+              </CardContent>
+
+              {/* Bottom Navigation Links - Text Only with Arrows */}
+              <Stack 
+                spacing={0} 
+                sx={{ 
+                  bgcolor: '#faf7fc',
+                  borderTop: '2px solid #e9d5ff'
+                }}
+              >
+                {card.links.map((link, linkIndex) => (
+                  <Link href={link.slug} key={linkIndex} style={{ textDecoration: 'none' }}>
+                    <Button
+                      fullWidth
+                      endIcon={<ChevronRightIcon />}
+                      sx={{
+                        justifyContent: 'space-between',
+                        textAlign: 'left',
+                        py: 2,
+                        px: 3,
+                        borderBottom: linkIndex < card.links.length - 1 ? '1px solid #e9d5ff' : 'none',
+                        borderRadius: 0,
+                        bgcolor: 'transparent',
+                        color: '#2a1136',
+                        fontWeight: 600,
+                        fontSize: { xs: '0.9rem', md: '1rem' },
+                        textTransform: 'none',
+                        borderLeft: '4px solid transparent',
+                        transition: 'all 0.2s ease',
+                        '&:hover': {
+                          bgcolor: '#f3e8ff',
+                          borderLeftColor: '#6B4FA1',
+                          pl: 4
+                        }
+                      }}
+                    >
+                      <span>{link.title}</span>
+                    </Button>
+                  </Link>
+                ))}
+              </Stack>
+            </Card>
+          </motion.div>
         ))}
 
       </div>
