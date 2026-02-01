@@ -10,6 +10,7 @@ const DaigakuPage = () => {
   const [openPD, setOpenPD] = useState<number | null>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const initialTopRef = useRef<number | null>(null);
@@ -44,6 +45,20 @@ const DaigakuPage = () => {
       const rect = sidebarRef.current.getBoundingClientRect();
       initialTopRef.current = rect.top + window.scrollY;
     }
+  }, []);
+
+  // Detect mobile vs desktop
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   // Toggle sticky class based on scroll position and stop before footer
@@ -205,7 +220,7 @@ const DaigakuPage = () => {
               </>
             )}
 
-            {activeSection === "features" && (
+            {(isMobile || activeSection === "features") && (
               <>
                 <h2 ref={featureRef} className="bg-gray-200 p-4 mt-15  ">
                   FEATURES OF JUNIOR COLLEGE
@@ -247,7 +262,7 @@ const DaigakuPage = () => {
             )}
 
             {/* Course Section */}
-            {activeSection === "duration" && (
+            {(isMobile || activeSection === "duration") && (
               <section ref={durationRef} id="course" className="bg-white py-12">
                 <h2 className="bg-gray-200 p-4  ">COURSE DURATION</h2>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -268,7 +283,7 @@ const DaigakuPage = () => {
             )}
 
             {/* Requirements Section */}
-            {activeSection === "requirements" && (
+            {(isMobile || activeSection === "requirements") && (
               <section ref={requirementsRef} id="requirements" className="bg-white py-12">
                 <h2 className="bg-gray-200 p-4  ">APPLICATION REQUIREMENTS</h2>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -297,7 +312,7 @@ const DaigakuPage = () => {
             )}
 
             {/* Admission Guide Section */}
-            {activeSection === "process" && (
+            {(isMobile || activeSection === "process") && (
               <>
                 <section ref={processRef} id="admission" className="bg-white py-12">
                   <h2 className="bg-gray-200 p-4  ">ADMISSION PROCESS</h2>
@@ -330,7 +345,7 @@ const DaigakuPage = () => {
             )}
 
             {/* Pathway Section */}
-            {activeSection === "pathway" && (
+            {(isMobile || activeSection === "pathway") && (
               <section ref={pathwayRef} id="pathway" className="bg-white py-12">
                 <h2 className="bg-gray-200 p-4">CAREER PATH AFTER GRADUATION</h2>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -367,7 +382,7 @@ const DaigakuPage = () => {
             )}
 
             {/* FAQ Section */}
-            {activeSection === "faq" && (
+            {(isMobile || activeSection === "faq") && (
               <div ref={faqRef} className="mt-10">
                 <h2 className="bg-gray-200 p-4">
                   FAQ

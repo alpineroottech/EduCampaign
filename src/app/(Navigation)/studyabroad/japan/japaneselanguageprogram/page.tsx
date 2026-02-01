@@ -20,6 +20,7 @@ const JapaneseLanguageProgramPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const initialTopRef = useRef<number | null>(null);
@@ -94,6 +95,20 @@ const JapaneseLanguageProgramPage = () => {
       const rect = sidebarRef.current.getBoundingClientRect();
       initialTopRef.current = rect.top + window.scrollY;
     }
+  }, []);
+
+  // Detect mobile vs desktop
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   // Toggle sticky class based on scroll position and stop before footer
@@ -218,7 +233,7 @@ const JapaneseLanguageProgramPage = () => {
 
         {/* Main Content Sections with refs */}
         <div className="flex-1 min-w-0 bg-white my-12 px-4 lg:px-0">
-          {activeSection === "about" && (
+          {(isMobile || activeSection === "about") && (
           <div ref={aboutRef}>
             <h3 className="bg-gray-200 p-4  ">
               ABOUT JAPANESE LANGUAGE PROGRAM
@@ -236,7 +251,7 @@ const JapaneseLanguageProgramPage = () => {
           </div>
           )}
 
-          {activeSection === "why" && (
+          {(isMobile || activeSection === "why") && (
           <div ref={whyRef}>
           <h3 className="bg-gray-200  p-4 mt-15 ">
             WHY JAPANESE LANGUAGE PROGRAM?
@@ -269,7 +284,7 @@ const JapaneseLanguageProgramPage = () => {
           )}
 
           {/* Course Duration Section */}
-          {activeSection === "duration" && (
+          {(isMobile || activeSection === "duration") && (
           <section ref={durationRef} id="duration" className="bg-white py-12">
             <h3 className="bg-gray-200  p-4  ">COURSE DURATION</h3>
             <p className="py-4 text-justify px-4">
@@ -317,7 +332,7 @@ const JapaneseLanguageProgramPage = () => {
           )}
 
           {/* Requirements Section */}
-          {activeSection === "requirements" && (
+          {(isMobile || activeSection === "requirements") && (
           <section ref={requirementsRef} id="requirements" className="bg-white py-12">
             <h3 className="bg-gray-200  p-4  ">Application Requirement</h3>
             <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -353,7 +368,7 @@ const JapaneseLanguageProgramPage = () => {
           )}
 
           {/* Admission Guide Section */}
-          {activeSection === "admission" && (
+          {(isMobile || activeSection === "admission") && (
           <section ref={admissionRef} id="admission" className="bg-white py-12">
             <h3 className="bg-gray-200  p-4  ">ADMISSION GUIDE</h3>
             <p className="py-6 px-4">The process from application to Enrollment</p>
@@ -458,7 +473,7 @@ const JapaneseLanguageProgramPage = () => {
           </section> */}
 
           {/* Career Path Section */}
-          {activeSection === "career" && (
+          {(isMobile || activeSection === "career") && (
           <section ref={careerRef} id="career" className="bg-white pt-12">
             <h3 className="bg-gray-200  p-4">CAREER PATH AFTER GRADUATION</h3>
             <p className="py-4 text-justify px-4">
@@ -489,7 +504,7 @@ const JapaneseLanguageProgramPage = () => {
           )}
 
           {/* FAQ Section */}
-          {activeSection === "faq" && (
+          {(isMobile || activeSection === "faq") && (
           <section ref={faqRef} id="faq" className="bg-white py-12">
             <h3 className="bg-gray-200 p-4">FAQ</h3>
             <p className="text-justify max-w-6xl mx-auto py-4 px-4">

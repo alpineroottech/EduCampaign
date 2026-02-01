@@ -10,6 +10,7 @@ const VocationalLanguagePage = () => {
   const [openPD, setOpenPD] = useState<number | null>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const initialTopRef = useRef<number | null>(null);
@@ -55,6 +56,20 @@ const VocationalLanguagePage = () => {
       const rect = sidebarRef.current.getBoundingClientRect();
       initialTopRef.current = rect.top + window.scrollY;
     }
+  }, []);
+
+  // Detect mobile vs desktop
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   // Toggle sticky class based on scroll position and stop before footer
@@ -200,7 +215,7 @@ const VocationalLanguagePage = () => {
 
         {/* Main Content Sections with refs */}
         <div className="flex-1 min-w-0 bg-white my-12 px-4 lg:px-0">
-          {activeSection === "about" && (
+          {(isMobile || activeSection === "about") && (
             <div ref={aboutRef}>
               <h3 className="bg-gray-200 p-4  ">
                 ABOUT VOCATIONAL SCHOOL
@@ -250,7 +265,7 @@ const VocationalLanguagePage = () => {
           )}
 
           {/* Course Section */}
-          {activeSection === "course" && (
+          {(isMobile || activeSection === "course") && (
             <section ref={courseRef} id="course" className="bg-white py-12">
               <h3 className="bg-gray-200 p-4  ">COURSE DURATION</h3>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -271,7 +286,7 @@ const VocationalLanguagePage = () => {
           )}
 
           {/* Requirements Section */}
-          {activeSection === "requirements" && (
+          {(isMobile || activeSection === "requirements") && (
             <section ref={requirementsRef} id="requirements" className="bg-white py-12">
               <h3 className="bg-gray-200 p-4  ">REQUIREMENTS</h3>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -310,7 +325,7 @@ const VocationalLanguagePage = () => {
           )}
 
           {/* Admission Guide Section */}
-          {activeSection === "admission" && (
+          {(isMobile || activeSection === "admission") && (
             <>
               <section ref={admissionRef} id="admission" className="bg-white py-12">
                 <h3 className="bg-gray-200 p-4  ">ADMISSION GUIDE</h3>
@@ -365,7 +380,7 @@ const VocationalLanguagePage = () => {
           )}
 
           {/* Pathway Section */}
-          {activeSection === "pathway" && (
+          {(isMobile || activeSection === "pathway") && (
             <section ref={pathwayRef} id="pathway" className="bg-white py-12">
               <h3 className="bg-gray-200 p-4">CAREER PATH AFTER GRADUATION</h3>
               <ul className="flex flex-col gap-5 px-4 py-4 text-justify">
@@ -401,7 +416,7 @@ const VocationalLanguagePage = () => {
           )}
 
           {/* FAQ Section */}
-          {activeSection === "faq" && (
+          {(isMobile || activeSection === "faq") && (
             <div ref={faqRef} className="mt-2">
               <h3 className="bg-gray-200 p-4">
                 FAQ
