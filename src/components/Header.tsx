@@ -97,12 +97,12 @@ const Header = () => {
     },
     {
       href: "/services", label: "Services", dropdown: [
-        { href: "/services?scrollTo=careerCounseling", label: " Career Counselling" },
-        { href: "/services?scrollTo=languagePreparation", label: "Language Preparation" },
-        { href: "/services?scrollTo=interviewAssistance", label: "Interview Assistance" },
-        { href: "/services?scrollTo=visaLodgment", label: "Visa Lodgement" },
-        { href: "/services?scrollTo=documentation", label: "Documentation" },
-        { href: "/services?scrollTo=preDeparture", label: "Pre-Departure Info" },
+        { href: "/services/career-counseling", label: "Career Counselling" },
+        { href: "/services/language-preparation", label: "Language Preparation" },
+        { href: "/services/interview-assistance", label: "Interview Assistance" },
+        { href: "/services/visa-lodgment", label: "Visa Lodgement" },
+        { href: "/services/documentation", label: "Documentation" },
+        { href: "/services/pre-departure-info", label: "Pre-Departure Info" },
       ]
     },
     { href: "/blog", label: "Blog" },

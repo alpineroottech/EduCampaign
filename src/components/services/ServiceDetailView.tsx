@@ -3,7 +3,6 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { ServiceDetail } from "../../data/servicesData";
 import ServiceSidebar from "./ServiceSidebar";
-import Image from "next/image";
 
 interface ServiceDetailViewProps {
   currentService: ServiceDetail;
@@ -25,17 +24,6 @@ export default function ServiceDetailView({ currentService, allServices }: Servi
           {/* Order: 1 on Mobile (Top), 2 on Desktop (Right) */}
           <Grid size={{ xs: 12, md: 9 }} sx={{ order: { xs: 1, md: 2 } }}>
             <Box component="main">
-              {/* Featured Image */}
-              <Box sx={{ position: "relative", width: "100%", height: 400, borderRadius: 2, overflow: "hidden", mb: 4, boxShadow: 2 }}>
-                 <Image
-                    src={currentService.image}
-                    alt={currentService.title}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    priority
-                  />
-              </Box>
-
               {/* Service Title */}
               <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: "bold", color: "#3d1a4d", mb: 3 }}>
                 {currentService.title}
