@@ -154,7 +154,7 @@ export default function JapaneseLanguage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto md:p-10 px-standard">
+      <div className="max-w-7xl mx-auto md:p-10 px-standard">
 
         {japaneseLanguage.map((card: JapaneseLanguageCard, index: number) => (
           <motion.div
@@ -178,34 +178,40 @@ export default function JapaneseLanguage() {
                 }
               }}
             >
-              {/* Top Image Section - 16:10 Aspect Ratio */}
-              <CardMedia
-                component="img"
-                image={card.image}
-                alt={card.title}
-                sx={{
-                  width: '100%',
-                  aspectRatio: '16/10',
-                  objectFit: 'cover'
-                }}
-              />
+              {/* Flex Container for Text and Image */}
+              <div className="flex flex-col md:flex-row">
+                {/* Text Content Section - Left Side */}
+                <CardContent sx={{ p: { xs: 3, md: 4 }, flex: 1 }}>
+                  {/* Title */}
+                  <h2 className="text-2xl md:text-3xl font-bold p-4 bg-gray-200 rounded-lg mb-6">
+                    {card.title}
+                  </h2>
 
-              {/* Middle Content Section */}
-              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                {/* Title */}
-                <h2 className="text-2xl md:text-3xl font-bold p-4 bg-gray-200 rounded-lg mb-6">
-                  {card.title}
-                </h2>
+                  {/* Description Paragraphs */}
+                  <p className="mt-4 leading-relaxed text-justify text-gray-700">
+                    {card.description1}
+                  </p>
 
-                {/* Description Paragraphs */}
-                <p className="mt-4 leading-relaxed text-justify text-gray-700">
-                  {card.description1}
-                </p>
+                  <p className="mt-4 leading-relaxed text-justify text-gray-700">
+                    {card.description2}
+                  </p>
+                </CardContent>
 
-                <p className="mt-4 leading-relaxed text-justify text-gray-700">
-                  {card.description2}
-                </p>
-              </CardContent>
+                {/* Image Section - Right Side (Desktop) / Top (Mobile) */}
+                <div className="md:w-[480px] lg:w-[560px] flex-shrink-0 md:self-center">
+                  <CardMedia
+                    component="img"
+                    image={card.image}
+                    alt={card.title}
+                    sx={{
+                      width: '100%',
+                      aspectRatio: '16/12',
+                      objectFit: 'cover',
+                      borderRadius: { xs: 0, md: 2 }
+                    }}
+                  />
+                </div>
+              </div>
 
               {/* Bottom Navigation Links - Text Only with Arrows */}
               <Stack 
