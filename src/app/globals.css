@@ -428,3 +428,14 @@ html,body{
   display: none;
 }
 
+/* Hero Button Slide-in Animation */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 1;
+    transform: translateX(calc(-100vw - 100%));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
