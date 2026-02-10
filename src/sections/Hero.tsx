@@ -11,8 +11,7 @@ import { motion } from "motion/react";
 // Hero carousel images - add more images here for the carousel
 const heroImages = [
   { src: "/images/homepage/hero.png", alt: "Students studying abroad" },
-  // Add more images as needed:
-  // { src: "/images/homepage/hero2.png", alt: "International education" },
+  { src: "/images/homepage/HomePageCenterImage.png", alt: "International education experience" },
 ];
 
 type HeroProps = {
