@@ -80,15 +80,26 @@ const Hero = ({ onJoinClick, onNoticeEventsClick }: HeroProps) => {
           className="w-full lg:w-auto lg:flex-shrink-0 text-center lg:pr-12 lg:text-left relative z-10 order-2 lg:order-1"
         >
           <div className="flex flex-col gap-2 md:gap-4 mb-8">
-            <h1 className="text-3xl lg:text-4xl xl:text-5xl leading-[1.1] font-extrabold tracking-tight text-gray-900">
-              A COMPLETE<br />
-              SOLUTION FOR<br />
-              <span className="text-[#6B4FA1]">ABROAD</span><br />
-              <span className="text-[#6B4FA1]">STUDIES</span>
+            <h1 className="text-3.5xl lg:text-4xl font-bold leading-[1.1] tracking-tight text-gray-900">
+              A COMPLETE
+              <br />
+              SOLUTION FOR
+              <br />
+              ABROAD
+              <br />
+              STUDIES
             </h1>
           </div>
 
           <motion.button
+            initial={{ x: -200, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ 
+              type: "spring",
+              stiffness: 200,
+              damping: 15,
+              delay: 0.2
+            }}
             onClick={onJoinClick}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}

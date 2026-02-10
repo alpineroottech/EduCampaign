@@ -1,45 +1,122 @@
-import Image from 'next/image'
+"use client";
+
+import { HeroCarousel } from './HeroCarousel';
+import { MoveRight } from 'lucide-react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+interface Notice {
+  title: string;
+  date: string;
+  href: string;
+}
 
 interface HeroSectionProps {
-    imageSrc: string;
-    title: string;
+  images: {
+    src: string;
+    alt: string;
+  }[];
+  onJoinClick?: () => void;
+  notices?: Notice[];
 }
 
-// Dynamic padding based on title length for cohesive appearance
-const getTitlePadding = (title: string): string => {
-    const length = title.length;
-    if (length <= 10) return 'px-16 sm:px-20'; // Short titles like "About Us"
-    if (length <= 18) return 'px-12 sm:px-16'; // Medium titles like "Test Preparation"
-    return 'px-8 sm:px-12'; // Longer titles like "Japanese Language"
-};
+const defaultNotices: Notice[] = [
+  {
+    title: "New Scholarship Opportunities Available",
+    date: "Feb 8, 2026",
+    href: "/blog/scholarship-opportunities"
+  },
+  {
+    title: "Study Abroad Seminar - Register Now",
+    date: "Feb 5, 2026",
+    href: "/events"
+  },
+  {
+    title: "IELTS Test Preparation Starting Soon",
+    date: "Feb 1, 2026",
+    href: "/testpreparation/ielts"
+  }
+];
 
-const HeroSection = ({ imageSrc, title }: HeroSectionProps) => {
-    const titlePadding = getTitlePadding(title);
-    
-    return (
-        <div className="relative h-[250px] sm:h-[300px] md:h-[350px] grid grid-cols-1 sm:grid-cols-6 grid-rows-1 mb-8 sm:mb-12 transition-[height] duration-300">
-            <div className="hidden sm:grid col-span-1 row-span-1 h-full bg-[#ebe9e1] items-center">
-                <div className={`absolute z-20 ml-4 sm:ml-8 bg-gradient-to-r from-white/80 to-white/10 py-8 sm:py-15 ${titlePadding} border-l-8 border-l-[#df5252] shadow-[0_2px_24px_rgba(0,0,0,0.04)] transition-all duration-300`}>
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl transition-[font-size] duration-300">{title}</h2>
-                </div>
+const HeroSection = ({ images, onJoinClick, notices = defaultNotices }: HeroSectionProps) => {
+  return (
+    <div className="py-8 lg:py-12 px-standard">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-6">
+          
+          {/* LEFT COLUMN - Text & CTA */}
+          <div className="lg:col-span-4 space-y-6 text-center lg:text-left">
+            {/* Symmetrical Heading - All lines same size and spacing */}
+            <h1 className="text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
+              <span className="block text-gray-900">A COMPLETE</span>
+              <span className="block text-gray-900">SOLUTION FOR</span>
+              <span className="block text-[#6B4FA1]">ABROAD</span>
+              <span className="block text-[#6B4FA1]">STUDIES</span>
+            </h1>
+            
+            {/* CTA Button with Slide-in Animation from Left */}
+            <motion.button
+              initial={{ x: -200, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 100,
+                damping: 20,
+                delay: 0.3
+              }}
+              onClick={onJoinClick}
+              className="group relative inline-flex items-center gap-2 bg-[#3d1a4d] hover:bg-[#2a1136] text-white font-semibold px-8 py-4 rounded-full shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/50 hover:-translate-y-1 active:scale-95 transition-all duration-300 overflow-hidden"
+            >
+              {/* Shimmer effect overlay */}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              
+              <span className="relative z-10">Join us today</span>
+              <MoveRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            </motion.button>
+          </div>
+
+          {/* CENTER COLUMN - Carousel (Wider & Bigger) */}
+          <div className="lg:col-span-5 relative lg:-my-4 lg:scale-110">
+            <HeroCarousel images={images} />
+          </div>
+
+          {/* RIGHT COLUMN - Latest Notices Card */}
+          <div className="lg:col-span-3">
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 space-y-4">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+                <h3 className="text-lg font-bold text-[#3d1a4d]">Latest Notices</h3>
+                <Link 
+                  href="/blog" 
+                  className="text-sm text-purple-600 hover:text-purple-800 font-medium transition-colors"
+                >
+                  View All
+                </Link>
+              </div>
+              
+              {/* Notices List */}
+              <ul className="space-y-3">
+                {notices.map((notice, index) => (
+                  <li key={index}>
+                    <Link 
+                      href={notice.href}
+                      className="group block hover:bg-purple-50 rounded-lg p-2 -mx-2 transition-colors"
+                    >
+                      <h4 className="text-sm font-medium text-gray-900 group-hover:text-purple-700 transition-colors line-clamp-2">
+                        {notice.title}
+                      </h4>
+                      <p className="text-xs text-gray-500 mt-1">{notice.date}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </div>
 
-            <Image
-                src={imageSrc}
-                width={1220}
-                height={400}
-                alt={`${title} Hero`}
-                className="grid col-span-1 sm:col-span-5 h-full w-full object-cover"
-            />
-
-            {/* Mobile Title Overlay */}
-            <div className="absolute inset-0 sm:hidden bg-gradient-to-r from-black/70 to-black/40 flex items-center">
-                <div className="ml-4 p-6 border-l-8 border-l-[#df5252]">
-                    <h2 className="text-2xl text-white font-bold">{title}</h2>
-                </div>
-            </div>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
 export default HeroSection;
