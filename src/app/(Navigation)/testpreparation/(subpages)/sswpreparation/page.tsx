@@ -64,7 +64,7 @@ const SSWPreparationPage = () => {
 
           <Breadcrumbs />
           <HeroSection imageSrc="/images/testpreparation/ssw.webp" title="SSW Preparation" />
-          <div className="py-16 md:py-24 px-standard">
+          <div className="py-16 md:py-24 px-standard bg-white">
             <div className="container-narrow mx-auto px-0 lg:px-8">
               <h2 className="bg-gray-200 p-4 w-full lg:w-[50vw]">
                 About Courses In Nepal
@@ -86,7 +86,7 @@ const SSWPreparationPage = () => {
               </p>
             </div>
           </div>
-          <div className="py-4 px-standard">
+          <div className="py-4 px-standard bg-gray-100">
             <div className="container-narrow mx-auto px-0 lg:px-8">
               <h2 className="bg-gray-200 p-4 w-full lg:w-[50vw]">
                 SSW Overview
@@ -105,7 +105,7 @@ const SSWPreparationPage = () => {
 
 
       {/* Features Section */}
-      <div className="max-w-7xl py-12 px-standard mx-auto">
+      <div className="max-w-7xl py-12 px-standard mx-auto bg-white">
         <div className="container-narrow mx-auto">
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="flex-1 lg:pr-8">
@@ -166,10 +166,23 @@ const SSWPreparationPage = () => {
       </div>
 
       {/* Requirements Section */}
-      <div className="py-12 max-w-7xl mx-auto px-standard ">
-        <div className="container-narrow mx-auto">
-          <div className="flex flex-col lg:flex-row gap-6">
-            <div className="flex-1 lg:pr-8">
+      <div className="py-12 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-standard">
+          <div className="container-narrow mx-auto">
+            <div className="flex flex-col lg:flex-row gap-6">
+            {/* Image on left for desktop */}
+            <div className="relative w-full lg:w-1/3 h-[400px] lg:h-[460px] order-first lg:order-1">
+              <Image
+                src="/images/subpages/req_ssw.jpg"
+                alt="Training"
+                fill
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover rounded-lg"
+              />
+            </div>
+
+            {/* Text on right for desktop */}
+            <div className="flex-1 lg:pl-8 lg:order-2">
               <h2 className="bg-gray-200 p-4 w-full">
                 Requirements of SSW
               </h2>
@@ -208,24 +221,15 @@ const SSWPreparationPage = () => {
                 Remarks* Currently, SSW II is only available to workers who already hold SSW Type 1 and then qualify for the upgrade.
               </p>
             </div>
-
-            <div className="relative w-full lg:w-1/3 h-[400px] lg:h-[460px]">
-              <Image
-                src="/images/subpages/req_ssw.jpg"
-                alt="Training"
-                fill
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                className="object-cover rounded-lg"
-              />
-            </div>
           </div>
         </div>
       </div>
+    </div>
 
 
 
       {/* Field Section */}
-      <div ref={fieldRef} className="py-12 px-standard mx-auto max-w-7xl">
+      <div ref={fieldRef} className="py-12 px-standard mx-auto max-w-7xl bg-white">
         <div className="container-narrow mx-auto">
           <h3 className="bg-gray-200 p-4 w-full lg:w-[50vw]">Industrial fields covered by Specified Skilled Worker
             System</h3>
@@ -300,7 +304,7 @@ const SSWPreparationPage = () => {
       </div>
 
       {/* Application Process Section */}
-      <div className="py-12 px-standard">
+      <div className="py-12 px-standard bg-gray-100">
         <div className="container-narrow mx-auto px-0 lg:px-8">
           <h2 className="bg-gray-200 p-4 w-full lg:w-[50vw]">
             Application Process
@@ -356,7 +360,7 @@ const SSWPreparationPage = () => {
       </div>
 
       {/* Enquiry Section */}
-      <div className="w-full">
+      <div className="w-full bg-white">
         <div className="relative h-70 w-full mb-12">
           <Image
             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80"

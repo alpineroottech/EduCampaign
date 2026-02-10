@@ -165,10 +165,10 @@ const BekkaPage = () => {
         <div className="hidden lg:block w-64 flex-shrink-0 -mt-14 ">
           <div
             ref={sidebarRef}
-            className={`w-64 rounded-sm z-30 bg-white border-2 border-purple-300 transition-[top] duration-300 ease-out ${isSticky ? "fixed top-28" : ""
+            className={`w-64 rounded-sm z-30 bg-white border-2 border-[#3d1a4d] transition-[top] duration-300 ease-out ${isSticky ? "fixed top-28" : ""
               } ${isAtBottom ? "absolute bottom-30" : ""}`}
           >
-            <h6 className="text-gray-900 p-4 bg-purple-300">
+            <h6 className="text-white p-4 bg-[#3d1a4d]">
               Preprapatory Japanese Language (Bekka) Program
             </h6>
             <div>
@@ -178,8 +178,8 @@ const BekkaPage = () => {
                   onClick={() => {
                     setActiveSection(item.id);
                   }}
-                  className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-purple-300 ${activeSection === item.id
-                      ? "bg-purple-200 text-gray-900"
+                  className={`block w-full text-left text-xs font-semibold py-3 px-3 leading-relaxed transition-colors border-b border-[#3d1a4d] ${activeSection === item.id
+                      ? "bg-[#3d1a4d] text-white"
                       : "text-gray-700 hover:bg-gray-100"
                     }`}
                 >

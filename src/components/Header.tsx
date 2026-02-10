@@ -114,7 +114,7 @@ const Header = () => {
   return (
     <>
       {/* Top info bar - stays visible */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-[#5c3697] text-white text-sm sm:text-base">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-[#3d1a4d] text-white text-sm sm:text-base">
         <div className="px-4 sm:px-6 lg:px-12 h-[40px] flex items-center justify-between">
           {/* Left group: phone + message */}
           <div className="flex items-center gap-2 sm:gap-3">
@@ -157,7 +157,7 @@ const Header = () => {
       >
         <div className="flex justify-between items-center h-16 sm:h-[69px]">
           {/* Logo */}
-          <div className="flex gap-2 sm:gap-4 font-bold text-lg sm:text-2xl items-center">
+          <div className="flex gap-2 sm:gap-4 font-bold text-lg sm:text-2xl items-center" style={{ fontFamily: 'var(--font-dm-sans), sans-serif' }}>
             <Link href="/">
               <Image
                 className="w-12 h-12 sm:w-[69px] sm:h-[69px] bg-transparent"

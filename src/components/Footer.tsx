@@ -128,7 +128,7 @@ const Footer: React.FC<FooterProps> = ({
     const displayYear = year ?? new Date().getFullYear();
 
     return (
-        <footer className="relative w-full bg-[#3d1a4d]">
+        <footer className="relative w-full bg-[#3d1a4d] mt-10">
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-standard py-12">
                 {/* Unified Desktop Grid: Links + Contact + Map */}
