@@ -1,7 +1,6 @@
 "use client";
 
 import HeroSection from "@/components/hero/HeroSection";
-import ContactForm from "@/components/ContactForm";
 import { Box, Container, Typography, Paper, Card, CardContent } from "@mui/material";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -112,205 +111,62 @@ export default function AboutUs() {
           <Paper
             elevation={3}
             sx={{
-              p: { xs: 4, md: 8 },
+              p: { xs: 4, md: 6 },
               borderRadius: 4,
               bgcolor: "white",
+              textAlign: "center",
             }}
           >
             <Typography
               variant="h4"
               component="h2"
               sx={{
-                textAlign: "center",
-                mb: { xs: 4, md: 6 },
+                mb: 2,
                 fontWeight: "bold",
                 color: "#3d1a4d",
                 fontSize: { xs: "1.5rem", md: "2rem" },
               }}
             >
-              Get in Touch
+              Ready to Start Your Journey?
             </Typography>
-
-            <Box
+            <Typography
+              variant="body1"
               sx={{
-                display: "grid",
-                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-                gap: { xs: 4, md: 6 },
+                color: "text.secondary",
+                mb: 4,
+                fontSize: { xs: "0.95rem", md: "1rem" },
               }}
             >
-              {/* Contact Form */}
-              <Box>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    fontWeight: "bold",
-                    mb: 3,
-                    color: "#3d1a4d",
-                  }}
-                >
-                  Send us a Message
-                </Typography>
-                <ContactForm />
+              Have questions about studying abroad? We're here to guide you every step of the way.
+            </Typography>
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              style={{ display: "inline-block" }}
+            >
+              <Box
+                component="button"
+                sx={{
+                  px: 6,
+                  py: 2,
+                  bgcolor: "#6B4FA1",
+                  color: "white",
+                  border: "none",
+                  borderRadius: 2,
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                  "&:hover": {
+                    bgcolor: "#5a3f8a",
+                    boxShadow: 3,
+                  },
+                }}
+              >
+                Contact Us Now
               </Box>
-
-              {/* Contact Info and Map */}
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                {/* Address */}
-                <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
-                  <Box
-                    sx={{
-                      width: { xs: 40, sm: 48 },
-                      height: { xs: 40, sm: 48 },
-                      bgcolor: "error.main",
-                      color: "white",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 2,
-                      flexShrink: 0,
-                      boxShadow: 2,
-                    }}
-                  >
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
-                    </svg>
-                  </Box>
-                  <Box>
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
-                      Address
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      DILLIBAZAR-30, GURJUMARGA, Kathmandu 44605, Nepal
-                    </Typography>
-                  </Box>
-                </Box>
-
-                {/* Phone */}
-                <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
-                  <Box
-                    sx={{
-                      width: { xs: 40, sm: 48 },
-                      height: { xs: 40, sm: 48 },
-                      bgcolor: "primary.main",
-                      color: "white",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 2,
-                      flexShrink: 0,
-                      boxShadow: 2,
-                    }}
-                  >
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59L15 15.41a1 1 0 011-.24 11.36 11.36 0 003.53.56 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.28a1 1 0 011 1 11.36 11.36 0 00.56 3.53 1 1 0 01-.24 1z" />
-                    </svg>
-                  </Box>
-                  <Box>
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
-                      Phone
-                    </Typography>
-                    <Typography
-                      component="a"
-                      href="tel:+97714500074"
-                      variant="body2"
-                      sx={{
-                        color: "text.secondary",
-                        textDecoration: "none",
-                        "&:hover": {
-                          color: "primary.main",
-                          textDecoration: "underline",
-                        },
-                      }}
-                    >
-                      01-4500074
-                    </Typography>
-                  </Box>
-                </Box>
-
-                {/* Mail */}
-                <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
-                  <Box
-                    sx={{
-                      width: { xs: 40, sm: 48 },
-                      height: { xs: 40, sm: 48 },
-                      bgcolor: "warning.main",
-                      color: "white",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 2,
-                      flexShrink: 0,
-                      boxShadow: 2,
-                    }}
-                  >
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M2 4a2 2 0 012-2h16a2 2 0 012 2v1l-10 6L2 5V4zm0 4.236V20a2 2 0 002 2h16a2 2 0 002-2V8.236l-10 6-10-6z" />
-                    </svg>
-                  </Box>
-                  <Box>
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 0.5 }}>
-                      Mail Us
-                    </Typography>
-                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-                      <Typography
-                        component="a"
-                        href="mailto:Educampaign2008@gmail.com"
-                        variant="body2"
-                        sx={{
-                          color: "text.secondary",
-                          textDecoration: "none",
-                          wordBreak: "break-word",
-                          "&:hover": {
-                            color: "primary.main",
-                            textDecoration: "underline",
-                          },
-                        }}
-                      >
-                        Educampaign2008@gmail.com
-                      </Typography>
-                      <Typography
-                        component="a"
-                        href="mailto:Info@educampaign.com.np"
-                        variant="body2"
-                        sx={{
-                          color: "text.secondary",
-                          textDecoration: "none",
-                          wordBreak: "break-word",
-                          "&:hover": {
-                            color: "primary.main",
-                            textDecoration: "underline",
-                          },
-                        }}
-                      >
-                        Info@educampaign.com.np
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-
-                {/* Google Maps Preview */}
-                <Box
-                  sx={{
-                    width: "100%",
-                    height: { xs: 250, md: 300 },
-                    borderRadius: 2,
-                    overflow: "hidden",
-                    boxShadow: 2,
-                  }}
-                >
-                  <iframe
-                    src="https://maps.google.com/maps?width=400&height=300&hl=en&q=Edu.%20Campaign%20Pvt&t=&z=15&ie=UTF8&iwloc=B&output=embed"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Edu Campaign Office Location"
-                  />
-                </Box>
-              </Box>
-            </Box>
+            </motion.a>
           </Paper>
         </motion.div>
         </Container>

@@ -184,22 +184,11 @@ const StudentVoice = () => {
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                             Student Voices
                         </h2>
-                        <p className="text-gray-600 leading-relaxed mb-4">
+                        <p className="text-gray-600 leading-relaxed">
                             Here, we share the experiences and reflections of our students from across the globe.
                             Their stories highlight learning, growth, and personal journeys, inspiring others to
                             explore opportunities and pursue their dreams.
                         </p>
-                        <a
-                            href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-[#6B4FA1] hover:text-[#5a3f8a] font-medium transition-colors"
-                        >
-                            See all videos
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
                     </div>
                 </ScrollReveal>
 
@@ -222,6 +211,20 @@ const StudentVoice = () => {
                             />
                         </div>
                     ))}
+                </div>
+
+                <div className="flex justify-end mt-6 px-2">
+                    <a
+                        href="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center border border-gray-300 gap-2 px-6 py-3 rounded-md font-medium hover:shadow-md hover:bg-gray-100 transition duration-200"
+                    >
+                        See all videos
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
                 </div>
             </div>
 

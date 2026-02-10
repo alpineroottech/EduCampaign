@@ -77,6 +77,7 @@ const Header = () => {
   }, [isMobileActive]);
 
   const navLinks: NavLink[] = [
+    { href: "/about", label: "About Us" },
     {
       href: "/studyabroad", label: "Study Abroad", dropdown: [
         { href: "/studyabroad/japan", label: "Study in Japan", disabled: false },
@@ -107,14 +108,14 @@ const Header = () => {
     },
     { href: "/blog", label: "Blog" },
     { href: "/gallery", label: "Gallery" },
-    { href: "/about", label: "About Us" },
+    { href: "/contact", label: "Contact Us" },
   ];
 
   return (
     <>
       {/* Top info bar - stays visible */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-[#5c3697] text-white text-xs sm:text-sm">
-        <div className="px-4 sm:px-6 lg:px-12 h-[34px] flex items-center justify-between">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-[#5c3697] text-white text-sm sm:text-base">
+        <div className="px-4 sm:px-6 lg:px-12 h-[40px] flex items-center justify-between">
           {/* Left group: phone + message */}
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
@@ -151,12 +152,12 @@ const Header = () => {
       </div>
       {/* Main header - hides on scroll down */}
       <header
-        className={`fixed top-[34px] left-0 right-0 z-40 bg-white px-4 sm:px-6 lg:px-12 transition-transform duration-300 ${scrollUp ? "translate-y-0" : "-translate-y-full"
+        className={`fixed top-[40px] left-0 right-0 z-40 bg-white px-4 sm:px-6 lg:px-12 transition-transform duration-300 ${scrollUp ? "translate-y-0" : "-translate-y-full"
           }`}
       >
         <div className="flex justify-between items-center h-16 sm:h-[69px]">
           {/* Logo */}
-          <div className="flex gap-2 sm:gap-4 font-bold text-base sm:text-xl items-center">
+          <div className="flex gap-2 sm:gap-4 font-bold text-lg sm:text-2xl items-center">
             <Link href="/">
               <Image
                 className="w-12 h-12 sm:w-[69px] sm:h-[69px] bg-transparent"
@@ -169,7 +170,7 @@ const Header = () => {
             <div>
               <Link href={"/"}>
                 <h6 className="">EDU. CAMPAIGN</h6>
-                <h6 className="text-xs sm:text-sm">Pvt. Ltd.</h6>
+                <h6 className="text-sm sm:text-base">Pvt. Ltd.</h6>
               </Link>
             </div>
           </div>

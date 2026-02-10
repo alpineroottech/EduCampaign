@@ -100,13 +100,13 @@ const Flag: React.FC<{ flag?: string }> = ({ flag }) => {
 const FooterSection: React.FC<{ section: FooterSection }> = ({ section }) => {
     return (
         <div>
-            <h3 className="text-base font-semibold text-white mb-3">{section.title}</h3>
+            <h3 className="text-lg font-semibold text-white mb-3">{section.title}</h3>
             <ul className="space-y-2">
                 {section.items.map((item, index) => (
                     <li key={index}>
                         <a 
                             href={item.href || "#"}
-                            className="text-sm text-white/70 hover:text-white transition-colors"
+                            className="text-base text-white/70 hover:text-white transition-colors"
                         >
                             {item.label}
                         </a>
@@ -142,10 +142,10 @@ const Footer: React.FC<FooterProps> = ({
 
                     {/* Head Office Info - takes 1 column on desktop */}
                     <div className="col-span-2 md:col-span-1">
-                        <h3 className="text-base font-semibold text-white mb-3">Head Office</h3>
-                        <p className="text-white/90 text-sm font-medium mb-1">Edu. Campaign Pvt. Ltd.</p>
+                        <h3 className="text-lg font-semibold text-white mb-3">Head Office</h3>
+                        <p className="text-white/90 text-base font-medium mb-1">Edu. Campaign Pvt. Ltd.</p>
                         {branches.map((branch, index) => (
-                            <div key={index} className="text-white/70 text-sm">
+                            <div key={index} className="text-white/70 text-base">
                                 {branch.city && <span className="block">{branch.city}</span>}
                                 {branch.country && (
                                     <Link 
@@ -162,14 +162,14 @@ const Footer: React.FC<FooterProps> = ({
                                 )}
                             </div>
                         ))}
-                        <Link href="/contact" className="inline-block mt-3 text-white/90 text-sm hover:text-white transition-colors border-b border-white/20 pb-0.5">
+                        <Link href="/contact" className="inline-block mt-3 text-white/90 text-base hover:text-white transition-colors border-b border-white/20 pb-0.5">
                             Contact Us →
                         </Link>
                     </div>
 
                     {/* Approved By */}
                     <div className="col-span-2 lg:col-span-1">
-                        <h3 className="text-base font-semibold text-white mb-3">Approved By</h3>
+                        <h3 className="text-lg font-semibold text-white mb-3">Approved By</h3>
                         <div className="flex items-start justify-center">
                             <Link
                                 href="https://www.moest.gov.np"
@@ -184,7 +184,7 @@ const Footer: React.FC<FooterProps> = ({
                                     height={60}
                                     alt="Ministry of Education Nepal Logo"
                                 />
-                                <p className="mt-2 text-center text-xs text-white/90 font-medium group-hover:text-white transition-colors">
+                                <p className="mt-2 text-center text-sm text-white/90 font-medium group-hover:text-white transition-colors">
                                     Ministry of Education, Nepal
                                 </p>
                             </Link>
@@ -198,7 +198,7 @@ const Footer: React.FC<FooterProps> = ({
                 <div className="max-w-7xl mx-auto px-standard flex flex-col sm:flex-row items-center justify-between gap-4">
                     {/* Social icons */}
                     <div className="flex items-center gap-3">
-                        <span className="text-white/70 text-sm hidden sm:inline">Follow us:</span>
+                        <span className="text-white/70 text-base hidden sm:inline">Follow us:</span>
                         <div className="flex items-center gap-1">
                             {socialIcons.map((social) => (
                                 <a
@@ -216,7 +216,7 @@ const Footer: React.FC<FooterProps> = ({
                     </div>
 
                     {/* Copyright */}
-                    <div className="text-white/60 text-sm">
+                    <div className="text-white/60 text-base">
                         © {displayYear} Education Campaign Pvt. Ltd. <br /> Crafted by AlpineRoot Technologies Pvt. Ltd.
                     </div>
                 </div>
