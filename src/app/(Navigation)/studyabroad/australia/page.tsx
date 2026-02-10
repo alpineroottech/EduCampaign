@@ -218,7 +218,7 @@ function PageContent() {
                                 {box.title}
                             </p>
                         </div>
-                    ))}n                </div>
+                    ))}                </div>
 
             </motion.div>
 
@@ -738,7 +738,7 @@ function PageContent() {
                     alt="Career Outcomes"
                     width={1080}
                     height={1080}
-                    className="md:w-[800px] h-[400px]"
+                    className="md:w-[640px] h-[320px]"
                 />
             </div>
 
