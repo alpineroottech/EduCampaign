@@ -3,6 +3,7 @@
 import { HeroCarousel } from './HeroCarousel';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 interface Notice {
@@ -11,14 +12,24 @@ interface Notice {
   href: string;
 }
 
-interface HeroSectionProps {
-  images: {
-    src: string;
-    alt: string;
-  }[];
-  onJoinClick?: () => void;
-  notices?: Notice[];
-}
+type HeroSectionProps =
+  | {
+      images: {
+        src: string;
+        alt: string;
+      }[];
+      onJoinClick?: () => void;
+      notices?: Notice[];
+      imageSrc?: never;
+      title?: never;
+    }
+  | {
+      imageSrc: string;
+      title: string;
+      images?: never;
+      onJoinClick?: never;
+      notices?: never;
+    };
 
 const defaultNotices: Notice[] = [
   {
@@ -38,7 +49,32 @@ const defaultNotices: Notice[] = [
   }
 ];
 
-const HeroSection = ({ images, onJoinClick, notices = defaultNotices }: HeroSectionProps) => {
+const HeroSection = (props: HeroSectionProps) => {
+  if ("imageSrc" in props && props.imageSrc) {
+    return (
+      <div className="relative h-[250px] sm:h-[300px] md:h-[350px] mb-8 sm:mb-12">
+        <Image
+          src={props.imageSrc}
+          width={1220}
+          height={400}
+          alt={props.title}
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex items-center">
+          <div className="px-standard">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+              {props.title}
+            </h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const { images, onJoinClick, notices = defaultNotices } = props;
+
+  if (!images) return null;
+
   return (
     <div className="py-8 lg:py-12 px-standard">
       <div className="max-w-7xl mx-auto">
