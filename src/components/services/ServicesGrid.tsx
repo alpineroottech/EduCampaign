@@ -35,7 +35,7 @@ const itemVariants = {
 
 export default function ServicesGrid({ services }: ServicesGridProps) {
   return (
-    <div className="pt-16 pb-2 bg-[#faf7fc]">
+    <div className="pt-16 pb-2 bg-white">
       <Container maxWidth="xl">
         {/* Main Content Title */}
         <Box sx={{ textAlign: "center", mb: 8 }}>
@@ -86,7 +86,8 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
                     maxWidth: 340,
                     height: 360,
                     borderRadius: 4,
-                    background: "linear-gradient(135deg, #6B4FA1 0%, #3d1a4d 100%)",
+                    background: "#ffffff",
+                    border: "2px solid #6B4FA1",
                     overflow: "hidden",
                     boxShadow: 4,
                     transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -100,23 +101,6 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
                     },
                   }}
                 >
-                  {/* Sequence Number Background */}
-                  <Typography
-                    sx={{
-                      position: "absolute",
-                      top: 16,
-                      right: 16,
-                      fontSize: "4rem",
-                      fontWeight: 900,
-                      color: "rgba(255, 255, 255, 0.08)",
-                      lineHeight: 1,
-                      userSelect: "none",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </Typography>
-
                   <Link href={`/services/${service.slug}`} passHref legacyBehavior>
                     <CardActionArea
                       sx={{
@@ -140,24 +124,21 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
                           width: "100%",
                         }}
                       >
-                        {/* Glassmorphism Icon Avatar */}
+                        {/* Icon Avatar */}
                         <Avatar
                           sx={{
-                            width: 80,
-                            height: 80,
+                            width: 160,
+                            height: 160,
                             mb: 3,
-                            bgcolor: "rgba(255, 255, 255, 0.2)",
-                            backdropFilter: "blur(10px)",
-                            border: "1px solid rgba(255, 255, 255, 0.3)",
-                            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
+                            bgcolor: "transparent",
                           }}
                         >
-                          {service.slug === "career-counseling" && <School sx={{ fontSize: 40, color: "#ffffff" }} />}
-                          {service.slug === "language-preparation" && <Language sx={{ fontSize: 40, color: "#ffffff" }} />}
-                          {service.slug === "interview-assistance" && <RecordVoiceOver sx={{ fontSize: 40, color: "#ffffff" }} />}
-                          {service.slug === "visa-lodgment" && <AirplaneTicket sx={{ fontSize: 40, color: "#ffffff" }} />}
-                          {service.slug === "documentation" && <Description sx={{ fontSize: 40, color: "#ffffff" }} />}
-                          {service.slug === "pre-departure-info" && <Luggage sx={{ fontSize: 40, color: "#ffffff" }} />}
+                          {service.slug === "career-counseling" && <School sx={{ fontSize: 80, color: "#3d1a4d" }} />}
+                          {service.slug === "language-preparation" && <Language sx={{ fontSize: 80, color: "#3d1a4d" }} />}
+                          {service.slug === "interview-assistance" && <RecordVoiceOver sx={{ fontSize: 80, color: "#3d1a4d" }} />}
+                          {service.slug === "visa-lodgment" && <AirplaneTicket sx={{ fontSize: 80, color: "#3d1a4d" }} />}
+                          {service.slug === "documentation" && <Description sx={{ fontSize: 80, color: "#3d1a4d" }} />}
+                          {service.slug === "pre-departure-info" && <Luggage sx={{ fontSize: 80, color: "#3d1a4d" }} />}
                         </Avatar>
 
                         {/* Title */}
@@ -165,7 +146,7 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
                           variant="h5"
                           component="h3"
                           fontWeight="bold"
-                          color="white"
+                          color="#3d1a4d"
                           sx={{
                             mb: 2,
                             px: 1,
@@ -184,7 +165,7 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
                             position: "absolute",
                             bottom: 20,
                             right: 20,
-                            color: "white",
+                            color: "#6B4FA1",
                             opacity: 0,
                             transform: "translateX(0)",
                             transition: "all 0.3s ease",

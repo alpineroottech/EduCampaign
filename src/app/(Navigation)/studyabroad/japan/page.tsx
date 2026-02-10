@@ -285,7 +285,7 @@ function ServicesContent() {
                 {box.title}
               </p>
             </div>
-          ))}n        </div>
+          ))}        </div>
       </motion.div>
 
       <div className="max-w-6xl mx-auto px-6 py-10 mt-8 ">
@@ -751,20 +751,20 @@ function ServicesContent() {
           <p className="py-3">The average monthly expenses, excluding academic fee, of international students are shown below.
             The cost of living in metropolitan areas is higher than in rural areas.</p>
           {/* Chart + Table */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            {/* Chart Image */}
-            <div className="flex justify-center">
+          <div className="flex flex-col lg:flex-row gap-6 items-start">
+            {/* Chart Image - 2x larger */}
+            <div className="w-full lg:w-2/3 flex justify-center">
               <Image
-                src="/images/numbers/priceinjapan.png" // <-- Replace with your actual chart image
+                src="/images/numbers/priceinjapan.png"
                 alt="Living Cost Chart"
-                className="rounded-xl object-contain max-w-full"
+                className="rounded-xl object-contain w-full"
                 width={4210}
                 height={3260}
               />
             </div>
 
-            {/* Table */}
-            <div className="w-full">
+            {/* Table - Smaller to fit remaining space */}
+            <div className="w-full lg:w-1/3">
               <div className="rounded-3xl overflow-hidden shadow-md border border-gray-300">
                 <table className="w-full text-left">
                   <thead>
@@ -832,6 +832,29 @@ function ServicesContent() {
             attendance, can result in visa denial or deportation.
           </p>
         </div>
+      </div>
+
+      {/* Career Outcomes Section */}
+      <div className="max-w-7xl px-standard mx-auto mt-20 flex flex-col md:flex-row items-center md:items-start gap-10">
+        <div className="flex flex-col justify-center text-center md:text-left px-4">
+          <h2 className="p-4 bg-gray-200 max-w-2xl mx-auto md:mx-0">
+            Career Outcomes
+          </h2>
+          <p className="py-4 text-justify">
+            Regarding career outcomes, Japanese school and university qualifications are widely recognized. 
+            International students seeking work experience in Japan can find opportunities with various companies. 
+            The Japanese government supports this through platforms like <strong>Open for Professionals by JETRO</strong>, 
+            which provides information and contacts for companies actively hiring foreign employees.
+          </p>
+        </div>
+
+        <Image
+          src="/images/career.png"
+          alt="Career Outcomes"
+          width={1080}
+          height={1080}
+          className="md:w-[800px] h-[400px]"
+        />
       </div>
     </div>
   );
