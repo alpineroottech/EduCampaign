@@ -191,7 +191,7 @@ function PageContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, margin: "-50px" }}
               transition={{ duration: 0.6 }}
-              className="max-w-6xl mx-auto px-4 sm:px-6 border border-gray-300 rounded-2xl bg-white pt-16 pb-2"
+              className="max-w-6xl mx-auto px-4 sm:px-6 border-2 border-gray-300 rounded-2xl bg-gray-100 pt-16 pb-2"
             >
                 <h2 className=" mb-6 text-center">
                     Why Australia ?
@@ -206,7 +206,7 @@ function PageContent() {
                     {iconBoxes.map((box, index) => (
                         <div
                             key={index}
-                            className="w-40 h-20 flex flex-col items-center justify-center border border-gray-300 rounded-full"
+                            className="w-40 h-20 flex flex-col items-center justify-center border-2 border-gray-300 rounded-full"
                         >
                             <Image
                                 src={box.icon}
