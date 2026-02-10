@@ -50,7 +50,7 @@ const EventCard = ({ event }: { event: NoticeEvent }) => {
 
                 {/* Description - fixed height for 3 lines */}
                 <div className="mb-4">
-                    <p className="text-sm text-gray-600 line-clamp-3 min-h-[4.5rem]">
+                    <p className="text-sm text-gray-600 line-clamp-3 overflow-hidden">
                         {event.description}
                     </p>
                 </div>
