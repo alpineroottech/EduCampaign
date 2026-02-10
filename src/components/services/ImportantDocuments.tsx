@@ -1,142 +1,106 @@
 "use client";
 
-import { Box, Container, Typography, Paper } from "@mui/material";
-import { importantDocuments } from "@/data/servicesData";
-import { motion } from "motion/react";
-import { CheckCircle } from "@mui/icons-material";
+import { Box, Container, Typography } from "@mui/material";
+import Image from "next/image";
+
+const documentItems = [
+  { icon: "/images/documents/password.png", title: "Passport" },
+  { icon: "/images/documents/tickets.png", title: "Tickets" },
+  { icon: "/images/documents/visadocs.png", title: "Visa Documents" },
+  { icon: "/images/documents/offerleter.png", title: "Offer Letter" },
+  { icon: "/images/documents/forex.png", title: "FOREX-TC's, Cash, Draft" },
+  { icon: "/images/documents/accommodation.png", title: "Accommodation Details" },
+  { icon: "/images/documents/academic.png", title: "Original Academic documents" },
+  { icon: "/images/documents/ecoe (2).png", title: "ECOE" },
+];
 
 export default function ImportantDocuments() {
   return (
-    <div className="pt-16 pb-2 bg-white" id="importantDocs">
+    <div className="pt-16 pb-16 bg-white" id="importantDocs">
       <Container maxWidth="xl">
-        <Box sx={{ textAlign: "center", mb: 8 }}>
+        <Box sx={{ mb: 6, px: { xs: 2, md: 0 } }}>
           <Typography
-            variant="h3"
-            component="h2"
+            component="h3"
             sx={{
-              fontWeight: "bold",
-              color: "#3d1a4d",
-              mb: 2,
-              position: "relative",
-              display: "inline-block",
-              "&::after": {
-                content: '""',
-                display: "block",
-                width: "60%",
-                height: "4px",
-                bgcolor: "#6B4FA1",
-                margin: "8px auto 0",
-                borderRadius: "2px",
-              },
+              textAlign: "left",
+              p: 2,
+              bgcolor: "#e5e7eb",
+              maxWidth: "672px",
+              fontSize: { xs: "1.25rem", md: "1.5rem" },
+              fontWeight: 600,
+              color: "#1a1a1a",
             }}
           >
-            {importantDocuments.title}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ mt: 2, color: "text.secondary", maxWidth: "800px", mx: "auto" }}
-          >
-            Before you head to the airport, ensure you have your document folder ready and accessible in your carry-on luggage.
+            Important Documents To Carry
           </Typography>
         </Box>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
+        <Box
+          sx={{
+            mt: 3,
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+              lg: "repeat(4, 1fr)",
+            },
+            gap: 2,
+            px: { xs: 2, md: 0 },
+          }}
         >
-          <Paper
-            elevation={3}
-            sx={{
-              maxWidth: "900px",
-              mx: "auto",
-              p: { xs: 4, md: 6 },
-              borderRadius: 4,
-              background: "linear-gradient(135deg, #f8f4ff 0%, #ffffff 100%)",
-              border: "2px solid #e0d4f7",
-            }}
-          >
-            <Typography
-              variant="h5"
-              sx={{
-                fontWeight: "bold",
-                color: "#6B4FA1",
-                mb: 4,
-                textAlign: "center",
-              }}
-            >
-              Must-Carry Documents
-            </Typography>
-
+          {documentItems.map((doc, index) => (
             <Box
-              component="ul"
+              key={index}
               sx={{
-                listStyle: "none",
-                p: 0,
-                m: 0,
-                display: "grid",
-                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-                gap: 3,
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                alignItems: "center",
+                gap: { xs: 2, sm: 1.5 },
+                border: "1px solid #d1d5db",
+                borderRadius: 4,
+                p: 2,
+                bgcolor: "white",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+                "&:hover": {
+                  bgcolor: "#e9d5ff",
+                  borderColor: "#e9d5ff",
+                  transform: "scale(1.03)",
+                },
               }}
             >
-              {importantDocuments.items.map((item, index) => (
-                <Box
-                  component="li"
-                  key={index}
-                  sx={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 2,
-                  }}
-                >
-                  <CheckCircle
-                    sx={{
-                      color: "#6B4FA1",
-                      fontSize: 28,
-                      flexShrink: 0,
-                      mt: 0.5,
-                    }}
-                  />
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "text.primary",
-                      lineHeight: 1.8,
-                      fontWeight: 500,
-                    }}
-                  >
-                    {item}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-
-            <Box
-              sx={{
-                mt: 5,
-                p: 3,
-                borderRadius: 2,
-                bgcolor: "#fff9e6",
-                border: "1px solid #ffd966",
-              }}
-            >
-              <Typography
-                variant="body1"
+              <Box
                 sx={{
-                  color: "#856404",
-                  fontWeight: 600,
+                  width: 64,
+                  height: 64,
+                  flexShrink: 0,
                   display: "flex",
                   alignItems: "center",
-                  gap: 1,
+                  justifyContent: "center",
                 }}
               >
-                <span style={{ fontSize: "1.2rem" }}>💡</span>
-                <strong>Tip:</strong> Keep digital copies of all these documents in your email or cloud storage for emergency access.
+                <Image
+                  src={doc.icon}
+                  alt={doc.title}
+                  width={64}
+                  height={64}
+                  style={{ objectFit: "contain" }}
+                />
+              </Box>
+              <Typography
+                sx={{
+                  textAlign: { xs: "center", sm: "left" },
+                  fontSize: { xs: "0.875rem", sm: "1rem" },
+                  fontWeight: 500,
+                  color: "#1a1a1a",
+                }}
+              >
+                {doc.title}
               </Typography>
             </Box>
-          </Paper>
-        </motion.div>
+          ))}
+        </Box>
       </Container>
     </div>
   );
