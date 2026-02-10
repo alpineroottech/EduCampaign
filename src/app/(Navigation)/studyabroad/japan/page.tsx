@@ -99,7 +99,7 @@ function ServicesContent() {
     },
     {
       icon: "/images/studyabroad/icons/Japanese.png",
-      title: "Learn Japanese in Context"
+      title: "Learn Japanese with Context"
     },
     {
       icon: "/images/studyabroad/icons/Soup.png",

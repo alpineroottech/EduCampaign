@@ -44,9 +44,9 @@ export function WelcomeCard({
   secondaryDescription,
 }: WelcomeCardProps) {
   return (
-    <section className="relative pt-16 pb-2 overflow-hidden">
+    <section className="relative pt-16 pb-2 overflow-hidden bg-gray-100">
       {/* Subtle background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-100 to-gray-50" />
       
       <div className="relative max-w-4xl mx-auto px-standard text-center">
         <ScrollReveal>

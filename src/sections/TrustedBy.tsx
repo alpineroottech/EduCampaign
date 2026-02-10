@@ -25,7 +25,7 @@ const EndorsersInfo = [
 
 const TrustedBy = () => {
     return (
-        <section className="pt-8 pb-8 bg-gray-50">
+        <section className="pt-8 pb-8 bg-gray-100">
             <div className="max-w-6xl mx-auto px-standard">
                 <ScrollReveal>
                     <div className="flex flex-col">

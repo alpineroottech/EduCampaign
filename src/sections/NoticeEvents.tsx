@@ -97,7 +97,7 @@ const NoticeEvents = forwardRef<HTMLDivElement>((props, ref) => {
     return (
         <section
             ref={ref}
-            className="relative px-standard max-w-7xl pt-16 pb-16 mx-auto"
+            className="relative px-standard max-w-7xl pt-16 pb-16 mx-auto bg-white"
             id="notice-events"
             aria-label="Notice and Events section"
         >
